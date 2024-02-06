@@ -1,37 +1,52 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-cardOpcaoHome(double largura, double altura) {
+cardOpcaoHome(
+    {required double largura,
+    required double altura,
+    required String palavraPrimaria,
+    required String palavraSecundaria,
+    required String urlImagem, double larguraIcon = 0.75, double alturaIcon = 0.4, required click()}) {
   return Center(
     child: GestureDetector(
-      child: Container(
-        padding: const EdgeInsets.all(10.0),
-        width: largura*0.78,
-        height: altura*0.58,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: const Color.fromARGB(255, 255, 222, 89),
+      onTap: click,
+      child: Card(
+        borderOnForeground: true,
+        elevation: 3,
+        shadowColor: const Color.fromARGB(255, 255, 222, 89),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Novo",
-              style: TextStyle(
-                fontSize: largura*0.78*0.11,
-                fontWeight: FontWeight.w500,
+        color: const Color.fromARGB(255, 255, 222, 89),
+        child: SizedBox(
+          width: largura * 0.85,
+          height: altura * 0.58,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                palavraPrimaria,
+                style: TextStyle(
+                  fontSize: largura * 0.78 * 0.105,
+                  fontWeight: FontWeight.w900,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "Dimensionamento",
-              style: TextStyle(
-                fontSize: largura*0.78*0.11,
-                fontWeight: FontWeight.w500,
+              Text(
+                palavraSecundaria,
+                style: TextStyle(
+                  fontSize: largura * 0.78 * 0.105,
+                  fontWeight: FontWeight.w900,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            Image(image: const AssetImage('assets/image/placa.png'),width: largura*0.75,height: altura*0.4,),
-          ],
+              Image(
+                image: AssetImage(urlImagem),
+                width: largura * larguraIcon,
+                height: altura * alturaIcon,
+              ),
+            ],
+          ),
         ),
       ),
     ),
