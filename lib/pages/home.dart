@@ -45,8 +45,8 @@ class _HomeState extends State<Home> {
             return cardOpcaoHome(
               largura: largura,
               altura: altura,
-              palavraPrimaria: "Dúvidas sobre",
-              palavraSecundaria: "Dimensionamentos",
+              palavraPrimaria: "Sobre os",
+              palavraSecundaria: "Desenvolvedores",
               urlImagem: "assets/image/page3.png",
               click: () {},
             );
