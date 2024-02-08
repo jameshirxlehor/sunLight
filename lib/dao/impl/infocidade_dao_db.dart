@@ -1,10 +1,11 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-
 import '../infocidade.dart';
+import '../infocidade_dao.dart';
 import '../listacomandossql.dart';
 
-class PessoaDaoDb implements indiceDao {
+
+class infocidadeDaoDb implements infocidadeDao {
   Database? _db;
 
   @override

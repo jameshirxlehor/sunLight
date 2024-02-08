@@ -1,6 +1,6 @@
 import 'infocidade.dart';
 
-abstract class indiceDao {
+abstract class infocidadeDao {
   Future iniciar();
-  Future<List<InfoCidade>> listar();
+  Future<List<InfoCidade>> listar(String tabela);
 }
