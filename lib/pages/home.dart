@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sunlight/pages/novoDimensionamento.dart';
+import 'package:sunlight/pages/sobreDesenvolvedores.dart';
 import '../widgets/cardOpcaoHome.dart';
 import 'package:card_swiper/card_swiper.dart';
 
@@ -48,7 +49,11 @@ class _HomeState extends State<Home> {
               palavraPrimaria: "Sobre os",
               palavraSecundaria: "Desenvolvedores",
               urlImagem: "assets/image/page3.png",
-              click: () {},
+              click: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SobreDesenvolvedores())
+                );
+              },
             );
           } else {
             return cardOpcaoHome(
