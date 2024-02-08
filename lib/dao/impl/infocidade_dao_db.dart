@@ -1,29 +1,17 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import '../infocidade.dart';
-import '../infocidade_dao.dart';
-import '../listacomandossql.dart';
+import 'package:sunlight/model/infocidade.dart';
+import '../../model/Cidade.dart';
+import '../cidadedao.dart';
+import '../infocidadedao.dart';
 
-
-class infocidadeDaoDb implements infocidadeDao {
+class infoCidadeDaoDb implements infoCidadeDao {
   Database? _db;
+  final String tabelaCidade = "indicesolar";
 
   @override
-  Future iniciar() async {
-    _db = await openDatabase(
-      join(await getDatabasesPath(), 'indice_solarimetrico.db'),
-      onCreate: (db, version) {
-        return db.execute(
-          listarComandosSql(),
-        );
-      },
-      version: 1,
-    );
-  }
-
-  @override
-  Future<List<InfoCidade>> listar(String tabela) async {
-    final List<Map<String, dynamic>> result = await _db!.query(tabela);
+  Future<List<InfoCidade>> listar() async {
+    final List<Map<String, dynamic>> result = await _db!.query(tabelaCidade);
     return result.map((element) => InfoCidade.fromMap(element)).toList();
   }
+
 }
