@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sunlight/pages/novoDimensionamento.dart';
 import 'package:sunlight/pages/sobreDesenvolvedores.dart';
+import '../model/localdatabase.dart';
 import '../widgets/cardOpcaoHome.dart';
 import 'package:card_swiper/card_swiper.dart';
 
@@ -12,11 +13,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+
+  TextEditingController controllerTexto = TextEditingController();
+  late LocalDatabase localDatabase;
+
+  @override
+  initState() {
+    localDatabase = LocalDatabase();
+    localDatabase.initDatabase("app.db").then((db) {
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
     double largura = MediaQuery.of(context).size.width; // tamanho da largura da tela
     double altura = MediaQuery.of(context).size.height; // tamanho da altura da tela
-    TextEditingController controllerTexto = TextEditingController();
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 51, 51, 31),

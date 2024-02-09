@@ -1,16 +1,14 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sunlight/model/listacomandossql.dart';
-import '../databasedao.dart';
-
 
 class LocalDatabase {
 
   static final Map<int, List<String>> _migrationScripts = {
-    1: listarComandosSql(),
+    1: listarComandosSql()
   };
 
-  static Future<Database> initDatabase(String fname) async {
+  Future<Database> initDatabase(String fname) async {
     return await openDatabase(
         join(await getDatabasesPath(), fname),
         version: _migrationScripts.length,
