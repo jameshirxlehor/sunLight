@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sunlight/domain/mediator.dart';
 import 'package:sunlight/pages/novoDimensionamento.dart';
 import 'package:sunlight/pages/sobreDesenvolvedores.dart';
-import '../model/localdatabase.dart';
+import '../database/localdatabase.dart';
 import '../widgets/cardOpcaoHome.dart';
 import 'package:card_swiper/card_swiper.dart';
 
@@ -17,11 +18,17 @@ class _HomeState extends State<Home> {
 
   TextEditingController controllerTexto = TextEditingController();
   late LocalDatabase localDatabase;
+  late LocalDatabase localDatabaseCard;
+  late LocalDatabase localDatabaseDimensionamentos;
 
   @override
   initState() {
     localDatabase = LocalDatabase();
+    localDatabaseDimensionamentos = LocalDatabase();
+    localDatabaseCard = LocalDatabase();
+
     localDatabase.initDatabase("app.db").then((db) {
+      Mediator().db = db;
 
     });
   }

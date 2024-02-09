@@ -1,6 +1,4 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:sunlight/model/infocidade.dart';
-
 import '../../model/estado.dart';
 import '../estadodao.dart';
 
