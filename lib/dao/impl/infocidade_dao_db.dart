@@ -1,7 +1,5 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:sunlight/model/infocidade.dart';
-import '../../model/Cidade.dart';
-import '../cidadedao.dart';
 import '../infocidadedao.dart';
 
 class infoCidadeDaoDb implements infoCidadeDao {
