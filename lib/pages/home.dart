@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sunlight/dao/impl/dimensionamento_dao_db.dart';
+import 'package:sunlight/dao/impl/infocidade_dao_mem.dart';
 import 'package:sunlight/domain/mediator.dart';
 import 'package:sunlight/pages/novoDimensionamento.dart';
 import 'package:sunlight/pages/sobreDesenvolvedores.dart';
+import '../dao/dimensionamentodao.dart';
 import '../database/localdatabase.dart';
 import '../widgets/cardOpcaoHome.dart';
 import 'package:card_swiper/card_swiper.dart';
@@ -15,21 +18,37 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-
+  late DimensionamentoDao _dimensionamentoDao;
+  
   TextEditingController controllerTexto = TextEditingController();
   late LocalDatabase localDatabase;
-  late LocalDatabase localDatabaseCard;
-  late LocalDatabase localDatabaseDimensionamentos;
 
   @override
   initState() {
     localDatabase = LocalDatabase();
-    localDatabaseDimensionamentos = LocalDatabase();
-    localDatabaseCard = LocalDatabase();
+    localDatabase.initDatabase("app.db").then((db) async {
+      var mediator = Mediator();
+      mediator.db = db;
+      _dimensionamentoDao = DimensionamentoDaoDb(db: db);
 
-    localDatabase.initDatabase("app.db").then((db) {
-      Mediator().db = db;
+      mediator.mapaCidades = await InfoCidadeDaoMem().listarCidades();
 
+      print(mediator.mapaCidades.keys);
+      var infoCidade = mediator.mapaCidades['Bahia'];
+      if(infoCidade != null){
+        List<String> cidades = infoCidade.map((e) => e.nome).toList();
+        cidades.sort((a,b) => a.compareTo(b));
+        print(cidades);
+      }
+
+
+      // mediator.mapaCidades.forEach((key, value) {
+      //   print('${key}: ${value}');
+      // });
+      // print(mediator.mapaCidades.keys);
+      // List<InfoCidade> cidades = mediator.mapaCidades['Bahia']!;
+      // cidades.sort((a,b) => a.compareTo(b));
+      // print(cidades);
     });
   }
 

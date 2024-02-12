@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:sunlight/widgets/styledSwitch.dart';
-import '../widgets/cardOpcaoHome.dart';
-import 'package:card_swiper/card_swiper.dart';
 
 class NovoDimensionamento extends StatefulWidget {
-  const NovoDimensionamento({super.key});
+  NovoDimensionamento({super.key});
+
 
   @override
   State<NovoDimensionamento> createState() => _NovoDimensionamentoState();
 }
 
+
 class _NovoDimensionamentoState extends State<NovoDimensionamento> {
+
+
+  _click(){
+
+  }
+
   TextEditingController controllerEstado = TextEditingController();
   TextEditingController controllerCidade = TextEditingController();
   TextEditingController controllerOrientacaoPlaca = TextEditingController();
@@ -173,6 +179,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
           children: [
             _getSizedBox(20),
             _getTextTitulo("Estado", 30),
+            // DropdownButton(items: listaEstados(), onChanged: _click()),
             _getTextFormFieldDados("Insira o estado", controllerEstado,
                 (p0) => null, TextInputType.emailAddress),
             _getSizedBox(40),

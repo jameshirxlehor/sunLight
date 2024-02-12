@@ -1,5 +1,5 @@
 class DimensionamentoRealizado {
-
+  int? id;
   String nome;
   String data;
   String estado;
@@ -22,6 +22,7 @@ class DimensionamentoRealizado {
   double? dez;
 
   DimensionamentoRealizado({
+    this.id,
     required this.nome,
     required this.data,
     required this.estado,
@@ -48,6 +49,7 @@ class DimensionamentoRealizado {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'nome': nome,
       'estado': estado,
       'cidade':cidade,
@@ -72,6 +74,7 @@ class DimensionamentoRealizado {
 
   static DimensionamentoRealizado fromMap(Map<String, dynamic> map) {
     return DimensionamentoRealizado(
+        id: map['id'],
         nome: map['nome'],
         estado: map['estado'],
         orientacaoPlacas: map['orientacaoPlacas'],
