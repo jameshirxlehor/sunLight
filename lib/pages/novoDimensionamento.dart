@@ -1,8 +1,9 @@
-import 'package:dropdown_search/dropdown_search.dart';
+
 import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:sunlight/widgets/styledSwitch.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
+
+
 
 class NovoDimensionamento extends StatefulWidget {
   const NovoDimensionamento({super.key});
@@ -11,7 +12,11 @@ class NovoDimensionamento extends StatefulWidget {
   State<NovoDimensionamento> createState() => _NovoDimensionamentoState();
 }
 
+
 class _NovoDimensionamentoState extends State<NovoDimensionamento> {
+
+
+
   TextEditingController controllerNomeCliente = TextEditingController();
   TextEditingController controllerEstado = TextEditingController();
   TextEditingController controllerCidade = TextEditingController();
@@ -250,6 +255,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
                 ""),
             _getSizedBox(_getAltura()),
             _getTextTitulo("Estado", 30),
+            // DropdownButton(items: listaEstados(), onChanged: _click()),
             _getTextFormFieldDados("Insira o estado", controllerEstado,
                 (p0) => null, TextInputType.emailAddress, ""),
             _getSizedBox(_getAltura()),

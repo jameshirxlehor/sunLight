@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:sunlight/model/infocidade.dart';
 
 class Mediator {
   Mediator._privateConstructor();
@@ -10,4 +11,5 @@ class Mediator {
   }
 
   late Database db;
+  late Map<String, List<InfoCidade>> mapaCidades;
 }
