@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sunlight/dao/impl/dimensionamento_dao_db.dart';
+import 'package:sunlight/dao/impl/infocidade_dao_mem.dart';
+import 'package:sunlight/domain/mediator.dart';
 import 'package:sunlight/pages/novoDimensionamento.dart';
 import 'package:sunlight/pages/sobreDesenvolvedores.dart';
+import '../dao/dimensionamentodao.dart';
+import '../database/localdatabase.dart';
 import '../widgets/cardOpcaoHome.dart';
 import 'package:card_swiper/card_swiper.dart';
 
@@ -12,11 +17,46 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  late DimensionamentoDao _dimensionamentoDao;
+  
+  TextEditingController controllerTexto = TextEditingController();
+  late LocalDatabase localDatabase;
+  List<String> listaEstado = [];
+  var infoCidade;
+
+  @override
+  initState() {
+    localDatabase = LocalDatabase();
+    localDatabase.initDatabase("app.db").then((db) async {
+      var mediator = Mediator();
+      mediator.db = db;
+      _dimensionamentoDao = DimensionamentoDaoDb(db: db);
+
+      mediator.mapaCidades = await InfoCidadeDaoMem().listarCidades();
+
+      listaEstado = mediator.mapaCidades.keys.toList();
+      print(mediator.mapaCidades.keys);
+      infoCidade = mediator.mapaCidades;
+
+
+      // mediator.mapaCidades.forEach((key, value) {
+      //   print('${key}: ${value}');
+      // });
+      // print(mediator.mapaCidades.keys);
+      // List<InfoCidade> cidades = mediator.mapaCidades['Bahia']!;
+      // cidades.sort((a,b) => a.compareTo(b));
+      // print(cidades);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+
+
     double largura = MediaQuery.of(context).size.width; // tamanho da largura da tela
     double altura = MediaQuery.of(context).size.height; // tamanho da altura da tela
-    TextEditingController controllerTexto = TextEditingController();
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 51, 51, 31),
@@ -64,7 +104,7 @@ class _HomeState extends State<Home> {
               urlImagem: "assets/image/page1.png",
               click: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NovoDimensionamento())
+                    MaterialPageRoute(builder: (context) => NovoDimensionamento(estados: listaEstado, infocidades: infoCidade))
                 );
               },
             );
