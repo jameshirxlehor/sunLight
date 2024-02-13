@@ -12,6 +12,7 @@ class NovoDimensionamento extends StatefulWidget {
 }
 
 class _NovoDimensionamentoState extends State<NovoDimensionamento> {
+
   TextEditingController controllerNomeCliente = TextEditingController();
   TextEditingController controllerEstado = TextEditingController();
   TextEditingController controllerCidade = TextEditingController();
@@ -217,7 +218,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         MediaQuery.of(context).size.width; // tamanho da largura da tela
     double altura = MediaQuery.of(context).size.height; // tamanho da altura da
     _getAltura() {
-      return altura * 0.03;
+      return altura * 0.02;
     }
 
     _getLargura() {

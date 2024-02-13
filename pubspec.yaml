@@ -41,6 +41,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   easy_loading_button: ^0.3.2
   dropdown_search: ^5.0.6
+  url_launcher: ^6.2.4
 
 dev_dependencies:
   flutter_test:
