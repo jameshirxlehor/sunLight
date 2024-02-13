@@ -2,18 +2,26 @@
 import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:sunlight/widgets/styledSwitch.dart';
+import 'package:sunlight/model/infocidade.dart';
 
 
 
 class NovoDimensionamento extends StatefulWidget {
-  const NovoDimensionamento({super.key});
-
+  late List<String> estados;
+  late Map<String, List<InfoCidade>> infocidades;
+  NovoDimensionamento({super.key, required this.estados, required this.infocidades});
   @override
   State<NovoDimensionamento> createState() => _NovoDimensionamentoState();
+
+
 }
 
 
 class _NovoDimensionamentoState extends State<NovoDimensionamento> {
+
+  String textoDropDownEstado = "Selecione";
+  String textoDropDownCidade = "Selecione";
+  String dropDownMenuOrientacao = "Selecione";
 
 
 
@@ -56,6 +64,94 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         ),
       ],
     );
+  }
+
+  _getDropDownMenuOrientacao(double altura) {
+    List<String> items = ["Norte", "Sul", "Leste", "Oeste"];
+    return DropdownButton<String>(
+      borderRadius: BorderRadius.circular(15),
+      alignment: Alignment.center,
+      focusColor: Colors.transparent,
+      menuMaxHeight: altura*0.55,
+      hint: Text(dropDownMenuOrientacao,style: TextStyle(color: Colors.black)),
+      dropdownColor: Color.fromARGB(255, 255, 222, 89),
+      isExpanded: true,
+      style: TextStyle(fontWeight: FontWeight.w800,fontSize: 25,color: Colors.black),
+      items: [
+        for (var item in items)
+          DropdownMenuItem(
+            value: item,
+            child: Text('${item}'),
+          )
+      ],
+      onChanged: (selected) {
+        dropDownMenuOrientacao = selected.toString();
+        setState(() {});
+      },
+    );
+  }
+
+  _getDropDownMenuEstado(List<String> items, double altura) {
+    return DropdownButton<String>(
+      borderRadius: BorderRadius.circular(15),
+      alignment: Alignment.center,
+      focusColor: Colors.transparent,
+      menuMaxHeight: altura*0.55,
+      hint: Text(textoDropDownEstado,style: TextStyle(color: Colors.black)),
+      dropdownColor: Color.fromARGB(255, 255, 222, 89),
+      isExpanded: true,
+      style: TextStyle(fontWeight: FontWeight.w800,fontSize: 25,color: Colors.black),
+      items: [
+        for (var item in items)
+          DropdownMenuItem(
+            value: item,
+            child: Text('${item}'),
+          )
+      ],
+      onChanged: (selected) {
+        textoDropDownEstado = selected.toString();
+        setState(() {});
+      },
+    );
+  }
+
+  _getDropDownMenuCidades(List<String> items, double altura) {
+    return DropdownButton<String>(
+      borderRadius: BorderRadius.circular(15),
+      alignment: Alignment.center,
+      focusColor: Colors.transparent,
+      menuMaxHeight: altura*0.55,
+      hint: Text(textoDropDownCidade,style: TextStyle(color: Colors.black)),
+      dropdownColor: Color.fromARGB(255, 255, 222, 89),
+      isExpanded: true,
+      style: TextStyle(fontWeight: FontWeight.w800,fontSize: 25,color: Colors.black),
+      items: [
+        for (var item in items)
+          DropdownMenuItem(
+            value: item,
+            child: Text('${item}'),
+          )
+      ],
+      onChanged: (selected) {
+        textoDropDownCidade = selected.toString();
+        setState(() {});
+      },
+    );
+  }
+
+
+  _getCidadesPorEstados(String estado, Map<String, List<InfoCidade>> infocidades){
+    List<InfoCidade> listaInfocidades = infocidades[estado]!;
+
+    List<String> cidades = [];
+    if(listaInfocidades != null){
+      cidades = listaInfocidades.map((e) => e.nome).toList();
+      cidades.sort((a,b) => a.compareTo(b));
+      return cidades;
+    } else{
+      return cidades;
+    }
+
   }
 
   _getTextFormFieldDados(
@@ -255,21 +351,18 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
                 ""),
             _getSizedBox(_getAltura()),
             _getTextTitulo("Estado", 30),
+            _getDropDownMenuEstado(widget.estados,altura),
             // DropdownButton(items: listaEstados(), onChanged: _click()),
-            _getTextFormFieldDados("Insira o estado", controllerEstado,
-                (p0) => null, TextInputType.emailAddress, ""),
+            // _getTextFormFieldDados("Insira o estado", controllerEstado,
+            //     (p0) => null, TextInputType.emailAddress, ""),
             _getSizedBox(_getAltura()),
             _getTextTitulo("Cidade", 30),
-            _getTextFormFieldDados("Insira a cidade", controllerCidade,
-                (p0) => null, TextInputType.emailAddress, ""),
+            _getDropDownMenuCidades(textoDropDownEstado == 'Selecione' ? ['']:_getCidadesPorEstados(textoDropDownEstado, widget.infocidades),altura),
+            // _getTextFormFieldDados("Insira a cidade", controllerCidade,
+            //     (p0) => null, TextInputType.emailAddress, ""),
             _getSizedBox(_getAltura()),
             _getTextTitulo("Orientação das Placas", 30),
-            _getTextFormFieldDados(
-                "Insira a orientação das Placas",
-                controllerOrientacaoPlaca,
-                (p0) => null,
-                TextInputType.emailAddress,
-                ""),
+            _getDropDownMenuOrientacao(altura),
             _getSizedBox(_getAltura()),
             _getTextTitulo("Potência da Placa", 30),
             _getTextFormFieldDados(

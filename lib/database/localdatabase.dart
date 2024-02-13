@@ -8,8 +8,7 @@ import 'package:sunlight/database/migrations/migration2.dart';
 class LocalDatabase {
 
   static final Map<int, List<String>> _migrationScripts = {
-    1: migration1(),
-    2: migration2(),
+    1: migration2(),
   };
 
   Future<Database> initDatabase(String fname) async {

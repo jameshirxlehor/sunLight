@@ -22,6 +22,8 @@ class _HomeState extends State<Home> {
   
   TextEditingController controllerTexto = TextEditingController();
   late LocalDatabase localDatabase;
+  List<String> listaEstado = [];
+  var infoCidade;
 
   @override
   initState() {
@@ -33,13 +35,9 @@ class _HomeState extends State<Home> {
 
       mediator.mapaCidades = await InfoCidadeDaoMem().listarCidades();
 
+      listaEstado = mediator.mapaCidades.keys.toList();
       print(mediator.mapaCidades.keys);
-      var infoCidade = mediator.mapaCidades['Bahia'];
-      if(infoCidade != null){
-        List<String> cidades = infoCidade.map((e) => e.nome).toList();
-        cidades.sort((a,b) => a.compareTo(b));
-        print(cidades);
-      }
+      infoCidade = mediator.mapaCidades;
 
 
       // mediator.mapaCidades.forEach((key, value) {
@@ -54,6 +52,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+
 
     double largura = MediaQuery.of(context).size.width; // tamanho da largura da tela
     double altura = MediaQuery.of(context).size.height; // tamanho da altura da tela
@@ -104,7 +104,7 @@ class _HomeState extends State<Home> {
               urlImagem: "assets/image/page1.png",
               click: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NovoDimensionamento())
+                    MaterialPageRoute(builder: (context) => NovoDimensionamento(estados: listaEstado, infocidades: infoCidade))
                 );
               },
             );
