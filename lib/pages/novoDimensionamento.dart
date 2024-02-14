@@ -72,74 +72,92 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
 
   _getDropDownMenuOrientacao(double altura) {
     List<String> items = ["Norte", "Sul", "Leste", "Oeste"];
-    return DropdownButton<String>(
-      borderRadius: BorderRadius.circular(15),
-      alignment: Alignment.center,
-      focusColor: Colors.transparent,
-      menuMaxHeight: altura*0.55,
-      hint: Text(dropDownMenuOrientacao,style: TextStyle(color: Colors.black)),
-      dropdownColor: Color.fromARGB(255, 255, 222, 89),
-      isExpanded: true,
-      style: TextStyle(fontWeight: FontWeight.w800,fontSize: 25,color: Colors.black),
-      items: [
-        for (var item in items)
-          DropdownMenuItem(
-            value: item,
-            child: Text('${item}'),
-          )
-      ],
-      onChanged: (selected) {
-        dropDownMenuOrientacao = selected.toString();
-        setState(() {});
-      },
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: Colors.white,
+      ),
+      child: DropdownButton<String>(
+        borderRadius: BorderRadius.circular(15),
+        alignment: Alignment.center,
+        focusColor: Colors.transparent,
+        menuMaxHeight: altura*0.55,
+        hint: Text(dropDownMenuOrientacao,style: const TextStyle(color: Colors.black)),
+        dropdownColor: Colors.white,
+        isExpanded: true,
+        style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
+        items: [
+          for (var item in items)
+            DropdownMenuItem(
+              value: item,
+              child: Text('${item}'),
+            )
+        ],
+        onChanged: (selected) {
+          dropDownMenuOrientacao = selected.toString();
+          setState(() {});
+        },
+      ),
     );
   }
 
   _getDropDownMenuEstado(List<String> items, double altura) {
-    return DropdownButton<String>(
-      borderRadius: BorderRadius.circular(15),
-      alignment: Alignment.center,
-      focusColor: Colors.transparent,
-      menuMaxHeight: altura*0.55,
-      hint: Text(textoDropDownEstado,style: TextStyle(color: Colors.black)),
-      dropdownColor: Color.fromARGB(255, 255, 222, 89),
-      isExpanded: true,
-      style: TextStyle(fontWeight: FontWeight.w800,fontSize: 25,color: Colors.black),
-      items: [
-        for (var item in items)
-          DropdownMenuItem(
-            value: item,
-            child: Text('${item}'),
-          )
-      ],
-      onChanged: (selected) {
-        textoDropDownEstado = selected.toString();
-        setState(() {});
-      },
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: Colors.white,
+      ),
+      child: DropdownButton<String>(
+        borderRadius: BorderRadius.circular(15),
+        alignment: Alignment.center,
+        focusColor: Colors.transparent,
+        menuMaxHeight: altura*0.55,
+        hint: Text(textoDropDownEstado,style: const TextStyle(color: Colors.black)),
+        dropdownColor: Colors.white,
+        isExpanded: true,
+        style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
+        items: [
+          for (var item in items)
+            DropdownMenuItem(
+              value: item,
+              child: Text('${item}'),
+            )
+        ],
+        onChanged: (selected) {
+          textoDropDownEstado = selected.toString();
+          setState(() {});
+        },
+      ),
     );
   }
 
   _getDropDownMenuCidades(List<String> items, double altura) {
-    return DropdownButton<String>(
-      borderRadius: BorderRadius.circular(15),
-      alignment: Alignment.center,
-      focusColor: Colors.transparent,
-      menuMaxHeight: altura*0.55,
-      hint: Text(textoDropDownCidade,style: TextStyle(color: Colors.black)),
-      dropdownColor: Color.fromARGB(255, 255, 222, 89),
-      isExpanded: true,
-      style: TextStyle(fontWeight: FontWeight.w800,fontSize: 25,color: Colors.black),
-      items: [
-        for (var item in items)
-          DropdownMenuItem(
-            value: item,
-            child: Text('${item}'),
-          )
-      ],
-      onChanged: (selected) {
-        textoDropDownCidade = selected.toString();
-        setState(() {});
-      },
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: Colors.white,
+      ),
+      child: DropdownButton<String>(
+        borderRadius: BorderRadius.circular(15),
+        alignment: Alignment.center,
+        focusColor: Colors.transparent,
+        menuMaxHeight: altura*0.55,
+        hint: Text(textoDropDownCidade,style: TextStyle(color: Colors.black)),
+        dropdownColor: Colors.white,
+        isExpanded: true,
+        style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
+        items: [
+          for (var item in items)
+            DropdownMenuItem(
+              value: item,
+              child: Text('${item}'),
+            )
+        ],
+        onChanged: (selected) {
+          textoDropDownCidade = selected.toString();
+          setState(() {});
+        },
+      ),
     );
   }
 
@@ -176,10 +194,10 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         //errorText: "Campo Obrigatório",
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(30),
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(30),
         ),
       ),
       // Define o comportamento da label quando o campo está focado
@@ -194,11 +212,11 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     );
   }
 
-  _getMedia() {
+  _getMedia(double altura) {
     return Column(
       children: [
         _getSizedBox(10),
-        _getTextTitulo("Média", 20),
+        _getTextTitulo("Média", altura * 0.029),
         _getTextFormFieldDados("Insira a média de consumo",
             controllerConsumoMedia, (p0) => null, TextInputType.number, "kWh")
       ],
@@ -206,98 +224,98 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
   }
 
   // _getTextFormFieldDados("Insira o consumo de janeiro", controllerConsumoMesJaneiro, (p0) => null, TextInputType.number);
-  _getMesAMes() {
+  _getMesAMes(double altura) {
     return Column(
       children: [
-        _getTextTitulo("Janeiro", 20),
+        _getTextTitulo("Janeiro", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de janeiro",
             controllerConsumoMesJaneiro,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Fevereiro", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Fevereiro", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de fevereiro",
             controllerConsumoMesFevereiro,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Março", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Março", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de março",
             controllerConsumoMesMarco,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Abril", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Abril", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de abril",
             controllerConsumoMesAbril,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Maio", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Maio", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de maio",
             controllerConsumoMesMaio,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Junho", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Junho", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de junho",
             controllerConsumoMesJunho,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Julho", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Julho", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de julho",
             controllerConsumoMesJulho,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Agosto", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Agosto", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de agosto",
             controllerConsumoMesAgosto,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Setembro", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Setembro", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de setembro",
             controllerConsumoMesSetembro,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Outubro", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Outubro", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de outubro",
             controllerConsumoMesOutubro,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Novembro", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Novembro", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de novembro",
             controllerConsumoMesNovembro,
             (p0) => null,
             TextInputType.number,
             "kWh"),
-        _getSizedBox(10),
-        _getTextTitulo("Dezembro", 20),
+        _getSizedBox(altura * 0.011),
+        _getTextTitulo("Dezembro", altura * 0.029),
         _getTextFormFieldDados(
             "Insira o consumo de dezembro",
             controllerConsumoMesDezembro,
@@ -454,7 +472,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         child: ListView(
           children: [
             _getSizedBox(_getAltura()),
-            _getTextTitulo("Nome Cliente", 30),
+            _getTextTitulo("Nome Cliente", altura * 0.03),
             _getTextFormFieldDados(
                 "Insira o nome do cliente",
                 controllerNomeCliente,
@@ -462,21 +480,21 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
                 TextInputType.emailAddress,
                 ""),
             _getSizedBox(_getAltura()),
-            _getTextTitulo("Estado", 30),
+            _getTextTitulo("Estado", altura * 0.03),
             _getDropDownMenuEstado(widget.estados,altura),
             // DropdownButton(items: listaEstados(), onChanged: _click()),
             // _getTextFormFieldDados("Insira o estado", controllerEstado,
             //     (p0) => null, TextInputType.emailAddress, ""),
             _getSizedBox(_getAltura()),
-            _getTextTitulo("Cidade", 30),
+            _getTextTitulo("Cidade", altura * 0.03),
             _getDropDownMenuCidades(textoDropDownEstado == 'Selecione' ? ['']:_getCidadesPorEstados(textoDropDownEstado, widget.infocidades),altura),
             // _getTextFormFieldDados("Insira a cidade", controllerCidade,
             //     (p0) => null, TextInputType.emailAddress, ""),
             _getSizedBox(_getAltura()),
-            _getTextTitulo("Orientação das Placas", 30),
+            _getTextTitulo("Orientação das Placas", altura * 0.03),
             _getDropDownMenuOrientacao(altura),
             _getSizedBox(_getAltura()),
-            _getTextTitulo("Potência da Placa", 30),
+            _getTextTitulo("Potência da Placa", altura * 0.03),
             _getTextFormFieldDados(
                 "Insira a potência da Placa",
                 controllerPotenciaPlaca,
@@ -487,20 +505,20 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _getTextTitulo("Consumo De Energia", 30),
+                _getTextTitulo("Consumo De Energia", altura * 0.031),
               ],
             ),
             _getSizedBox(_getAltura()),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _getTextTitulo("Mês a Mês", 25),
+                _getTextTitulo("Mês a Mês", altura * 0.029),
                 StyledSwitch(onToggled: _onToggled),
-                _getTextTitulo("Média", 25),
+                _getTextTitulo("Média", altura * 0.029),
               ],
             ),
             _getSizedBox(_getAltura()),
-            mostrarConsumoMesAMes ? _getMesAMes() : _getMedia(),
+            mostrarConsumoMesAMes ? _getMesAMes(altura) : _getMedia(altura),
             _getSizedBox(_getAltura()),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

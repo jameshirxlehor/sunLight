@@ -109,7 +109,7 @@ class SobreDesenvolvedores extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Novo Dimensionamento',
+          'Sobre Desenvolvedores',
           style: TextStyle(
               color: Color.fromARGB(255, 255, 222, 89),
               fontWeight: FontWeight.w600,
