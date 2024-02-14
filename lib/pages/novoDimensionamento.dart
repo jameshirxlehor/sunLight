@@ -3,7 +3,6 @@ import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:sunlight/calculos/producaomensal.dart';
 import 'package:sunlight/model/calculogeracao.dart';
-import 'package:sunlight/model/producaototal.dart';
 import 'package:sunlight/pages/resultadoDimensionamento.dart';
 import 'package:sunlight/widgets/styledSwitch.dart';
 import 'package:sunlight/model/infocidade.dart';
@@ -72,92 +71,89 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
 
   _getDropDownMenuOrientacao(double altura) {
     List<String> items = ["Norte", "Sul", "Leste", "Oeste"];
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        color: Colors.white,
+    return DropdownButtonFormField(
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
+          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
+          fillColor: Colors.white,
+          filled: true
       ),
-      child: DropdownButton<String>(
-        borderRadius: BorderRadius.circular(15),
-        alignment: Alignment.center,
-        focusColor: Colors.transparent,
-        menuMaxHeight: altura*0.55,
-        hint: Text(dropDownMenuOrientacao,style: const TextStyle(color: Colors.black)),
-        dropdownColor: Colors.white,
-        isExpanded: true,
-        style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
-        items: [
-          for (var item in items)
-            DropdownMenuItem(
-              value: item,
-              child: Text('${item}'),
-            )
-        ],
-        onChanged: (selected) {
-          dropDownMenuOrientacao = selected.toString();
-          setState(() {});
-        },
-      ),
+      icon: Icon(Icons.compare_arrows,color: Colors.black),
+      focusColor: Colors.transparent,
+      menuMaxHeight: altura*0.55,
+      hint: Text(dropDownMenuOrientacao,style: const TextStyle(color: Colors.black)),
+      dropdownColor: Colors.white,
+      isExpanded: true,
+      style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
+      items: [
+        for (var item in items)
+          DropdownMenuItem(
+            value: item,
+            child: Text('${item}'),
+          )
+      ],
+      onChanged: (selected) {
+        dropDownMenuOrientacao = selected.toString();
+        setState(() {});
+      },
     );
   }
 
   _getDropDownMenuEstado(List<String> items, double altura) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        color: Colors.white,
+    return DropdownButtonFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
+        fillColor: Colors.white,
+        filled: true
       ),
-      child: DropdownButton<String>(
-        borderRadius: BorderRadius.circular(15),
-        alignment: Alignment.center,
-        focusColor: Colors.transparent,
-        menuMaxHeight: altura*0.55,
-        hint: Text(textoDropDownEstado,style: const TextStyle(color: Colors.black)),
-        dropdownColor: Colors.white,
-        isExpanded: true,
-        style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
-        items: [
-          for (var item in items)
-            DropdownMenuItem(
-              value: item,
-              child: Text('${item}'),
-            )
-        ],
-        onChanged: (selected) {
-          textoDropDownEstado = selected.toString();
-          setState(() {});
-        },
-      ),
+      icon: Icon(Icons.map,color: Colors.black),
+      focusColor: Colors.transparent,
+      menuMaxHeight: altura*0.55,
+      hint: Text(textoDropDownEstado,style: const TextStyle(color: Colors.black)),
+      dropdownColor: Colors.white,
+      isExpanded: true,
+      style: TextStyle(fontWeight: FontWeight.w900,fontSize: altura*0.025,color: Colors.black),
+      items: [
+        for (var item in items)
+          DropdownMenuItem(
+            value: item,
+            child: Text('${item}'),
+          )
+      ],
+      onChanged: (selected) {
+        textoDropDownEstado = selected.toString();
+        setState(() {});
+      },
     );
   }
 
   _getDropDownMenuCidades(List<String> items, double altura) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        color: Colors.white,
+    return DropdownButtonFormField(
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
+          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
+          fillColor: Colors.white,
+          filled: true
       ),
-      child: DropdownButton<String>(
-        borderRadius: BorderRadius.circular(15),
-        alignment: Alignment.center,
-        focusColor: Colors.transparent,
-        menuMaxHeight: altura*0.55,
-        hint: Text(textoDropDownCidade,style: TextStyle(color: Colors.black)),
-        dropdownColor: Colors.white,
-        isExpanded: true,
-        style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
-        items: [
-          for (var item in items)
-            DropdownMenuItem(
-              value: item,
-              child: Text('${item}'),
-            )
-        ],
-        onChanged: (selected) {
-          textoDropDownCidade = selected.toString();
-          setState(() {});
-        },
-      ),
+      icon: Icon(Icons.map,color: Colors.black),
+      focusColor: Colors.transparent,
+      menuMaxHeight: altura*0.55,
+      hint: Text(textoDropDownCidade,style: TextStyle(color: Colors.black)),
+      dropdownColor: Colors.white,
+      isExpanded: true,
+      style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
+      items: [
+        for (var item in items)
+          DropdownMenuItem(
+            value: item,
+            child: Text('${item}'),
+          )
+      ],
+      onChanged: (selected) {
+        textoDropDownCidade = selected.toString();
+        setState(() {});
+      },
     );
   }
 
@@ -189,7 +185,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         hintText: hintText,
         filled: true,
         fillColor: Colors.white,
-        labelStyle: TextStyle(color: Colors.black, fontSize: 40),
+        labelStyle: TextStyle(color: Colors.black, fontSize: 40,fontWeight: FontWeight.w900),
         suffixText: suffixText,
         //errorText: "Campo Obrigatório",
         focusedBorder: OutlineInputBorder(
