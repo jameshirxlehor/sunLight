@@ -143,13 +143,13 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       dropdownColor: Colors.white,
       isExpanded: true,
       style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
-      items: [
-        for (var item in items)
-          DropdownMenuItem(
-            value: item,
-            child: Text('${item}'),
-          )
-      ],
+      value: items[0],
+      items: items.map<DropdownMenuItem>((e) {
+            return DropdownMenuItem(
+              value: e,
+              child: Text('${e}'),
+              );
+      }).toList(),
       onChanged: (selected) {
         textoDropDownCidade = selected.toString();
         setState(() {});
