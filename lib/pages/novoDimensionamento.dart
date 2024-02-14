@@ -1,6 +1,10 @@
 
 import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:flutter/material.dart';
+import 'package:sunlight/calculos/producaomensal.dart';
+import 'package:sunlight/model/calculogeracao.dart';
+import 'package:sunlight/model/producaototal.dart';
+import 'package:sunlight/pages/resultadoDimensionamento.dart';
 import 'package:sunlight/widgets/styledSwitch.dart';
 import 'package:sunlight/model/infocidade.dart';
 
@@ -311,6 +315,26 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       return null;
     }
   }
+  _clickCalcular(){
+    List? infocidadeslocal = widget.infocidades[textoDropDownEstado] == null ? [] : widget.infocidades[textoDropDownEstado];
+    late InfoCidade informacoescidade;
+    for(int i = 0;i<infocidadeslocal!.length;i++){
+      if(infocidadeslocal[i].nome == textoDropDownCidade){
+        informacoescidade = infocidadeslocal[i];
+      }
+    }
+    int potenciaplaca = int.parse(controllerPotenciaPlaca.text);
+    double rendimentoSistema = 0.8;
+    double mediaConsumoCliente = double.parse(controllerConsumoMedia.text);
+
+
+    CalculoGeracao calculogerado = producaoMensal(informacoescidade, potenciaplaca, rendimentoSistema,mediaConsumoCliente);
+
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ResultadoDimensionamento(calculos: calculogerado,))
+    );
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -324,6 +348,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     _getLargura() {
       return largura * 0.04;
     }
+
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 222, 89),
@@ -432,7 +457,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
                   // Para [EasyButtonType.outlined]: Esta será a cor da borda.
                   // Para [EasyButtonType.text]: Esta será a cor do texto.
                   buttonColor: Colors.black,
-                  onPressed: () {},
+                  onPressed: _clickCalcular,
                 ),
               ],
             ),
