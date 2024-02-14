@@ -322,9 +322,10 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         informacoescidade = infocidadeslocal[i];
       }
     }
+    List? consumoMesAMes = [controllerConsumoMesJaneiro.text,controllerConsumoMesFevereiro.text,controllerConsumoMesMarco.text,controllerConsumoMesAbril.text,controllerConsumoMesMaio.text,controllerConsumoMesJunho.text,controllerConsumoMesJulho.text,controllerConsumoMesAgosto.text,controllerConsumoMesSetembro.text,controllerConsumoMesOutubro.text,controllerConsumoMesNovembro.text,controllerConsumoMesDezembro.text];
     int potenciaplaca = int.parse(controllerPotenciaPlaca.text);
-    double rendimentoSistema = 0.8;
-    double mediaConsumoCliente = double.parse(controllerConsumoMedia.text);
+    double rendimentoSistema = _rendimentoSistema(informacoescidade, dropDownMenuOrientacao);
+    double mediaConsumoCliente = controllerConsumoMedia.text == '' ? _mediaConsumo(consumoMesAMes) : double.parse(controllerConsumoMedia.text);
 
 
     CalculoGeracao calculogerado = producaoMensal(informacoescidade, potenciaplaca, rendimentoSistema,mediaConsumoCliente);
@@ -333,6 +334,92 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         MaterialPageRoute(builder: (context) => ResultadoDimensionamento(calculos: calculogerado,))
     );
 
+  }
+
+  _rendimentoSistema(InfoCidade informacoescidade, String orietacaoPlacas){
+    double latitude = informacoescidade.latitude;
+    double rendimento = 1;
+
+    if(0>=latitude && latitude<=5){
+      rendimento = 0.80;
+
+    }if(5>latitude && latitude<=10){
+      if(orietacaoPlacas == "Norte"){
+        rendimento = 0.80;
+      }if(orietacaoPlacas == "Sul"){
+        rendimento = 0.75;
+      }if(orietacaoPlacas == "Leste"){
+        rendimento = 0.77;
+      }if(orietacaoPlacas == "Oeste"){
+        rendimento = 0.77;
+      }
+
+    }if(10>latitude && latitude<=15){
+      if(orietacaoPlacas == "Norte"){
+        rendimento = 0.80;
+      }if(orietacaoPlacas == "Sul"){
+        rendimento = 0.71;
+      }if(orietacaoPlacas == "Leste"){
+        rendimento = 0.76;
+      }if(orietacaoPlacas == "Oeste"){
+        rendimento = 0.76;
+      }
+
+    }if(15>latitude && latitude<=20){
+      if(orietacaoPlacas == "Norte"){
+        rendimento = 0.80;
+      }if(orietacaoPlacas == "Sul"){
+        rendimento = 0.68;
+      }if(orietacaoPlacas == "Leste"){
+        rendimento = 0.74;
+      }if(orietacaoPlacas == "Oeste"){
+        rendimento = 0.74;
+      }
+
+    }if(20>latitude && latitude<=25){
+      if(orietacaoPlacas == "Norte"){
+        rendimento = 0.80;
+      }if(orietacaoPlacas == "Sul"){
+        rendimento = 0.65;
+      }if(orietacaoPlacas == "Leste"){
+        rendimento = 0.72;
+      }if(orietacaoPlacas == "Oeste"){
+        rendimento = 0.72;
+      }
+
+    }if(25>latitude && latitude<=30){
+      if(orietacaoPlacas == "Norte"){
+        rendimento = 0.80;
+      }if(orietacaoPlacas == "Sul"){
+        rendimento = 0.62;
+      }if(orietacaoPlacas == "Leste"){
+        rendimento = 0.70;
+      }if(orietacaoPlacas == "Oeste"){
+        rendimento = 0.70;
+      }
+
+    }if(30>latitude && latitude<=35){
+      if(orietacaoPlacas == "Norte"){
+        rendimento = 0.80;
+      }if(orietacaoPlacas == "Sul"){
+        rendimento = 0.60;
+      }if(orietacaoPlacas == "Leste"){
+        rendimento = 0.68;
+      }if(orietacaoPlacas == "Oeste"){
+        rendimento = 0.68;
+      }
+
+    }
+
+    return rendimento;
+  }
+
+  _mediaConsumo(List consumoMesAMes){
+    double result = 0;
+    for(int i = 0; i<consumoMesAMes.length;i++){
+      result = result + double.parse(consumoMesAMes[i]);
+    }
+    return result/12;
   }
 
   @override
