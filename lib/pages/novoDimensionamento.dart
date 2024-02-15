@@ -549,110 +549,107 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       ),
       body: Padding(
         padding: EdgeInsets.only(left: _getLargura(), right: _getLargura()),
-        child: ListView(
-          children: [
-            _getSizedBox(_getAltura()),
-            _getTextTitulo("Nome Cliente", altura * 0.03),
-            _getTextFormFieldDados(
-                "Insira o nome do cliente",
-                controllerNomeCliente,
-                (p0) => _validatorNome(p0),
-                TextInputType.emailAddress,
-                ""),
-            _getSizedBox(_getAltura()),
-            _getTextTitulo("Estado", altura * 0.03),
-            _getDropDownMenuEstado(widget.estados, altura),
-            // DropdownButton(items: listaEstados(), onChanged: _click()),
-            // _getTextFormFieldDados("Insira o estado", controllerEstado,
-            //     (p0) => null, TextInputType.emailAddress, ""),
-            _getSizedBox(_getAltura()),
-            _getTextTitulo("Cidade", altura * 0.03),
-            _getDropDownMenuCidades(
-                textoDropDownEstado == 'Selecione'
-                    ? ['']
-                    : _getCidadesPorEstados(
-                        textoDropDownEstado, widget.infocidades),
-                altura),
-            // _getTextFormFieldDados("Insira a cidade", controllerCidade,
-            //     (p0) => null, TextInputType.emailAddress, ""),
-            _getSizedBox(_getAltura()),
-            _getTextTitulo("Orientação das Placas", altura * 0.03),
-            _getDropDownMenuOrientacao(altura),
-            _getSizedBox(_getAltura()),
-            _getTextTitulo("Potência da Placa", altura * 0.03),
-            _getTextFormFieldDados(
-                "Insira a potência da Placa",
-                controllerPotenciaPlaca,
-                (p0) => null,
-                TextInputType.number,
-                "W"),
-            _getSizedBox(_getAltura()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _getTextTitulo("Consumo De Energia", altura * 0.031),
-              ],
-            ),
-            _getSizedBox(_getAltura()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _getTextTitulo("Mês a Mês", altura * 0.029),
-                StyledSwitch(onToggled: _onToggled),
-                _getTextTitulo("Média", altura * 0.029),
-              ],
-            ),
-            _getSizedBox(_getAltura()),
-            mostrarConsumoMesAMes ? _getMesAMes(altura) : _getMedia(altura),
-            _getSizedBox(_getAltura()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                EasyButton(
-                  type: EasyButtonType.elevated,
-                  // Conteúdo dentro do botão quando o estado do botão está inativo.
-                  idleStateWidget: const Text(
-                    'Calcular',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
-                  loadingStateWidget: const CircularProgressIndicator(
-                    strokeWidth: 3.0,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _getSizedBox(_getAltura()),
+              _getTextTitulo("Nome Cliente", altura * 0.03),
+              _getTextFormFieldDados(
+                  "Insira o nome do cliente",
+                  controllerNomeCliente,
+                  (p0) => _validatorNome(p0),
+                  TextInputType.emailAddress,
+                  ""),
+              _getSizedBox(_getAltura()),
+              _getTextTitulo("Estado", altura * 0.03),
+              _getDropDownMenuEstado(widget.estados,altura),
+              // DropdownButton(items: listaEstados(), onChanged: _click()),
+              // _getTextFormFieldDados("Insira o estado", controllerEstado,
+              //     (p0) => null, TextInputType.emailAddress, ""),
+              _getSizedBox(_getAltura()),
+              _getTextTitulo("Cidade", altura * 0.03),
+              _getDropDownMenuCidades(textoDropDownEstado == 'Selecione' ? ['']:_getCidadesPorEstados(textoDropDownEstado, widget.infocidades),altura),
+              // _getTextFormFieldDados("Insira a cidade", controllerCidade,
+              //     (p0) => null, TextInputType.emailAddress, ""),
+              _getSizedBox(_getAltura()),
+              _getTextTitulo("Orientação das Placas", altura * 0.03),
+              _getDropDownMenuOrientacao(altura),
+              _getSizedBox(_getAltura()),
+              _getTextTitulo("Potência da Placa", altura * 0.03),
+              _getTextFormFieldDados(
+                  "Insira a potência da Placa",
+                  controllerPotenciaPlaca,
+                  (p0) => null,
+                  TextInputType.number,
+                  "W"),
+              _getSizedBox(_getAltura()),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _getTextTitulo("Consumo De Energia", altura * 0.031),
+                ],
+              ),
+              _getSizedBox(_getAltura()),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _getTextTitulo("Mês a Mês", altura * 0.029),
+                  StyledSwitch(onToggled: _onToggled),
+                  _getTextTitulo("Média", altura * 0.029),
+                ],
+              ),
+              _getSizedBox(_getAltura()),
+              mostrarConsumoMesAMes ? _getMesAMes(altura) : _getMedia(altura),
+              _getSizedBox(_getAltura()),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  EasyButton(
+                    type: EasyButtonType.elevated,
+                    // Conteúdo dentro do botão quando o estado do botão está inativo.
+                    idleStateWidget: const Text(
+                      'Calcular',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700),
                     ),
+                    // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+                    loadingStateWidget: const CircularProgressIndicator(
+                      strokeWidth: 3.0,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Colors.white,
+                      ),
+                    ),
+                    // Animar ou não a largura do botão. O padrão é `true`.
+                    // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
+                    useWidthAnimation: true,
+                    // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
+                    // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
+                    // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
+                    useEqualLoadingStateWidgetDimension: false,
+                    // Se você quiser um tamanho de largura total, defina como double.infinity
+                    width: 150.0,
+                    height: 40.0,
+                    borderRadius: 4.0,
+                    // A elevação do botão.
+                    // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
+                    elevation: 0.0,
+                    // A lacuna entre o botão e seu conteúdo.
+                    // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
+                    contentGap: 6.0,
+                    //Cor do botão.
+                    // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
+                    // Para [EasyButtonType.outlined]: Esta será a cor da borda.
+                    // Para [EasyButtonType.text]: Esta será a cor do texto.
+                    buttonColor: Colors.black,
+                    onPressed: _clickCalcular,
                   ),
-                  // Animar ou não a largura do botão. O padrão é `true`.
-                  // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
-                  useWidthAnimation: true,
-                  // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-                  // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-                  // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
-                  useEqualLoadingStateWidgetDimension: false,
-                  // Se você quiser um tamanho de largura total, defina como double.infinity
-                  width: 150.0,
-                  height: 40.0,
-                  borderRadius: 4.0,
-                  // A elevação do botão.
-                  // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
-                  elevation: 0.0,
-                  // A lacuna entre o botão e seu conteúdo.
-                  // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
-                  contentGap: 6.0,
-                  //Cor do botão.
-                  // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-                  // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-                  // Para [EasyButtonType.text]: Esta será a cor do texto.
-                  buttonColor: Colors.black,
-                  onPressed: _clickCalcular,
-                ),
-              ],
-            ),
-            _getSizedBox(_getAltura()),
-          ],
+                ],
+              ),
+              _getSizedBox(_getAltura()),
+            ],
+          ),
         ),
       ),
     );
