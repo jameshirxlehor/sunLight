@@ -185,7 +185,7 @@ class SobreDesenvolvedores extends StatelessWidget {
           ),
           buildCard(
             "Peterson Filipe",
-            const AssetImage("assets/image/peterson.jpg"),
+            const AssetImage("assets/image/peterson.jpeg"),
             "https://www.linkedin.com/in/petersonsidral/",
             "https://github.com/petysid",
             getLargura(),
