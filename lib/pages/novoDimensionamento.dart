@@ -161,6 +161,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
           color: Colors.black),
       value: items[0],
       items: items.map<DropdownMenuItem>((e) {
+        textoDropDownCidade = items[0];
         return DropdownMenuItem(
           value: e,
           child: Text('${e}'),
