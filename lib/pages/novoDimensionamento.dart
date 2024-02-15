@@ -1,4 +1,3 @@
-
 import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:sunlight/calculos/producaomensal.dart';
@@ -7,26 +6,23 @@ import 'package:sunlight/pages/resultadoDimensionamento.dart';
 import 'package:sunlight/widgets/styledSwitch.dart';
 import 'package:sunlight/model/infocidade.dart';
 
-
+import '../model/dimensionamentorealizado.dart';
 
 class NovoDimensionamento extends StatefulWidget {
   late List<String> estados;
   late Map<String, List<InfoCidade>> infocidades;
-  NovoDimensionamento({super.key, required this.estados, required this.infocidades});
+
+  NovoDimensionamento(
+      {super.key, required this.estados, required this.infocidades});
+
   @override
   State<NovoDimensionamento> createState() => _NovoDimensionamentoState();
-
-
 }
 
-
 class _NovoDimensionamentoState extends State<NovoDimensionamento> {
-
-
   String textoDropDownEstado = "Selecione";
   String textoDropDownCidade = "Selecione";
   String dropDownMenuOrientacao = "Selecione";
-
 
   TextEditingController controllerNomeCliente = TextEditingController();
   TextEditingController controllerEstado = TextEditingController();
@@ -73,18 +69,25 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     List<String> items = ["Norte", "Sul", "Leste", "Oeste"];
     return DropdownButtonFormField(
       decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
-          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(altura * 0.038),
+              borderSide: BorderSide(color: Colors.black)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(altura * 0.038),
+              borderSide: BorderSide(color: Colors.black)),
           fillColor: Colors.white,
-          filled: true
-      ),
-      icon: Icon(Icons.compare_arrows,color: Colors.black),
+          filled: true),
+      icon: Icon(Icons.compare_arrows, color: Colors.black),
       focusColor: Colors.transparent,
-      menuMaxHeight: altura*0.55,
-      hint: Text(dropDownMenuOrientacao,style: const TextStyle(color: Colors.black)),
+      menuMaxHeight: altura * 0.55,
+      hint: Text(dropDownMenuOrientacao,
+          style: const TextStyle(color: Colors.black)),
       dropdownColor: Colors.white,
       isExpanded: true,
-      style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
+      style: TextStyle(
+          fontWeight: FontWeight.w800,
+          fontSize: altura * 0.025,
+          color: Colors.black),
       items: [
         for (var item in items)
           DropdownMenuItem(
@@ -102,18 +105,25 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
   _getDropDownMenuEstado(List<String> items, double altura) {
     return DropdownButtonFormField(
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
-        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
-        fillColor: Colors.white,
-        filled: true
-      ),
-      icon: Icon(Icons.map,color: Colors.black),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(altura * 0.038),
+              borderSide: BorderSide(color: Colors.black)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(altura * 0.038),
+              borderSide: BorderSide(color: Colors.black)),
+          fillColor: Colors.white,
+          filled: true),
+      icon: Icon(Icons.map, color: Colors.black),
       focusColor: Colors.transparent,
-      menuMaxHeight: altura*0.55,
-      hint: Text(textoDropDownEstado,style: const TextStyle(color: Colors.black)),
+      menuMaxHeight: altura * 0.55,
+      hint: Text(textoDropDownEstado,
+          style: const TextStyle(color: Colors.black)),
       dropdownColor: Colors.white,
       isExpanded: true,
-      style: TextStyle(fontWeight: FontWeight.w900,fontSize: altura*0.025,color: Colors.black),
+      style: TextStyle(
+          fontWeight: FontWeight.w900,
+          fontSize: altura * 0.025,
+          color: Colors.black),
       items: [
         for (var item in items)
           DropdownMenuItem(
@@ -131,24 +141,30 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
   _getDropDownMenuCidades(List<String> items, double altura) {
     return DropdownButtonFormField(
       decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
-          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(altura*0.038),borderSide: BorderSide(color: Colors.black)),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(altura * 0.038),
+              borderSide: BorderSide(color: Colors.black)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(altura * 0.038),
+              borderSide: BorderSide(color: Colors.black)),
           fillColor: Colors.white,
-          filled: true
-      ),
-      icon: Icon(Icons.map,color: Colors.black),
+          filled: true),
+      icon: Icon(Icons.map, color: Colors.black),
       focusColor: Colors.transparent,
-      menuMaxHeight: altura*0.55,
-      hint: Text(textoDropDownCidade,style: TextStyle(color: Colors.black)),
+      menuMaxHeight: altura * 0.55,
+      hint: Text(textoDropDownCidade, style: TextStyle(color: Colors.black)),
       dropdownColor: Colors.white,
       isExpanded: true,
-      style: TextStyle(fontWeight: FontWeight.w800,fontSize: altura*0.025,color: Colors.black),
+      style: TextStyle(
+          fontWeight: FontWeight.w800,
+          fontSize: altura * 0.025,
+          color: Colors.black),
       value: items[0],
       items: items.map<DropdownMenuItem>((e) {
-            return DropdownMenuItem(
-              value: e,
-              child: Text('${e}'),
-              );
+        return DropdownMenuItem(
+          value: e,
+          child: Text('${e}'),
+        );
       }).toList(),
       onChanged: (selected) {
         textoDropDownCidade = selected.toString();
@@ -157,19 +173,18 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     );
   }
 
-
-  _getCidadesPorEstados(String estado, Map<String, List<InfoCidade>> infocidades){
+  _getCidadesPorEstados(
+      String estado, Map<String, List<InfoCidade>> infocidades) {
     List<InfoCidade> listaInfocidades = infocidades[estado]!;
 
     List<String> cidades = [];
-    if(listaInfocidades != null){
+    if (listaInfocidades != null) {
       cidades = listaInfocidades.map((e) => e.nome).toList();
-      cidades.sort((a,b) => a.compareTo(b));
+      cidades.sort((a, b) => a.compareTo(b));
       return cidades;
-    } else{
+    } else {
       return cidades;
     }
-
   }
 
   _getTextFormFieldDados(
@@ -185,7 +200,8 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         hintText: hintText,
         filled: true,
         fillColor: Colors.white,
-        labelStyle: TextStyle(color: Colors.black, fontSize: 40,fontWeight: FontWeight.w900),
+        labelStyle: TextStyle(
+            color: Colors.black, fontSize: 40, fontWeight: FontWeight.w900),
         suffixText: suffixText,
         //errorText: "Campo Obrigatório",
         focusedBorder: OutlineInputBorder(
@@ -322,119 +338,188 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     );
   }
 
-  _validatorNome(valor){
+  _validatorNome(valor) {
     if (valor.isEmpty) {
       return 'Por favor insira o nome';
-    }else{
+    } else {
       return null;
     }
   }
-  _clickCalcular(){
-    List? infocidadeslocal = widget.infocidades[textoDropDownEstado] == null ? [] : widget.infocidades[textoDropDownEstado];
+  _converteDateTimePString() {
+    DateTime dataHoje = DateTime.now();
+    String dataString = dataHoje.toString();
+    return dataString.substring(10);
+  }
+
+  _clickCalcular() {
+    List? infocidadeslocal = widget.infocidades[textoDropDownEstado];
     late InfoCidade informacoescidade;
-    for(int i = 0;i<infocidadeslocal!.length;i++){
-      if(infocidadeslocal[i].nome == textoDropDownCidade){
+    for (int i = 0; i < infocidadeslocal!.length; i++) {
+      if (infocidadeslocal[i].nome == textoDropDownCidade) {
         informacoescidade = infocidadeslocal[i];
       }
     }
-    List? consumoMesAMes = [controllerConsumoMesJaneiro.text,controllerConsumoMesFevereiro.text,controllerConsumoMesMarco.text,controllerConsumoMesAbril.text,controllerConsumoMesMaio.text,controllerConsumoMesJunho.text,controllerConsumoMesJulho.text,controllerConsumoMesAgosto.text,controllerConsumoMesSetembro.text,controllerConsumoMesOutubro.text,controllerConsumoMesNovembro.text,controllerConsumoMesDezembro.text];
+
+    List? consumoMesAMes = [
+      controllerConsumoMesJaneiro.text,
+      controllerConsumoMesFevereiro.text,
+      controllerConsumoMesMarco.text,
+      controllerConsumoMesAbril.text,
+      controllerConsumoMesMaio.text,
+      controllerConsumoMesJunho.text,
+      controllerConsumoMesJulho.text,
+      controllerConsumoMesAgosto.text,
+      controllerConsumoMesSetembro.text,
+      controllerConsumoMesOutubro.text,
+      controllerConsumoMesNovembro.text,
+      controllerConsumoMesDezembro.text
+    ];
     int potenciaplaca = int.parse(controllerPotenciaPlaca.text);
-    double rendimentoSistema = _rendimentoSistema(informacoescidade, dropDownMenuOrientacao);
-    double mediaConsumoCliente = controllerConsumoMedia.text == '' ? _mediaConsumo(consumoMesAMes) : double.parse(controllerConsumoMedia.text);
+    double rendimentoSistema =
+        _rendimentoSistema(informacoescidade, dropDownMenuOrientacao);
+    double mediaConsumoCliente = controllerConsumoMedia.text == ''
+        ? _mediaConsumo(consumoMesAMes)
+        : double.parse(controllerConsumoMedia.text);
+
+    CalculoGeracao calculogerado = producaoMensal(informacoescidade,
+        potenciaplaca, rendimentoSistema, mediaConsumoCliente);
 
 
-    CalculoGeracao calculogerado = producaoMensal(informacoescidade, potenciaplaca, rendimentoSistema,mediaConsumoCliente);
 
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => ResultadoDimensionamento(calculos: calculogerado,))
-    );
+    DimensionamentoRealizado dimensionamentoRealizado =
+        DimensionamentoRealizado(
+            nome: controllerNomeCliente.text,
+            data: _converteDateTimePString(),
+            estado: textoDropDownEstado,
+            cidade: textoDropDownCidade,
+            orientacaoPlacas: dropDownMenuOrientacao,
+            potenciaPlaca: int.parse(controllerPotenciaPlaca.text),
+            mesOuMedia: mostrarConsumoMesAMes,
+            media: controllerConsumoMedia.text == '' ? null : double.parse(controllerConsumoMedia.text),
+            jan: controllerConsumoMesJaneiro.text == '' ? null : double.parse(controllerConsumoMesJaneiro.text),
+            fev: controllerConsumoMesFevereiro.text == '' ? null : double.parse(controllerConsumoMesFevereiro.text),
+            mar: controllerConsumoMesMarco.text == '' ? null : double.parse(controllerConsumoMesMarco.text),
+            abr: controllerConsumoMesAbril.text == '' ? null : double.parse(controllerConsumoMesAbril.text),
+            mai: controllerConsumoMesMaio.text == '' ? null : double.parse(controllerConsumoMesMaio.text),
+            jun: controllerConsumoMesJunho.text == '' ? null : double.parse(controllerConsumoMesJunho.text),
+            jul: controllerConsumoMesJulho.text == '' ? null : double.parse(controllerConsumoMesJulho.text),
+            ago: controllerConsumoMesAgosto.text == '' ? null : double.parse(controllerConsumoMesAgosto.text),
+            sete: controllerConsumoMesSetembro.text == '' ? null : double.parse(controllerConsumoMesSetembro.text),
+            outu: controllerConsumoMesOutubro.text == '' ? null : double.parse(controllerConsumoMesOutubro.text),
+            nov: controllerConsumoMesNovembro.text == '' ? null : double.parse(controllerConsumoMesNovembro.text),
+            dez: controllerConsumoMesDezembro.text == '' ? null : double.parse(controllerConsumoMesDezembro.text),
+        );
 
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ResultadoDimensionamento(
+                  calculos: calculogerado,
+                  dimensionamentoRealizadoEnviadoDeOutraTela: dimensionamentoRealizado,
+                )));
   }
 
-  _rendimentoSistema(InfoCidade informacoescidade, String orietacaoPlacas){
+  _rendimentoSistema(InfoCidade informacoescidade, String orietacaoPlacas) {
     double latitude = informacoescidade.latitude;
     double rendimento = 1;
 
-    if(0>=latitude && latitude<=5){
+    if (0 >= latitude && latitude <= 5) {
       rendimento = 0.80;
-
-    }if(5>latitude && latitude<=10){
-      if(orietacaoPlacas == "Norte"){
+    }
+    if (5 > latitude && latitude <= 10) {
+      if (orietacaoPlacas == "Norte") {
         rendimento = 0.80;
-      }if(orietacaoPlacas == "Sul"){
+      }
+      if (orietacaoPlacas == "Sul") {
         rendimento = 0.75;
-      }if(orietacaoPlacas == "Leste"){
-        rendimento = 0.77;
-      }if(orietacaoPlacas == "Oeste"){
+      }
+      if (orietacaoPlacas == "Leste") {
         rendimento = 0.77;
       }
-
-    }if(10>latitude && latitude<=15){
-      if(orietacaoPlacas == "Norte"){
+      if (orietacaoPlacas == "Oeste") {
+        rendimento = 0.77;
+      }
+    }
+    if (10 > latitude && latitude <= 15) {
+      if (orietacaoPlacas == "Norte") {
         rendimento = 0.80;
-      }if(orietacaoPlacas == "Sul"){
+      }
+      if (orietacaoPlacas == "Sul") {
         rendimento = 0.71;
-      }if(orietacaoPlacas == "Leste"){
-        rendimento = 0.76;
-      }if(orietacaoPlacas == "Oeste"){
+      }
+      if (orietacaoPlacas == "Leste") {
         rendimento = 0.76;
       }
-
-    }if(15>latitude && latitude<=20){
-      if(orietacaoPlacas == "Norte"){
+      if (orietacaoPlacas == "Oeste") {
+        rendimento = 0.76;
+      }
+    }
+    if (15 > latitude && latitude <= 20) {
+      if (orietacaoPlacas == "Norte") {
         rendimento = 0.80;
-      }if(orietacaoPlacas == "Sul"){
+      }
+      if (orietacaoPlacas == "Sul") {
         rendimento = 0.68;
-      }if(orietacaoPlacas == "Leste"){
-        rendimento = 0.74;
-      }if(orietacaoPlacas == "Oeste"){
+      }
+      if (orietacaoPlacas == "Leste") {
         rendimento = 0.74;
       }
-
-    }if(20>latitude && latitude<=25){
-      if(orietacaoPlacas == "Norte"){
+      if (orietacaoPlacas == "Oeste") {
+        rendimento = 0.74;
+      }
+    }
+    if (20 > latitude && latitude <= 25) {
+      if (orietacaoPlacas == "Norte") {
         rendimento = 0.80;
-      }if(orietacaoPlacas == "Sul"){
+      }
+      if (orietacaoPlacas == "Sul") {
         rendimento = 0.65;
-      }if(orietacaoPlacas == "Leste"){
-        rendimento = 0.72;
-      }if(orietacaoPlacas == "Oeste"){
+      }
+      if (orietacaoPlacas == "Leste") {
         rendimento = 0.72;
       }
-
-    }if(25>latitude && latitude<=30){
-      if(orietacaoPlacas == "Norte"){
+      if (orietacaoPlacas == "Oeste") {
+        rendimento = 0.72;
+      }
+    }
+    if (25 > latitude && latitude <= 30) {
+      if (orietacaoPlacas == "Norte") {
         rendimento = 0.80;
-      }if(orietacaoPlacas == "Sul"){
+      }
+      if (orietacaoPlacas == "Sul") {
         rendimento = 0.62;
-      }if(orietacaoPlacas == "Leste"){
-        rendimento = 0.70;
-      }if(orietacaoPlacas == "Oeste"){
+      }
+      if (orietacaoPlacas == "Leste") {
         rendimento = 0.70;
       }
-
-    }if(30>latitude && latitude<=35){
-      if(orietacaoPlacas == "Norte"){
+      if (orietacaoPlacas == "Oeste") {
+        rendimento = 0.70;
+      }
+    }
+    if (30 > latitude && latitude <= 35) {
+      if (orietacaoPlacas == "Norte") {
         rendimento = 0.80;
-      }if(orietacaoPlacas == "Sul"){
+      }
+      if (orietacaoPlacas == "Sul") {
         rendimento = 0.60;
-      }if(orietacaoPlacas == "Leste"){
-        rendimento = 0.68;
-      }if(orietacaoPlacas == "Oeste"){
+      }
+      if (orietacaoPlacas == "Leste") {
         rendimento = 0.68;
       }
-
+      if (orietacaoPlacas == "Oeste") {
+        rendimento = 0.68;
+      }
     }
 
     return rendimento;
   }
 
-  _mediaConsumo(List consumoMesAMes){
+  _mediaConsumo(List consumoMesAMes) {
     double result = 0;
-    for(int i = 0; i<consumoMesAMes.length;i++){
+    for (int i = 0; i < consumoMesAMes.length; i++) {
       result = result + double.parse(consumoMesAMes[i]);
     }
-    return result/12;
+    return result / 12;
   }
 
   @override
@@ -449,7 +534,6 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     _getLargura() {
       return largura * 0.04;
     }
-
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 222, 89),
