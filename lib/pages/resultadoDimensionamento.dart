@@ -22,17 +22,44 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
 
   late DimensionamentoDao dimensionamentoDao;
   late DimensionamentoRealizado dimensionamentorealizado = widget.dimensionamentoRealizadoEnviadoDeOutraTela;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     dimensionamentoDao = DimensionamentoDaoDb(db: Mediator().db);
   }
 
-  _clicksalvar(){
+  _salvar(){
     dimensionamentoDao.salvar(dimensionamentorealizado);
     Navigator.pop(context);
     Navigator.pop(context);
   }
+
+  _clickSalvar() {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Salvar?'),
+          content: Text('Tem certeza que deseja salvar?'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancelar')),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _salvar();
+                },
+                child: Text('Salvar')),
+          ],
+        ),
+      );
+
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -317,7 +344,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                     // Para [EasyButtonType.outlined]: Esta será a cor da borda.
                     // Para [EasyButtonType.text]: Esta será a cor do texto.
                     buttonColor: Colors.black,
-                    onPressed: _clicksalvar,
+                    onPressed: _clickSalvar,
 
                   ),
                 ],

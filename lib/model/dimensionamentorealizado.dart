@@ -7,7 +7,7 @@ class DimensionamentoRealizado {
   String orientacaoPlacas;
   int potenciaPlaca;
   bool mesOuMedia;
-  double? media;
+  double? mediaConsumo;
   double? jan;
   double? fev;
   double? mar;
@@ -30,7 +30,7 @@ class DimensionamentoRealizado {
     required this.orientacaoPlacas,
     required this.potenciaPlaca,
     required this.mesOuMedia,
-    this.media,
+    this.mediaConsumo,
     this.jan,
     this.fev,
     this.mar,
@@ -55,7 +55,7 @@ class DimensionamentoRealizado {
       'cidade':cidade,
       'orientacaoPlacas':orientacaoPlacas,
       'potenciaPlaca': potenciaPlaca,
-      'mesOuMedia':mesOuMedia,
+      'mesOuMedia':mesOuMedia ? 1:0,
       'data': data,
       'jan': jan,
       'fev': fev,
@@ -68,7 +68,8 @@ class DimensionamentoRealizado {
       'sete': sete,
       'outu': outu,
       'nov': nov,
-      'dez': dez
+      'dez': dez,
+      'mediaConsumo': mediaConsumo
     };
   }
 
@@ -79,7 +80,7 @@ class DimensionamentoRealizado {
         estado: map['estado'],
         orientacaoPlacas: map['orientacaoPlacas'],
         potenciaPlaca: map['potenciaPlaca'],
-        mesOuMedia: map['mesOuMedia'],
+        mesOuMedia: map['mesOuMedia'] == 1 ? true : false,
         jan: map['jan'],
         fev: map['jan'],
         mar: map['jan'],
@@ -93,7 +94,8 @@ class DimensionamentoRealizado {
         nov: map['jan'],
         dez: map['jan'],
         data: map['data'],
-        cidade: map['cidade']
+        cidade: map['cidade'],
+        mediaConsumo: map['mediaConsumo']
     );
   }
 

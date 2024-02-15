@@ -5,7 +5,7 @@ import 'package:sunlight/model/calculogeracao.dart';
 import 'package:sunlight/pages/resultadoDimensionamento.dart';
 import 'package:sunlight/widgets/styledSwitch.dart';
 import 'package:sunlight/model/infocidade.dart';
-
+import 'package:intl/intl.dart';
 import '../model/dimensionamentorealizado.dart';
 
 class NovoDimensionamento extends StatefulWidget {
@@ -347,8 +347,8 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
   }
   _converteDateTimePString() {
     DateTime dataHoje = DateTime.now();
-    String dataString = dataHoje.toString();
-    return dataString.substring(10);
+    String dataString = DateFormat('dd/MM/yyyy').format(dataHoje);
+    return dataString;
   }
 
   _clickCalcular() {
@@ -395,7 +395,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
             orientacaoPlacas: dropDownMenuOrientacao,
             potenciaPlaca: int.parse(controllerPotenciaPlaca.text),
             mesOuMedia: mostrarConsumoMesAMes,
-            media: controllerConsumoMedia.text == '' ? null : double.parse(controllerConsumoMedia.text),
+            mediaConsumo: controllerConsumoMedia.text == '' ? null : double.parse(controllerConsumoMedia.text),
             jan: controllerConsumoMesJaneiro.text == '' ? null : double.parse(controllerConsumoMesJaneiro.text),
             fev: controllerConsumoMesFevereiro.text == '' ? null : double.parse(controllerConsumoMesFevereiro.text),
             mar: controllerConsumoMesMarco.text == '' ? null : double.parse(controllerConsumoMesMarco.text),
