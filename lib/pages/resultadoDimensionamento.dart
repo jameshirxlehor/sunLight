@@ -1,18 +1,39 @@
 import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sunlight/domain/mediator.dart';
 import 'package:sunlight/model/calculogeracao.dart';
 import 'package:sunlight/model/producaototal.dart';
 
+import '../dao/dimensionamentodao.dart';
+import '../dao/impl/dimensionamento_dao_db.dart';
+import '../model/dimensionamentorealizado.dart';
+
 class ResultadoDimensionamento extends StatefulWidget {
   CalculoGeracao calculos;
-  ResultadoDimensionamento({super.key, required this.calculos});
+  DimensionamentoRealizado dimensionamentoRealizadoEnviadoDeOutraTela;
+  ResultadoDimensionamento({super.key, required this.calculos, required this.dimensionamentoRealizadoEnviadoDeOutraTela});
 
   @override
   State<ResultadoDimensionamento> createState() => _ResultadoDimensionamentoState();
 }
 
 class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
+
+  late DimensionamentoDao dimensionamentoDao;
+  late DimensionamentoRealizado dimensionamentorealizado = widget.dimensionamentoRealizadoEnviadoDeOutraTela;
+
+  @override
+  void initState() {
+    dimensionamentoDao = DimensionamentoDaoDb(db: Mediator().db);
+  }
+
+  _clicksalvar(){
+    dimensionamentoDao.salvar(dimensionamentorealizado);
+    Navigator.pop(context);
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -59,6 +80,8 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
        ],
      );
     }
+
+
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 222, 89),
@@ -294,7 +317,8 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                     // Para [EasyButtonType.outlined]: Esta será a cor da borda.
                     // Para [EasyButtonType.text]: Esta será a cor do texto.
                     buttonColor: Colors.black,
-                    onPressed: (){},
+                    onPressed: _clicksalvar,
+
                   ),
                 ],
               ),
