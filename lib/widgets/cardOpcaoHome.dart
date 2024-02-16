@@ -2,20 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
+// DecorationImage(image: AssetImage(urlImagem), fit: BoxFit.cover)
 cardOpcaoHome(
     {required double largura,
     required double altura,
     required String palavraPrimaria,
     required String palavraSecundaria,
-    required String urlImagem, double larguraIcon = 0.75, double alturaIcon = 0.4, required click()}) {
+    double larguraIcon = 0.75,
+    double alturaIcon = 0.4,
+    required click(),
+    required DecorationImage image}) {
   return Center(
     child: GestureDetector(
       onTap: click,
       child: Card(
         borderOnForeground: true,
         elevation: 3,
-        shadowColor:  Colors.black,
+        shadowColor: Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(40),
         ),
@@ -30,7 +33,8 @@ cardOpcaoHome(
                 width: largura * 0.79,
                 height: altura * 0.46,
                 // color: Colors.white,
-                decoration: BoxDecoration(image: DecorationImage(image: AssetImage(urlImagem), fit: BoxFit.cover),borderRadius: BorderRadius.circular(20)),
+                decoration: BoxDecoration(
+                    image: image, borderRadius: BorderRadius.circular(20)),
                 // child: Image(
                 //     image: AssetImage(urlImagem),
                 //     width: largura * larguraIcon,
@@ -41,7 +45,9 @@ cardOpcaoHome(
               ),
               Text(
                 palavraPrimaria,
-                style: GoogleFonts.playball(fontSize: largura * 0.85 * 0.11,color: Color.fromARGB(255, 255, 222, 89)),
+                style: GoogleFonts.playball(
+                    fontSize: largura * 0.85 * 0.11,
+                    color: Color.fromARGB(255, 255, 222, 89)),
                 // style: TextStyle(
                 //   fontSize: largura * 0.78 * 0.105,
                 //   fontWeight: FontWeight.w900,
@@ -50,7 +56,9 @@ cardOpcaoHome(
               ),
               Text(
                 palavraSecundaria,
-                style: GoogleFonts.playball(fontSize: largura * 0.85 * 0.11,color: Color.fromARGB(255, 255, 222, 89)),
+                style: GoogleFonts.playball(
+                    fontSize: largura * 0.85 * 0.11,
+                    color: Color.fromARGB(255, 255, 222, 89)),
                 // style: TextStyle(
                 //   fontSize: largura * 0.78 * 0.105,
                 //   fontWeight: FontWeight.w900,

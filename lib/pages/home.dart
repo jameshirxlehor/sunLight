@@ -10,6 +10,8 @@ import '../database/localdatabase.dart';
 import '../widgets/cardOpcaoHome.dart';
 import 'package:card_swiper/card_swiper.dart';
 
+import 'dimensionamentosRealizados.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -18,9 +20,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   late DimensionamentoDao _dimensionamentoDao;
-  
+
   TextEditingController controllerTexto = TextEditingController();
   late LocalDatabase localDatabase;
   List<String> listaEstado = [];
@@ -39,75 +40,82 @@ class _HomeState extends State<Home> {
       listaEstado = mediator.mapaCidades.keys.toList();
       print(mediator.mapaCidades.keys);
       infoCidade = mediator.mapaCidades;
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
-
-
-    double largura = MediaQuery.of(context).size.width; // tamanho da largura da tela
-    double altura = MediaQuery.of(context).size.height; // tamanho da altura da tela
+    double largura =
+        MediaQuery.of(context).size.width; // tamanho da largura da tela
+    double altura =
+        MediaQuery.of(context).size.height; // tamanho da altura da tela
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           'SunLight',
-          style: GoogleFonts.lobster(fontSize: largura * 0.85 * 0.11,color: Colors.black,fontWeight: FontWeight.w500),
+          style: GoogleFonts.lobster(
+              fontSize: largura * 0.85 * 0.11,
+              color: Colors.black,
+              fontWeight: FontWeight.w500),
         ),
         backgroundColor: Color.fromARGB(255, 255, 222, 89),
       ),
       body: Container(
-        decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/paisagem.png'), fit: BoxFit.cover)),
-        child: Swiper(
-          itemBuilder: (BuildContext context, int index) {
-            if (index == 1) {
-              return cardOpcaoHome(
-                largura: largura,
-                altura: altura,
-                palavraPrimaria: "Dimensionamentos",
-                palavraSecundaria: "Realizados",
-                urlImagem: "assets/image/realizados.jpg",
-                click: () {},
-              );
-            }
-            if (index == 2) {
-              return cardOpcaoHome(
-                largura: largura,
-                altura: altura,
-                palavraPrimaria: "Sobre os",
-                palavraSecundaria: "Desenvolvedores",
-                urlImagem: "assets/image/sobre.png",
-                click: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SobreDesenvolvedores())
-                  );
-                },
-              );
-            } else {
-              return cardOpcaoHome(
-                largura: largura,
-                altura: altura,
-                palavraPrimaria: "Novo",
-                palavraSecundaria: "Dimensionamento",
-                urlImagem: 'assets/image/dimensionar.jpg',
-                click: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => NovoDimensionamento(estados: listaEstado, infocidades: infoCidade))
-                  );
-                },
-              );
-            }
-          },
-          itemCount: 3,
-          pagination: SwiperPagination(builder: SwiperPagination.rect),
-          control: SwiperControl(color: Colors.transparent,size: 25),
-          loop: false,
-
-        ),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/image/paisagem.png'),
+                fit: BoxFit.cover)),
+        child: PageView(
+            children: [
+          cardOpcaoHome(
+            largura: largura,
+            altura: altura,
+            palavraPrimaria: "Novo",
+            palavraSecundaria: "Dimensionamento",
+            image: const DecorationImage(
+                image: AssetImage("assets/image/dimensionar.jpg"),
+                fit: BoxFit.cover),
+            click: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NovoDimensionamento(
+                          estados: listaEstado, infocidades: infoCidade)));
+            },
+          ),
+          cardOpcaoHome(
+            largura: largura,
+            altura: altura,
+            palavraPrimaria: "Dimensionamentos",
+            palavraSecundaria: "Realizados",
+            image: const DecorationImage(
+                image: AssetImage("assets/image/realizados.jpg"),
+                fit: BoxFit.cover),
+            click: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DimensionamentosRealizados(
+                      )));
+            },
+          ),
+          cardOpcaoHome(
+            largura: largura,
+            altura: altura,
+            palavraPrimaria: "Sobre os",
+            palavraSecundaria: "Desenvolvedores",
+            image: const DecorationImage(
+                image: AssetImage("assets/image/equipe.jpg"), fit: BoxFit.cover),
+            click: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SobreDesenvolvedores()));
+            },
+          ),
+        ]),
       ),
     );
   }

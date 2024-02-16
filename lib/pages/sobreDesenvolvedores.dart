@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -142,12 +143,13 @@ class SobreDesenvolvedores extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Sobre Desenvolvedores',
-          style: TextStyle(
-              color: Color.fromARGB(255, 255, 222, 89),
-              fontWeight: FontWeight.w600,
-              fontSize: 25),
+        centerTitle: true,
+        title: Text(
+          'Sobre os Desenvolvedores',
+          style: GoogleFonts.lobster(
+              fontSize: largura * 0.85 * 0.09,
+              color: const Color.fromARGB(255, 255, 222, 89),
+              fontWeight: FontWeight.w500),
         ),
         backgroundColor: Colors.black,
       ),
