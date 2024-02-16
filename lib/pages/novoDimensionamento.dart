@@ -42,6 +42,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
   TextEditingController controllerConsumoMesOutubro = TextEditingController();
   TextEditingController controllerConsumoMesNovembro = TextEditingController();
   TextEditingController controllerConsumoMesDezembro = TextEditingController();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool mostrarConsumoMesAMes = false;
 
@@ -140,6 +141,8 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
 
   _getDropDownMenuCidades(List<String> items, double altura) {
     return DropdownButtonFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (p0) => _validatorCidade(p0),
       decoration: InputDecoration(
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(altura * 0.038),
@@ -196,6 +199,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       String suffixText) {
     return TextFormField(
       validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
@@ -230,8 +234,12 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       children: [
         _getSizedBox(10),
         _getTextTitulo("Média", altura * 0.029),
-        _getTextFormFieldDados("Insira a média de consumo",
-            controllerConsumoMedia, (p0) => null, TextInputType.number, "kWh")
+        _getTextFormFieldDados(
+            "Insira a média de consumo",
+            controllerConsumoMedia,
+            (p0) => _validatorConsumos(p0),
+            TextInputType.number,
+            "kWh")
       ],
     );
   }
@@ -244,7 +252,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de janeiro",
             controllerConsumoMesJaneiro,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -252,7 +260,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de fevereiro",
             controllerConsumoMesFevereiro,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -260,7 +268,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de março",
             controllerConsumoMesMarco,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -268,7 +276,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de abril",
             controllerConsumoMesAbril,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -276,7 +284,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de maio",
             controllerConsumoMesMaio,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -284,7 +292,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de junho",
             controllerConsumoMesJunho,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -292,7 +300,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de julho",
             controllerConsumoMesJulho,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -300,7 +308,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de agosto",
             controllerConsumoMesAgosto,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -308,7 +316,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de setembro",
             controllerConsumoMesSetembro,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -316,7 +324,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de outubro",
             controllerConsumoMesOutubro,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -324,7 +332,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de novembro",
             controllerConsumoMesNovembro,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
         _getSizedBox(altura * 0.011),
@@ -332,7 +340,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         _getTextFormFieldDados(
             "Insira o consumo de dezembro",
             controllerConsumoMesDezembro,
-            (p0) => null,
+            (p0) => _validatorConsumos(p0),
             TextInputType.number,
             "kWh"),
       ],
@@ -346,78 +354,138 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       return null;
     }
   }
+
+  _validatorPotenciaPlaca(valor) {
+    if (valor.isEmpty) {
+      return 'Por favor insira a potência da placa';
+    } else {
+      return null;
+    }
+  }
+
+  _validatorConsumos(valor) {
+    if (valor.isEmpty) {
+      return 'Por favor insira o valor';
+    } else {
+      return null;
+    }
+  }
+  _validatorEstado(valor) {
+    if (valor.isEmpty) {
+      return 'Por favor insira o Estado';
+    } else {
+      return null;
+    }
+  }
+  _validatorCidade(valor) {
+    if (valor.isEmpty) {
+      return 'Por favor insira a Cidade';
+    } else {
+      return null;
+    }
+  }
+
   _converteDateTimePString() {
     DateTime dataHoje = DateTime.now();
     String dataString = DateFormat('dd/MM/yyyy').format(dataHoje);
     return dataString;
   }
 
+  _validaCampo() {}
+
   _clickCalcular() {
-    List? infocidadeslocal = widget.infocidades[textoDropDownEstado];
-    late InfoCidade informacoescidade;
-    for (int i = 0; i < infocidadeslocal!.length; i++) {
-      if (infocidadeslocal[i].nome == textoDropDownCidade) {
-        informacoescidade = infocidadeslocal[i];
+    if (_formKey.currentState!.validate() && dropDownMenuOrientacao != 'Selecione') {
+      List? infocidadeslocal = widget.infocidades[textoDropDownEstado];
+      late InfoCidade informacoescidade;
+      for (int i = 0; i < infocidadeslocal!.length; i++) {
+        if (infocidadeslocal[i].nome == textoDropDownCidade) {
+          informacoescidade = infocidadeslocal[i];
+        }
       }
+
+      List? consumoMesAMes = [
+        controllerConsumoMesJaneiro.text,
+        controllerConsumoMesFevereiro.text,
+        controllerConsumoMesMarco.text,
+        controllerConsumoMesAbril.text,
+        controllerConsumoMesMaio.text,
+        controllerConsumoMesJunho.text,
+        controllerConsumoMesJulho.text,
+        controllerConsumoMesAgosto.text,
+        controllerConsumoMesSetembro.text,
+        controllerConsumoMesOutubro.text,
+        controllerConsumoMesNovembro.text,
+        controllerConsumoMesDezembro.text
+      ];
+      int potenciaplaca = int.parse(controllerPotenciaPlaca.text);
+      double rendimentoSistema =
+          _rendimentoSistema(informacoescidade, dropDownMenuOrientacao);
+      double mediaConsumoCliente = controllerConsumoMedia.text == ''
+          ? _mediaConsumo(consumoMesAMes)
+          : double.parse(controllerConsumoMedia.text.replaceAll(',', '.'));
+
+      CalculoGeracao calculogerado = producaoMensal(informacoescidade,
+          potenciaplaca, rendimentoSistema, mediaConsumoCliente);
+
+      DimensionamentoRealizado dimensionamentoRealizado =
+          DimensionamentoRealizado(
+        nome: controllerNomeCliente.text,
+        data: _converteDateTimePString(),
+        estado: textoDropDownEstado,
+        cidade: textoDropDownCidade,
+        orientacaoPlacas: dropDownMenuOrientacao,
+        potenciaPlaca: int.parse(controllerPotenciaPlaca.text),
+        mesOuMedia: mostrarConsumoMesAMes,
+        mediaConsumo: controllerConsumoMedia.text == ''
+            ? null
+            : double.parse(controllerConsumoMedia.text.replaceAll(',', '.')),
+        jan: controllerConsumoMesJaneiro.text == ''
+            ? null
+            : double.parse(controllerConsumoMesJaneiro.text.replaceAll(',', '.')),
+        fev: controllerConsumoMesFevereiro.text == ''
+            ? null
+            : double.parse(controllerConsumoMesFevereiro.text.replaceAll(',', '.')),
+        mar: controllerConsumoMesMarco.text == ''
+            ? null
+            : double.parse(controllerConsumoMesMarco.text.replaceAll(',', '.')),
+        abr: controllerConsumoMesAbril.text == ''
+            ? null
+            : double.parse(controllerConsumoMesAbril.text.replaceAll(',', '.')),
+        mai: controllerConsumoMesMaio.text == ''
+            ? null
+            : double.parse(controllerConsumoMesMaio.text.replaceAll(',', '.')),
+        jun: controllerConsumoMesJunho.text == ''
+            ? null
+            : double.parse(controllerConsumoMesJunho.text.replaceAll(',', '.')),
+        jul: controllerConsumoMesJulho.text == ''
+            ? null
+            : double.parse(controllerConsumoMesJulho.text.replaceAll(',', '.')),
+        ago: controllerConsumoMesAgosto.text == ''
+            ? null
+            : double.parse(controllerConsumoMesAgosto.text.replaceAll(',', '.')),
+        sete: controllerConsumoMesSetembro.text == ''
+            ? null
+            : double.parse(controllerConsumoMesSetembro.text.replaceAll(',', '.')),
+        outu: controllerConsumoMesOutubro.text == ''
+            ? null
+            : double.parse(controllerConsumoMesOutubro.text.replaceAll(',', '.')),
+        nov: controllerConsumoMesNovembro.text == ''
+            ? null
+            : double.parse(controllerConsumoMesNovembro.text.replaceAll(',', '.')),
+        dez: controllerConsumoMesDezembro.text == ''
+            ? null
+            : double.parse(controllerConsumoMesDezembro.text.replaceAll(',', '.')),
+      );
+
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ResultadoDimensionamento(
+                    calculos: calculogerado,
+                    dimensionamentoRealizadoEnviadoDeOutraTela:
+                        dimensionamentoRealizado,
+                  )));
     }
-
-    List? consumoMesAMes = [
-      controllerConsumoMesJaneiro.text,
-      controllerConsumoMesFevereiro.text,
-      controllerConsumoMesMarco.text,
-      controllerConsumoMesAbril.text,
-      controllerConsumoMesMaio.text,
-      controllerConsumoMesJunho.text,
-      controllerConsumoMesJulho.text,
-      controllerConsumoMesAgosto.text,
-      controllerConsumoMesSetembro.text,
-      controllerConsumoMesOutubro.text,
-      controllerConsumoMesNovembro.text,
-      controllerConsumoMesDezembro.text
-    ];
-    int potenciaplaca = int.parse(controllerPotenciaPlaca.text);
-    double rendimentoSistema =
-        _rendimentoSistema(informacoescidade, dropDownMenuOrientacao);
-    double mediaConsumoCliente = controllerConsumoMedia.text == ''
-        ? _mediaConsumo(consumoMesAMes)
-        : double.parse(controllerConsumoMedia.text);
-
-    CalculoGeracao calculogerado = producaoMensal(informacoescidade,
-        potenciaplaca, rendimentoSistema, mediaConsumoCliente);
-
-
-
-    DimensionamentoRealizado dimensionamentoRealizado =
-        DimensionamentoRealizado(
-            nome: controllerNomeCliente.text,
-            data: _converteDateTimePString(),
-            estado: textoDropDownEstado,
-            cidade: textoDropDownCidade,
-            orientacaoPlacas: dropDownMenuOrientacao,
-            potenciaPlaca: int.parse(controllerPotenciaPlaca.text),
-            mesOuMedia: mostrarConsumoMesAMes,
-            mediaConsumo: controllerConsumoMedia.text == '' ? null : double.parse(controllerConsumoMedia.text),
-            jan: controllerConsumoMesJaneiro.text == '' ? null : double.parse(controllerConsumoMesJaneiro.text),
-            fev: controllerConsumoMesFevereiro.text == '' ? null : double.parse(controllerConsumoMesFevereiro.text),
-            mar: controllerConsumoMesMarco.text == '' ? null : double.parse(controllerConsumoMesMarco.text),
-            abr: controllerConsumoMesAbril.text == '' ? null : double.parse(controllerConsumoMesAbril.text),
-            mai: controllerConsumoMesMaio.text == '' ? null : double.parse(controllerConsumoMesMaio.text),
-            jun: controllerConsumoMesJunho.text == '' ? null : double.parse(controllerConsumoMesJunho.text),
-            jul: controllerConsumoMesJulho.text == '' ? null : double.parse(controllerConsumoMesJulho.text),
-            ago: controllerConsumoMesAgosto.text == '' ? null : double.parse(controllerConsumoMesAgosto.text),
-            sete: controllerConsumoMesSetembro.text == '' ? null : double.parse(controllerConsumoMesSetembro.text),
-            outu: controllerConsumoMesOutubro.text == '' ? null : double.parse(controllerConsumoMesOutubro.text),
-            nov: controllerConsumoMesNovembro.text == '' ? null : double.parse(controllerConsumoMesNovembro.text),
-            dez: controllerConsumoMesDezembro.text == '' ? null : double.parse(controllerConsumoMesDezembro.text),
-        );
-
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ResultadoDimensionamento(
-                  calculos: calculogerado,
-                  dimensionamentoRealizadoEnviadoDeOutraTela: dimensionamentoRealizado,
-                )));
   }
 
   _rendimentoSistema(InfoCidade informacoescidade, String orietacaoPlacas) {
@@ -551,105 +619,113 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       body: Padding(
         padding: EdgeInsets.only(left: _getLargura(), right: _getLargura()),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _getSizedBox(_getAltura()),
-              _getTextTitulo("Nome Cliente", altura * 0.03),
-              _getTextFormFieldDados(
-                  "Insira o nome do cliente",
-                  controllerNomeCliente,
-                  (p0) => _validatorNome(p0),
-                  TextInputType.emailAddress,
-                  ""),
-              _getSizedBox(_getAltura()),
-              _getTextTitulo("Estado", altura * 0.03),
-              _getDropDownMenuEstado(widget.estados,altura),
-              // DropdownButton(items: listaEstados(), onChanged: _click()),
-              // _getTextFormFieldDados("Insira o estado", controllerEstado,
-              //     (p0) => null, TextInputType.emailAddress, ""),
-              _getSizedBox(_getAltura()),
-              _getTextTitulo("Cidade", altura * 0.03),
-              _getDropDownMenuCidades(textoDropDownEstado == 'Selecione' ? ['']:_getCidadesPorEstados(textoDropDownEstado, widget.infocidades),altura),
-              // _getTextFormFieldDados("Insira a cidade", controllerCidade,
-              //     (p0) => null, TextInputType.emailAddress, ""),
-              _getSizedBox(_getAltura()),
-              _getTextTitulo("Orientação das Placas", altura * 0.03),
-              _getDropDownMenuOrientacao(altura),
-              _getSizedBox(_getAltura()),
-              _getTextTitulo("Potência da Placa", altura * 0.03),
-              _getTextFormFieldDados(
-                  "Insira a potência da Placa",
-                  controllerPotenciaPlaca,
-                  (p0) => null,
-                  TextInputType.number,
-                  "W"),
-              _getSizedBox(_getAltura()),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _getTextTitulo("Consumo De Energia", altura * 0.031),
-                ],
-              ),
-              _getSizedBox(_getAltura()),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _getTextTitulo("Mês a Mês", altura * 0.029),
-                  StyledSwitch(onToggled: _onToggled),
-                  _getTextTitulo("Média", altura * 0.029),
-                ],
-              ),
-              _getSizedBox(_getAltura()),
-              mostrarConsumoMesAMes ? _getMesAMes(altura) : _getMedia(altura),
-              _getSizedBox(_getAltura()),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  EasyButton(
-                    type: EasyButtonType.elevated,
-                    // Conteúdo dentro do botão quando o estado do botão está inativo.
-                    idleStateWidget: const Text(
-                      'Calcular',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
-                    loadingStateWidget: const CircularProgressIndicator(
-                      strokeWidth: 3.0,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.white,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                _getSizedBox(_getAltura()),
+                _getTextTitulo("Nome Cliente", altura * 0.03),
+                _getTextFormFieldDados(
+                    "Insira o nome do cliente",
+                    controllerNomeCliente,
+                    (p0) => _validatorNome(p0),
+                    TextInputType.emailAddress,
+                    ""),
+                _getSizedBox(_getAltura()),
+                _getTextTitulo("Estado", altura * 0.03),
+                _getDropDownMenuEstado(widget.estados, altura),
+                // DropdownButton(items: listaEstados(), onChanged: _click()),
+                // _getTextFormFieldDados("Insira o estado", controllerEstado,
+                //     (p0) => null, TextInputType.emailAddress, ""),
+                _getSizedBox(_getAltura()),
+                _getTextTitulo("Cidade", altura * 0.03),
+                _getDropDownMenuCidades(
+                    textoDropDownEstado == 'Selecione'
+                        ? ['']
+                        : _getCidadesPorEstados(
+                            textoDropDownEstado, widget.infocidades),
+                    altura),
+                // _getTextFormFieldDados("Insira a cidade", controllerCidade,
+                //     (p0) => null, TextInputType.emailAddress, ""),
+                _getSizedBox(_getAltura()),
+                _getTextTitulo("Orientação das Placas", altura * 0.03),
+                _getDropDownMenuOrientacao(altura),
+                _getSizedBox(_getAltura()),
+                _getTextTitulo("Potência da Placa", altura * 0.03),
+                _getTextFormFieldDados(
+                    "Insira a potência da Placa",
+                    controllerPotenciaPlaca,
+                    (p0) => _validatorPotenciaPlaca(p0),
+                    TextInputType.number,
+                    "W"),
+                _getSizedBox(_getAltura()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _getTextTitulo("Consumo De Energia", altura * 0.031),
+                  ],
+                ),
+                _getSizedBox(_getAltura()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _getTextTitulo("Mês a Mês", altura * 0.029),
+                    StyledSwitch(onToggled: _onToggled),
+                    _getTextTitulo("Média", altura * 0.029),
+                  ],
+                ),
+                _getSizedBox(_getAltura()),
+                mostrarConsumoMesAMes ? _getMesAMes(altura) : _getMedia(altura),
+                _getSizedBox(_getAltura()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    EasyButton(
+                      type: EasyButtonType.elevated,
+                      // Conteúdo dentro do botão quando o estado do botão está inativo.
+                      idleStateWidget: const Text(
+                        'Calcular',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
                       ),
+                      // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+                      loadingStateWidget: const CircularProgressIndicator(
+                        strokeWidth: 3.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Colors.white,
+                        ),
+                      ),
+                      // Animar ou não a largura do botão. O padrão é `true`.
+                      // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
+                      useWidthAnimation: true,
+                      // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
+                      // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
+                      // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
+                      useEqualLoadingStateWidgetDimension: false,
+                      // Se você quiser um tamanho de largura total, defina como double.infinity
+                      width: 150.0,
+                      height: 40.0,
+                      borderRadius: 4.0,
+                      // A elevação do botão.
+                      // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
+                      elevation: 0.0,
+                      // A lacuna entre o botão e seu conteúdo.
+                      // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
+                      contentGap: 6.0,
+                      //Cor do botão.
+                      // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
+                      // Para [EasyButtonType.outlined]: Esta será a cor da borda.
+                      // Para [EasyButtonType.text]: Esta será a cor do texto.
+                      buttonColor: Colors.black,
+                      onPressed: _clickCalcular,
                     ),
-                    // Animar ou não a largura do botão. O padrão é `true`.
-                    // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
-                    useWidthAnimation: true,
-                    // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-                    // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-                    // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
-                    useEqualLoadingStateWidgetDimension: false,
-                    // Se você quiser um tamanho de largura total, defina como double.infinity
-                    width: 150.0,
-                    height: 40.0,
-                    borderRadius: 4.0,
-                    // A elevação do botão.
-                    // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
-                    elevation: 0.0,
-                    // A lacuna entre o botão e seu conteúdo.
-                    // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
-                    contentGap: 6.0,
-                    //Cor do botão.
-                    // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-                    // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-                    // Para [EasyButtonType.text]: Esta será a cor do texto.
-                    buttonColor: Colors.black,
-                    onPressed: _clickCalcular,
-                  ),
-                ],
-              ),
-              _getSizedBox(_getAltura()),
-            ],
+                  ],
+                ),
+                _getSizedBox(_getAltura()),
+              ],
+            ),
           ),
         ),
       ),
