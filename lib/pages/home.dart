@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sunlight/dao/impl/dimensionamento_dao_db.dart';
 import 'package:sunlight/dao/impl/infocidade_dao_mem.dart';
 import 'package:sunlight/domain/mediator.dart';
@@ -39,14 +40,6 @@ class _HomeState extends State<Home> {
       print(mediator.mapaCidades.keys);
       infoCidade = mediator.mapaCidades;
 
-
-      // mediator.mapaCidades.forEach((key, value) {
-      //   print('${key}: ${value}');
-      // });
-      // print(mediator.mapaCidades.keys);
-      // List<InfoCidade> cidades = mediator.mapaCidades['Bahia']!;
-      // cidades.sort((a,b) => a.compareTo(b));
-      // print(cidades);
     });
   }
 
@@ -59,62 +52,62 @@ class _HomeState extends State<Home> {
     double altura = MediaQuery.of(context).size.height; // tamanho da altura da tela
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 51, 51, 31),
       appBar: AppBar(
-        title: const Text(
+        centerTitle: true,
+        title: Text(
           'SunLight',
-          style: TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-              fontWeight: FontWeight.w400,
-              fontSize: 30),
+          style: GoogleFonts.lobster(fontSize: largura * 0.85 * 0.11,color: Colors.black,fontWeight: FontWeight.w500),
         ),
-        backgroundColor: const Color.fromARGB(255, 255, 222, 89),
+        backgroundColor: Color.fromARGB(255, 255, 222, 89),
       ),
-      body: Swiper(
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 1) {
-            return cardOpcaoHome(
-              largura: largura,
-              altura: altura,
-              palavraPrimaria: "Dimensionamentos",
-              palavraSecundaria: "Realizados",
-              urlImagem: "assets/image/page2.png",
-              click: () {},
-            );
-          }
-          if (index == 2) {
-            return cardOpcaoHome(
-              largura: largura,
-              altura: altura,
-              palavraPrimaria: "Sobre os",
-              palavraSecundaria: "Desenvolvedores",
-              urlImagem: "assets/image/page3.png",
-              click: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SobreDesenvolvedores())
-                );
-              },
-            );
-          } else {
-            return cardOpcaoHome(
-              largura: largura,
-              altura: altura,
-              palavraPrimaria: "Novo",
-              palavraSecundaria: "Dimensionamento",
-              urlImagem: "assets/image/page1.png",
-              click: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NovoDimensionamento(estados: listaEstado, infocidades: infoCidade))
-                );
-              },
-            );
-          }
-        },
-        itemCount: 3,
-        pagination: SwiperPagination(builder: SwiperPagination.rect),
-        control: SwiperControl(color: Color.fromARGB(255, 255, 222, 89)),
-        loop: false,
+      body: Container(
+        decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/paisagem.png'), fit: BoxFit.cover)),
+        child: Swiper(
+          itemBuilder: (BuildContext context, int index) {
+            if (index == 1) {
+              return cardOpcaoHome(
+                largura: largura,
+                altura: altura,
+                palavraPrimaria: "Dimensionamentos",
+                palavraSecundaria: "Realizados",
+                urlImagem: "assets/image/realizados.jpg",
+                click: () {},
+              );
+            }
+            if (index == 2) {
+              return cardOpcaoHome(
+                largura: largura,
+                altura: altura,
+                palavraPrimaria: "Sobre os",
+                palavraSecundaria: "Desenvolvedores",
+                urlImagem: "assets/image/sobre.png",
+                click: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SobreDesenvolvedores())
+                  );
+                },
+              );
+            } else {
+              return cardOpcaoHome(
+                largura: largura,
+                altura: altura,
+                palavraPrimaria: "Novo",
+                palavraSecundaria: "Dimensionamento",
+                urlImagem: 'assets/image/dimensionar.jpg',
+                click: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NovoDimensionamento(estados: listaEstado, infocidades: infoCidade))
+                  );
+                },
+              );
+            }
+          },
+          itemCount: 3,
+          pagination: SwiperPagination(builder: SwiperPagination.rect),
+          control: SwiperControl(color: Colors.transparent,size: 25),
+          loop: false,
 
+        ),
       ),
     );
   }
