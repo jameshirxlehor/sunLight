@@ -1,5 +1,6 @@
 import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sunlight/calculos/producaomensal.dart';
 import 'package:sunlight/model/calculogeracao.dart';
 import 'package:sunlight/pages/resultadoDimensionamento.dart';
@@ -607,12 +608,13 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 222, 89),
       appBar: AppBar(
-        title: const Text(
+        centerTitle: true,
+        title: Text(
           'Novo Dimensionamento',
-          style: TextStyle(
-              color: Color.fromARGB(255, 255, 222, 89),
-              fontWeight: FontWeight.w600,
-              fontSize: 25),
+          style: GoogleFonts.lobster(
+              fontSize: largura * 0.85 * 0.091,
+              color: const Color.fromARGB(255, 255, 222, 89),
+              fontWeight: FontWeight.w500),
         ),
         backgroundColor: Colors.black,
       ),
