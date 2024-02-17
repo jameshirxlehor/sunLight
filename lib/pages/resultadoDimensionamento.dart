@@ -1,6 +1,7 @@
 import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sunlight/domain/mediator.dart';
 import 'package:sunlight/model/calculogeracao.dart';
 import 'package:sunlight/model/producaototal.dart';
@@ -296,15 +297,16 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       return altura * 0.025;
     }
 
+
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 222, 89),
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Resultado do Dimensionamento',
-          style: TextStyle(
-              color: Color.fromARGB(255, 255, 222, 89),
-              fontWeight: FontWeight.w600,
-              fontSize: 21),
+         style: GoogleFonts.lobster(fontSize: largura * 0.85 * 0.091,
+    color: const  Color.fromARGB(255, 255, 222, 89),
+    fontWeight: FontWeight.w500),
         ),
         backgroundColor: Colors.black,
       ),
