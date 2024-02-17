@@ -13,10 +13,14 @@ class SobreDesenvolvedores extends StatelessWidget {
   }
 
   buildCard(String name, ImageProvider imageUrl, String url1, String url2,
-      double espacamento, double altura, String textLinkedin, String textGit) {
+      double espacamento, double altura) {
     return Padding(
       padding: EdgeInsets.only(left: espacamento, right: espacamento),
-      child: Card(
+      child: Container(
+        decoration: BoxDecoration(
+          color:  const Color.fromRGBO(0, 0, 0, 99),
+          borderRadius: BorderRadius.circular(75),
+        ),
         child: Padding(
           padding: const EdgeInsets.only(left: 16,right: 16,top: 8,bottom: 8),
           child: Row(
@@ -43,12 +47,13 @@ class SobreDesenvolvedores extends StatelessWidget {
                       name,
                       style: const TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w600,
+                        color:  Color.fromARGB(255, 255, 222, 89),
                       ),
                     ),
                     Row(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 40,
                           height: 40,
                           child: IconButton(
@@ -57,21 +62,22 @@ class SobreDesenvolvedores extends StatelessWidget {
                             },
                             icon: const Icon(
                               Bootstrap.linkedin,
-                              color: Color.fromARGB(255, 10, 102, 194),
+                              color: Colors.white70
+                              ,
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           height: 40,
                           child: TextButton(
                             onPressed: () {
                               _launchUrl(Uri.parse(url1));
                             },
-                            child: Text(
-                              textLinkedin,
-                              style: const TextStyle(
+                            child: const Text(
+                              "LinkedIn",
+                              style: TextStyle(
                                   color: Colors.blue,
-                                  fontWeight: FontWeight.w600),
+                                  fontWeight: FontWeight.w600,fontSize: 17),
                             ),
                           ),
                         ),
@@ -79,7 +85,7 @@ class SobreDesenvolvedores extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 40,
                           height: 40,
                           child: IconButton(
@@ -88,20 +94,21 @@ class SobreDesenvolvedores extends StatelessWidget {
                             },
                             icon: const Icon(
                               Bootstrap.github,
+                              color: Colors.white70
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           height: 40,
                           child: TextButton(
                             onPressed: () {
                               _launchUrl(Uri.parse(url2));
                             },
-                            child: Text(
-                              textGit,
-                              style: const TextStyle(
+                            child: const Text(
+                              "GitHub",
+                              style: TextStyle(
                                   color: Colors.blue,
-                                  fontWeight: FontWeight.w600),
+                                  fontWeight: FontWeight.w600,fontSize: 17),
                             ),
                           ),
                         ),
@@ -134,7 +141,7 @@ class SobreDesenvolvedores extends StatelessWidget {
     }
 
     getEspacamento() {
-      return altura * 0.005;
+      return altura * 0.02;
     }
 
     double largura =
@@ -143,6 +150,11 @@ class SobreDesenvolvedores extends StatelessWidget {
     getLargura() {
       return largura * 0.03;
     }
+
+    // decoration: const BoxDecoration(
+    //     image: DecorationImage(
+    //         image: AssetImage('assets/image/paisagem.png'),
+    //         fit: BoxFit.cover)),
 
     return Scaffold(
       appBar: AppBar(
@@ -156,75 +168,67 @@ class SobreDesenvolvedores extends StatelessWidget {
         ),
         backgroundColor: Colors.black,
       ),
-      backgroundColor: const Color.fromARGB(255, 255, 222, 89),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: getAltura(),
-          ),
-          buildCard(
-            "James Hirxlehor",
-            const AssetImage('assets/image/Me.james.png'),
-            "https://www.linkedin.com/in/jameshirxlehor/",
-            "https://github.com/jameshirxlehor",
-            getLargura(),
-            getSepararText(),
-            "Linkedin ",
-            "GitHub",
-          ),
-          SizedBox(
-            height: getEspacamento(),
-          ),
-          buildCard(
-            "João Lazzarotto",
-            const AssetImage('assets/image/joaolazzarotto.png'),
-            "https://www.linkedin.com/in/joaolazzarotto/",
-            "https://github.com/JoaoLazzarotto",
-            getLargura(),
-            getSepararText(),
-            "Linkedin ",
-            "GitHub",
-          ),
-          SizedBox(
-            height: getEspacamento(),
-          ),
-          buildCard(
-            "Peterson Filipe",
-            const AssetImage("assets/image/peterson.jpeg"),
-            "https://www.linkedin.com/in/petersonsidral/",
-            "https://github.com/petysid",
-            getLargura(),
-            getSepararText(),
-            "Linkedin ",
-            "GitHub",
-          ),
-          SizedBox(
-            height: getEspacamento(),
-          ),
-          buildCard(
-            "Rafael Klug",
-            const AssetImage('assets/image/rafaelqualy.png'),
-            "https://www.linkedin.com/in/rafaelklug/",
-            "https://github.com/rafellklug",
-            getLargura(),
-            getSepararText(),
-            "Linkedin ",
-            "GitHub",
-          ),
-          SizedBox(
-            height: getEspacamento(),
-          ),
-          buildCard(
-            "Rafael Ramos",
-            const AssetImage('assets/image/rafaelramos.png'),
-            "https://www.linkedin.com/in/rafael-ros/",
-            "https://github.com/Rafelrosod",
-            getLargura(),
-            getSepararText(),
-            "Linkedin ",
-            "GitHub",
-          ),
-        ],
+      body: Container(
+        decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/paisagem.png'), fit: BoxFit.cover)),
+        child: ListView(
+          children: [
+            SizedBox(
+              height: getAltura(),
+            ),
+            buildCard(
+              "James Hirxlehor",
+              const AssetImage('assets/image/Me.james.png'),
+              "https://www.linkedin.com/in/jameshirxlehor/",
+              "https://github.com/jameshirxlehor",
+              getLargura(),
+              getSepararText(),
+            ),
+            SizedBox(
+              height: getEspacamento(),
+            ),
+            buildCard(
+              "João Lazzarotto",
+              const AssetImage('assets/image/joaolazzarotto.png'),
+              "https://www.linkedin.com/in/joaolazzarotto/",
+              "https://github.com/JoaoLazzarotto",
+              getLargura(),
+              getSepararText(),
+            ),
+            SizedBox(
+              height: getEspacamento(),
+            ),
+            buildCard(
+              "Peterson Filipe",
+              const AssetImage("assets/image/peterson.jpeg"),
+              "https://www.linkedin.com/in/petersonsidral/",
+              "https://github.com/petysid",
+              getLargura(),
+              getSepararText(),
+            ),
+            SizedBox(
+              height: getEspacamento(),
+            ),
+            buildCard(
+              "Rafael Klug",
+              const AssetImage('assets/image/rafaelqualy.png'),
+              "https://www.linkedin.com/in/rafaelklug/",
+              "https://github.com/rafellklug",
+              getLargura(),
+              getSepararText(),
+            ),
+            SizedBox(
+              height: getEspacamento(),
+            ),
+            buildCard(
+              "Rafael Ramos",
+              const AssetImage('assets/image/rafaelramos.png'),
+              "https://www.linkedin.com/in/rafael-ros/",
+              "https://github.com/Rafelrosod",
+              getLargura(),
+              getSepararText(),
+            ),
+          ],
+        ),
       ),
     );
   }
