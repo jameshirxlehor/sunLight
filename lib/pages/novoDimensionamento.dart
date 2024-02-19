@@ -608,15 +608,18 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 222, 89),
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
         centerTitle: true,
         title: Text(
           'Novo Dimensionamento',
           style: GoogleFonts.lobster(
               fontSize: largura * 0.85 * 0.091,
-              color: const Color.fromARGB(255, 255, 222, 89),
+              color: Colors.black,
               fontWeight: FontWeight.w500),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(255, 255, 222, 89),
       ),
       body: Container(
         decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/pordosol_preto.jpg'), fit: BoxFit.cover)),

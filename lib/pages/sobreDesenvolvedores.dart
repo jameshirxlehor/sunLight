@@ -154,15 +154,18 @@ class SobreDesenvolvedores extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
         centerTitle: true,
         title: Text(
           'Sobre os Desenvolvedores',
           style: GoogleFonts.lobster(
               fontSize: largura * 0.85 * 0.09,
-              color: const Color.fromARGB(255, 255, 222, 89),
+              color: Colors.black,
               fontWeight: FontWeight.w500),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(255, 255, 222, 89),
       ),
       body: Container(
         decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/paisagem.png'), fit: BoxFit.cover)),
