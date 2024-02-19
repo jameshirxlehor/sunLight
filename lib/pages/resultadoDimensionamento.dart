@@ -90,6 +90,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     }
   }
 
+
   _getRowCadaMes(
     String mes,
     double? consumoMensal,
@@ -107,8 +108,9 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
               children: [
                 Text(
                   "$mes:",
-                  style: TextStyle(color: Colors.grey[600], fontSize: 17),
+                  style: GoogleFonts.robotoMono(color: Colors.grey[600], fontSize: 17, fontWeight: FontWeight.w400),
                 ),
+
               ],
             ),
             const SizedBox(
@@ -120,7 +122,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                 Text(
                   '${resultado(consumoMensal)} kWh',
 
-                  style: TextStyle(color: Colors.green, fontSize: 17),
+                  style: GoogleFonts.robotoMono(color: Colors.green, fontSize: 17,fontWeight: FontWeight.w400  ),
                 ),
               ],
             ),
@@ -153,16 +155,16 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+             Text(
               'Média:',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              style: GoogleFonts.robotoMono(fontWeight: FontWeight.bold, fontSize: 17, color: Colors.white70),
             ),
             const SizedBox(
               width: 12,
             ),
             Text(
               '${_resultadoMedia(produtototal).toStringAsFixed(2)}kWh',
-              style: const TextStyle(
+              style: GoogleFonts.robotoMono(
                   color: Colors.green,
                   fontWeight: FontWeight.bold,
                   fontSize: 17),
@@ -180,7 +182,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
         width: largura * 0.56,
         height: altura * 0.45,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.black,
             border: Border.all(width: 1),
             borderRadius: BorderRadius.circular(20)),
         child: Column(
@@ -216,64 +218,47 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     );
   }
 
+  _getDadosContainer(String text, IconData icons, double altura, double largura){
+    return Container(
+      width: largura * 0.7,
+      height: altura * 0.07,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        border: Border.all(width: 1),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+             Icon(icons, size: 30, color:  Colors.white,),
+            Text(
+              text, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700,color: Colors.white),) ,
+          ],
+        ),
+      ),
+    );
+  }
+
+
   _getCaixaResultados(double sugestaoModulos, double potenciakit, double area,
       double altura, double largura) {
     return Padding(
       padding: const EdgeInsets.all(22.0),
-      child: Container(
+      child: SizedBox(
         width: largura * 0.7,
         height: altura * 0.24,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(width: 1),
-          borderRadius: BorderRadius.circular(20),
-        ),
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start
-                ,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(6.0),
-                    child: Icon(Icons.solar_power_outlined, size: 30,)
-                  ),
-                  Text(
-                      "Quantidade de placas: ${sugestaoModulos.ceil().toStringAsFixed(0)} ", style: TextStyle(fontSize: 16),) ,
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
+            _getDadosContainer("Quantidade de placas: ${sugestaoModulos.ceil().toStringAsFixed(0)}", Icons.solar_power_outlined, altura, largura),
+            SizedBox(height: altura * 0.01309,),
+            _getDadosContainer("Potência do KIT: ${potenciakit.toStringAsFixed(2)}(kWp)", Icons.offline_bolt_outlined, altura, largura),
+            SizedBox(height: altura * 0.01309,),
+            _getDadosContainer("Area ocupada: ${area.toStringAsFixed(1)} m²", Icons.straighten_outlined, altura, largura),
 
-                  const Padding(
-                    padding: EdgeInsets.all(6.0),
-                    child: Icon(Icons.offline_bolt_outlined, size: 30,)
-                  ),
-                  Text(
-                      "Potência do KIT: ${potenciakit.toStringAsFixed(2)} (kWp)", style: TextStyle(fontSize: 16),),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(6.0),
-                    child: Icon(Icons.straighten_outlined, size: 30,)
-                  ),
-                  Text("Area ocupada: ${area.toStringAsFixed(1)} m²", style: TextStyle(fontSize: 16),),
-                ],
-              ),
-            ),
           ],
         ),
       ),
@@ -297,10 +282,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       return altura * 0.025;
     }
 
-
-
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 222, 89),
       appBar: AppBar(
         title: Text(
           'Resultado do Dimensionamento',
@@ -310,113 +292,116 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
         ),
         backgroundColor: Colors.black,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(_getESpacamentoLadosDinamica()), //22.0
-          child: Column(
-            children: [
-              const Text(
-                'Geração de Energia Mensal',
-                style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700),
-              ),
-              SizedBox(
-                height: altura * 0.011,
-              ),
-              _cardGeracaoMesMedia(altura, largura, producaototal),
-              _getCaixaResultados(
-                  sugestaoModulos, potenciakit, area, altura, largura),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  EasyButton(
-                    type: EasyButtonType.elevated,
-                    // Conteúdo dentro do botão quando o estado do botão está inativo.
-                    idleStateWidget: const Text(
-                      'Sair',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
-                    loadingStateWidget: const CircularProgressIndicator(
-                      strokeWidth: 3.0,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.white,
+      body: Container(
+        decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/mao_pordool.jpg'), fit: BoxFit.cover)),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(_getESpacamentoLadosDinamica()), //22.0
+            child: Column(
+              children: [
+                const Text(
+                  'Geração de Energia Mensal',
+                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700,color: Color.fromARGB(255, 255, 222, 89)),
+                ),
+                SizedBox(
+                  height: altura * 0.011,
+                ),
+                _cardGeracaoMesMedia(altura, largura, producaototal),
+                _getCaixaResultados(
+                    sugestaoModulos, potenciakit, area, altura, largura),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    EasyButton(
+                      type: EasyButtonType.elevated,
+                      // Conteúdo dentro do botão quando o estado do botão está inativo.
+                      idleStateWidget: const Text(
+                        'Sair',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
                       ),
-                    ),
-                    // Animar ou não a largura do botão. O padrão é `true`.
-                    // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
-                    useWidthAnimation: true,
-                    // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-                    // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-                    // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
-                    useEqualLoadingStateWidgetDimension: false,
-                    // Se você quiser um tamanho de largura total, defina como double.infinity
-                    width: 150.0,
-                    height: 40.0,
-                    borderRadius: 4.0,
-                    // A elevação do botão.
-                    // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
-                    elevation: 0.0,
-                    // A lacuna entre o botão e seu conteúdo.
-                    // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
-                    contentGap: 6.0,
-                    //Cor do botão.
-                    // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-                    // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-                    // Para [EasyButtonType.text]: Esta será a cor do texto.
-                    buttonColor: Colors.black,
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                    },
-                  ),
-                  SizedBox(width: 20),
-                  EasyButton(
-                    type: EasyButtonType.elevated,
-                    // Conteúdo dentro do botão quando o estado do botão está inativo.
-                    idleStateWidget: const Text(
-                      'Salvar',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
-                    loadingStateWidget: const CircularProgressIndicator(
-                      strokeWidth: 3.0,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.white,
+                      // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+                      loadingStateWidget: const CircularProgressIndicator(
+                        strokeWidth: 3.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Colors.black,
+                        ),
                       ),
+                      // Animar ou não a largura do botão. O padrão é `true`.
+                      // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
+                      useWidthAnimation: true,
+                      // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
+                      // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
+                      // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
+                      useEqualLoadingStateWidgetDimension: false,
+                      // Se você quiser um tamanho de largura total, defina como double.infinity
+                      width: 150.0,
+                      height: 40.0,
+                      borderRadius: 4.0,
+                      // A elevação do botão.
+                      // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
+                      elevation: 0.0,
+                      // A lacuna entre o botão e seu conteúdo.
+                      // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
+                      contentGap: 6.0,
+                      //Cor do botão.
+                      // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
+                      // Para [EasyButtonType.outlined]: Esta será a cor da borda.
+                      // Para [EasyButtonType.text]: Esta será a cor do texto.
+                      buttonColor: Color.fromARGB(255, 255, 222, 89),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
                     ),
-                    // Animar ou não a largura do botão. O padrão é `true`.
-                    // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
-                    useWidthAnimation: true,
-                    // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-                    // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-                    // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
-                    useEqualLoadingStateWidgetDimension: false,
-                    // Se você quiser um tamanho de largura total, defina como double.infinity
-                    width: 150.0,
-                    height: 40.0,
-                    borderRadius: 4.0,
-                    // A elevação do botão.
-                    // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
-                    elevation: 0.0,
-                    // A lacuna entre o botão e seu conteúdo.
-                    // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
-                    contentGap: 6.0,
-                    //Cor do botão.
-                    // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-                    // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-                    // Para [EasyButtonType.text]: Esta será a cor do texto.
-                    buttonColor: Colors.black,
-                    onPressed: _clickSalvar,
-                  ),
-                ],
-              ),
-            ],
+                    SizedBox(width: 20),
+                    EasyButton(
+                      type: EasyButtonType.elevated,
+                      // Conteúdo dentro do botão quando o estado do botão está inativo.
+                      idleStateWidget: const Text(
+                        'Salvar',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+                      loadingStateWidget: const CircularProgressIndicator(
+                        strokeWidth: 3.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Colors.black,
+                        ),
+                      ),
+                      // Animar ou não a largura do botão. O padrão é `true`.
+                      // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
+                      useWidthAnimation: true,
+                      // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
+                      // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
+                      // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
+                      useEqualLoadingStateWidgetDimension: false,
+                      // Se você quiser um tamanho de largura total, defina como double.infinity
+                      width: 150.0,
+                      height: 40.0,
+                      borderRadius: 4.0,
+                      // A elevação do botão.
+                      // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
+                      elevation: 0.0,
+                      // A lacuna entre o botão e seu conteúdo.
+                      // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
+                      contentGap: 6.0,
+                      //Cor do botão.
+                      // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
+                      // Para [EasyButtonType.outlined]: Esta será a cor da borda.
+                      // Para [EasyButtonType.text]: Esta será a cor do texto.
+                      buttonColor:  Color.fromARGB(255, 255, 222, 89),
+                      onPressed: _clickSalvar,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

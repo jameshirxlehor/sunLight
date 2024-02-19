@@ -10,9 +10,11 @@ class DimensionamentosRealizados extends StatefulWidget {
       _DimensionamentosRealizadosState();
 }
 
-class _DimensionamentosRealizadosState extends State<DimensionamentosRealizados> {
+class _DimensionamentosRealizadosState
+    extends State<DimensionamentosRealizados> {
 
-  _cardDimensionados(double largura, double altura){
+
+  _cardDimensionados(double largura, double altura) {
     return Row(
       children: [
         Expanded(
@@ -20,38 +22,51 @@ class _DimensionamentosRealizadosState extends State<DimensionamentosRealizados>
             shape: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
             color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 6,top: 6),
+              padding: const EdgeInsets.only(bottom: 6, top: 6),
               child: Row(
                 children: [
                   Column(
                     children: [
-                      SizedBox(width: largura*0.36,),
+                      SizedBox(
+                        width: largura * 0.36,
+                      ),
                       Row(
                         children: [
-                          Text('Titulo',style: TextStyle(fontSize: largura*0.11),),
+                          Text(
+                            'Titulo',
+                            style: TextStyle(fontSize: largura * 0.11),
+                          ),
                         ],
                       ),
                       Row(
                         children: [
-                          Text('Data',style: TextStyle(fontSize: largura*0.063)),
+                          Text('Data',
+                              style: TextStyle(fontSize: largura * 0.063)),
                         ],
                       ),
                       Row(
                         children: [
-                          Text('Cidade',style: TextStyle(fontSize: largura*0.063)),
+                          Text('Cidade',
+                              style: TextStyle(fontSize: largura * 0.063)),
                         ],
                       ),
                       Row(
                         children: [
-                          Text('Consumo',style: TextStyle(fontSize: largura*0.063)),
+                          Text('Consumo',
+                              style: TextStyle(fontSize: largura * 0.063)),
                         ],
                       ),
                     ],
                   ),
-                  SizedBox(width: largura*0.25,),
+                  SizedBox(
+                    width: largura * 0.25,
+                  ),
                   Column(
                     children: [
-                      Icon(Icons.solar_power,size: largura*0.30,),
+                      Icon(
+                        Icons.solar_power,
+                        size: largura * 0.30,
+                      ),
                     ],
                   )
                 ],
@@ -62,8 +77,6 @@ class _DimensionamentosRealizadosState extends State<DimensionamentosRealizados>
       ],
     );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +108,6 @@ class _DimensionamentosRealizadosState extends State<DimensionamentosRealizados>
               _cardDimensionados(largura, altura),
               _cardDimensionados(largura, altura),
               _cardDimensionados(largura, altura),
-
             ],
           ),
         ),

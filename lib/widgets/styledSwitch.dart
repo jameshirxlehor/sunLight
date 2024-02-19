@@ -40,14 +40,14 @@ class _StyledSwitchState extends State<StyledSwitch> {
         curve: Curves.easeOut,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: isToggled ? Colors.white: Colors.black,
+          color: Colors.white,
         ),
         child: Container(
           width: size - innerPadding * 2,
           height: size - innerPadding * 2,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            color: isToggled ? Colors.black: Colors.white,
+            color:  Colors.black,
           ),
         ),
       ),

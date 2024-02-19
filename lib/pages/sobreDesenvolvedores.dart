@@ -33,7 +33,7 @@ class SobreDesenvolvedores extends StatelessWidget {
                     image: DecorationImage(image: imageUrl, fit: BoxFit.cover),
                     borderRadius: const BorderRadius.all(Radius.circular(75.0)),
                     boxShadow: const [
-                      BoxShadow(blurRadius: 7.0, color: Colors.grey)
+                      BoxShadow(blurRadius: 1.0, color: Colors.grey)
                     ]),
               ),
               const SizedBox(
@@ -151,10 +151,6 @@ class SobreDesenvolvedores extends StatelessWidget {
       return largura * 0.03;
     }
 
-    // decoration: const BoxDecoration(
-    //     image: DecorationImage(
-    //         image: AssetImage('assets/image/paisagem.png'),
-    //         fit: BoxFit.cover)),
 
     return Scaffold(
       appBar: AppBar(
