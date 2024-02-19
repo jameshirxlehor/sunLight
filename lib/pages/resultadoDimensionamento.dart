@@ -187,6 +187,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
             borderRadius: BorderRadius.circular(20)),
         child: Column(
           children: [
+            SizedBox(height: altura * 0.005),
             _getRowCadaMes(
                 "Jan", produtototal.producaoMensalJan, altura, largura),
             _getRowCadaMes(
@@ -283,14 +284,19 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.black,
+
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
         title: Text(
           'Resultado do Dimensionamento',
          style: GoogleFonts.lobster(fontSize: largura * 0.85 * 0.091,
-    color: const  Color.fromARGB(255, 255, 222, 89),
+    color: Colors.black,
     fontWeight: FontWeight.w500),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(255, 255, 222, 89),
       ),
       body: Container(
         decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/mao_pordool.jpg'), fit: BoxFit.cover)),

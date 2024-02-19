@@ -86,29 +86,33 @@ class _DimensionamentosRealizadosState
         MediaQuery.of(context).size.height; // tamanho da altura da tela
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 222, 89),
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
         centerTitle: true,
         title: Text(
           'Realizados',
           style: GoogleFonts.lobster(
               fontSize: largura * 0.85 * 0.11,
-              color: const Color.fromARGB(255, 255, 222, 89),
+              color: Colors.black,
               fontWeight: FontWeight.w500),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromARGB(255, 255, 222, 89),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _cardDimensionados(largura, altura),
-              _cardDimensionados(largura, altura),
-              _cardDimensionados(largura, altura),
-              _cardDimensionados(largura, altura),
-            ],
+      body: Container(
+        decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/pordosol_pretoamarelo.jpg'), fit: BoxFit.cover)),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _cardDimensionados(largura, altura),
+                _cardDimensionados(largura, altura),
+                _cardDimensionados(largura, altura),
+                _cardDimensionados(largura, altura),
+              ],
+            ),
           ),
         ),
       ),
