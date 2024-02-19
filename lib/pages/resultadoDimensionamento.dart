@@ -1,4 +1,5 @@
 import 'package:easy_loading_button/easy_loading_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,13 +12,11 @@ import '../dao/impl/dimensionamento_dao_db.dart';
 import '../model/dimensionamentorealizado.dart';
 
 class ResultadoDimensionamento extends StatefulWidget {
-  CalculoGeracao calculos;
   DimensionamentoRealizado dimensionamentoRealizadoEnviadoDeOutraTela;
+  late bool novoDimensionamentoOuNao;
 
   ResultadoDimensionamento(
-      {super.key,
-      required this.calculos,
-      required this.dimensionamentoRealizadoEnviadoDeOutraTela});
+      {super.key,required this.dimensionamentoRealizadoEnviadoDeOutraTela, required this.novoDimensionamentoOuNao});
 
   @override
   State<ResultadoDimensionamento> createState() =>
@@ -64,20 +63,37 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     );
   }
 
-  List<double> energiaMensal = [
-    150.0,
-    200.0,
-    180.0,
-    250.0,
-    220.0,
-    190.0,
-    210.0,
-    240.0,
-    200.0,
-    180.0,
-    220.0,
-    230.0
-  ];
+  _clickExcluir(){
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Excluir?'),
+        content: Text('Tem certeza que deseja excluir?'),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancelar')),
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                setState(() {
+                  dimensionamentoDao.excluir(dimensionamentorealizado);
+                });
+              },
+              child: Text('Excluir')),
+        ],
+      ),
+    );
+
+
+
+
+  }
+
 
   double calcularMedia(List<double> dados) {
     if (dados.isEmpty) return 0.0;
@@ -132,23 +148,24 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     );
   }
 
-  _resultadoMedia(Producaototal produtototal) {
-    late double producao = produtototal.producaoMensalJan! +
-        produtototal.producaoMensalFev! +
-        produtototal.producaoMensalMar! +
-        produtototal.producaoMensalAbr! +
-        produtototal.producaoMensalMai! +
-        produtototal.producaoMensalJun! +
-        produtototal.producaoMensalJul! +
-        produtototal.producaoMensalAgo! +
-        produtototal.producaoMensalSete! +
-        produtototal.producaoMensalOutu! +
-        produtototal.producaoMensalNov! +
-        produtototal.producaoMensalDez!;
+  _resultadoMedia() {
+    late double producao = widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoJan +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoFev +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoMar +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoAbr +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoMai +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoJun +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoJul +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoAgo +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoSete +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoOutu +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoNov +
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoDez;
+
     return (producao / 12);
   }
 
-  _getRowMedia(Producaototal produtototal) {
+  _getRowMedia() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Expanded(
@@ -163,7 +180,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
               width: 12,
             ),
             Text(
-              '${_resultadoMedia(produtototal).toStringAsFixed(2)}kWh',
+              '${_resultadoMedia().toStringAsFixed(2)}kWh',
               style: GoogleFonts.robotoMono(
                   color: Colors.green,
                   fontWeight: FontWeight.bold,
@@ -176,7 +193,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
   }
 
   _cardGeracaoMesMedia(
-      double altura, double largura, Producaototal produtototal) {
+      double altura, double largura, DimensionamentoRealizado dimensionamento) {
     return Center(
       child: Container(
         width: largura * 0.56,
@@ -189,30 +206,30 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
           children: [
             SizedBox(height: altura * 0.005),
             _getRowCadaMes(
-                "Jan", produtototal.producaoMensalJan, altura, largura),
+                "Jan", dimensionamento.producaoJan, altura, largura),
             _getRowCadaMes(
-                "Fev", produtototal.producaoMensalFev, altura, largura),
+                "Fev", dimensionamento.producaoFev, altura, largura),
             _getRowCadaMes(
-                "Mar", produtototal.producaoMensalMar, altura, largura),
+                "Mar", dimensionamento.producaoMar, altura, largura),
             _getRowCadaMes(
-                "Abr", produtototal.producaoMensalAbr, altura, largura),
+                "Abr", dimensionamento.producaoAbr, altura, largura),
             _getRowCadaMes(
-                "Mai", produtototal.producaoMensalMai, altura, largura),
+                "Mai", dimensionamento.producaoMai, altura, largura),
             _getRowCadaMes(
-                "Jun", produtototal.producaoMensalJun, altura, largura),
+                "Jun", dimensionamento.producaoJun, altura, largura),
             _getRowCadaMes(
-                "Jul", produtototal.producaoMensalJul, altura, largura),
+                "Jul", dimensionamento.producaoJul, altura, largura),
             _getRowCadaMes(
-                "Ago", produtototal.producaoMensalAgo, altura, largura),
+                "Ago", dimensionamento.producaoAgo, altura, largura),
             _getRowCadaMes(
-                "Set", produtototal.producaoMensalSete, altura, largura),
+                "Set", dimensionamento.producaoSete, altura, largura),
             _getRowCadaMes(
-                "Out", produtototal.producaoMensalOutu, altura, largura),
+                "Out", dimensionamento.producaoOutu, altura, largura),
             _getRowCadaMes(
-                "Nov", produtototal.producaoMensalNov, altura, largura),
+                "Nov", dimensionamento.producaoNov, altura, largura),
             _getRowCadaMes(
-                "Dez", produtototal.producaoMensalDez, altura, largura),
-            _getRowMedia(produtototal),
+                "Dez", dimensionamento.producaoDez, altura, largura),
+            _getRowMedia(),
           ],
         ),
       ),
@@ -241,7 +258,50 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       ),
     );
   }
+_getBotao(bool novoDimensionamentoOuNao){
+  return EasyButton(
+    type: EasyButtonType.elevated,
+    // Conteúdo dentro do botão quando o estado do botão está inativo.
+    idleStateWidget: Text(
+      novoDimensionamentoOuNao ? 'Salvar': 'Excluir',
+      style: const TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+          fontWeight: FontWeight.w700),
+    ),
+    // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+    loadingStateWidget: const CircularProgressIndicator(
+      strokeWidth: 3.0,
+      valueColor: AlwaysStoppedAnimation<Color>(
+        Colors.black,
+      ),
+    ),
+    // Animar ou não a largura do botão. O padrão é `true`.
+    // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
+    useWidthAnimation: true,
+    // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
+    // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
+    // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
+    useEqualLoadingStateWidgetDimension: false,
+    // Se você quiser um tamanho de largura total, defina como double.infinity
+    width: 150.0,
+    height: 40.0,
+    borderRadius: 4.0,
+    // A elevação do botão.
+    // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
+    elevation: 0.0,
+    // A lacuna entre o botão e seu conteúdo.
+    // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
+    contentGap: 6.0,
+    //Cor do botão.
+    // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
+    // Para [EasyButtonType.outlined]: Esta será a cor da borda.
+    // Para [EasyButtonType.text]: Esta será a cor do texto.
+    buttonColor:  Color.fromARGB(255, 255, 222, 89),
+    onPressed: novoDimensionamentoOuNao ? _clickSalvar : _clickExcluir,
+  );
 
+}
 
   _getCaixaResultados(double sugestaoModulos, double potenciakit, double area,
       double altura, double largura) {
@@ -271,13 +331,11 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     double largura = MediaQuery.of(context).size.width;
     double altura = MediaQuery.of(context).size.height;
 
-    double area = widget.calculos.areaOcupada;
+    double area = widget.dimensionamentoRealizadoEnviadoDeOutraTela.areOcupada;
 
-    double potenciakit = widget.calculos.potenciaDoKit;
+    double potenciakit = widget.dimensionamentoRealizadoEnviadoDeOutraTela.potenciakit;
 
-    Producaototal producaototal = widget.calculos.producaoTotal;
-
-    double sugestaoModulos = widget.calculos.sugestaoModulos;
+    double sugestaoModulos = widget.dimensionamentoRealizadoEnviadoDeOutraTela.sugestaoPlacas;
 
     _getESpacamentoLadosDinamica() {
       return altura * 0.025;
@@ -312,7 +370,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                 SizedBox(
                   height: altura * 0.011,
                 ),
-                _cardGeracaoMesMedia(altura, largura, producaototal),
+                _cardGeracaoMesMedia(altura, largura, widget.dimensionamentoRealizadoEnviadoDeOutraTela),
                 _getCaixaResultados(
                     sugestaoModulos, potenciakit, area, altura, largura),
                 Row(
@@ -363,47 +421,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                       },
                     ),
                     SizedBox(width: 20),
-                    EasyButton(
-                      type: EasyButtonType.elevated,
-                      // Conteúdo dentro do botão quando o estado do botão está inativo.
-                      idleStateWidget: const Text(
-                        'Salvar',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
-                      loadingStateWidget: const CircularProgressIndicator(
-                        strokeWidth: 3.0,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Colors.black,
-                        ),
-                      ),
-                      // Animar ou não a largura do botão. O padrão é `true`.
-                      // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
-                      useWidthAnimation: true,
-                      // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-                      // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-                      // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
-                      useEqualLoadingStateWidgetDimension: false,
-                      // Se você quiser um tamanho de largura total, defina como double.infinity
-                      width: 150.0,
-                      height: 40.0,
-                      borderRadius: 4.0,
-                      // A elevação do botão.
-                      // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
-                      elevation: 0.0,
-                      // A lacuna entre o botão e seu conteúdo.
-                      // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
-                      contentGap: 6.0,
-                      //Cor do botão.
-                      // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-                      // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-                      // Para [EasyButtonType.text]: Esta será a cor do texto.
-                      buttonColor:  Color.fromARGB(255, 255, 222, 89),
-                      onPressed: _clickSalvar,
-                    ),
+                    _getBotao(widget.novoDimensionamentoOuNao),
                   ],
                 ),
               ],

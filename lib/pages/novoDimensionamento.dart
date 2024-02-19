@@ -476,15 +476,29 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         dez: controllerConsumoMesDezembro.text == ''
             ? null
             : double.parse(controllerConsumoMesDezembro.text.replaceAll(',', '.')),
+            areOcupada: calculogerado.areaOcupada,
+            potenciakit: calculogerado.potenciaDoKit,
+            sugestaoPlacas: calculogerado.sugestaoModulos,
+            producaoJan: calculogerado.producaoTotal.producaoMensalJan,
+            producaoFev: calculogerado.producaoTotal.producaoMensalFev,
+            producaoMar: calculogerado.producaoTotal.producaoMensalMar,
+            producaoAbr: calculogerado.producaoTotal.producaoMensalAbr,
+            producaoMai: calculogerado.producaoTotal.producaoMensalMai,
+            producaoJun: calculogerado.producaoTotal.producaoMensalJun,
+            producaoJul: calculogerado.producaoTotal.producaoMensalJul,
+            producaoAgo: calculogerado.producaoTotal.producaoMensalAgo,
+            producaoSete: calculogerado.producaoTotal.producaoMensalSete,
+            producaoOutu: calculogerado.producaoTotal.producaoMensalOutu,
+            producaoNov: calculogerado.producaoTotal.producaoMensalNov,
+            producaoDez: calculogerado.producaoTotal.producaoMensalDez
       );
 
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => ResultadoDimensionamento(
-                    calculos: calculogerado,
                     dimensionamentoRealizadoEnviadoDeOutraTela:
-                        dimensionamentoRealizado,
+                        dimensionamentoRealizado,novoDimensionamentoOuNao: true,
                   )));
     }
   }
@@ -606,7 +620,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     }
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 222, 89),
+      backgroundColor: Colors.black,
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.black,

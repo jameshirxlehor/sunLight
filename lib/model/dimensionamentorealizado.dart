@@ -21,6 +21,24 @@ class DimensionamentoRealizado {
   double? nov;
   double? dez;
 
+  double potenciakit;
+  double areOcupada;
+  double sugestaoPlacas;
+  double producaoJan;
+  double producaoFev;
+  double producaoMar;
+  double producaoAbr;
+  double producaoMai;
+  double producaoJun;
+  double producaoJul;
+  double producaoAgo;
+  double producaoSete;
+  double producaoOutu;
+  double producaoNov;
+  double producaoDez;
+
+
+
   DimensionamentoRealizado({
     this.id,
     required this.nome,
@@ -42,7 +60,24 @@ class DimensionamentoRealizado {
     this.sete,
     this.outu,
     this.nov,
-    this.dez
+    this.dez,
+
+    required this.potenciakit,
+    required this.areOcupada,
+    required this.sugestaoPlacas,
+    required this.producaoJan,
+    required this.producaoFev,
+    required this.producaoMar,
+    required this.producaoAbr,
+    required this.producaoMai,
+    required this.producaoJun,
+    required this.producaoJul,
+    required this.producaoAgo,
+    required this.producaoSete,
+    required this.producaoOutu,
+    required this.producaoNov,
+    required this.producaoDez,
+
   });
 
 
@@ -69,7 +104,23 @@ class DimensionamentoRealizado {
       'outu': outu,
       'nov': nov,
       'dez': dez,
-      'mediaConsumo': mediaConsumo
+      'mediaConsumo': mediaConsumo,
+      'potenciakit': potenciakit,
+      'areOcupada': areOcupada,
+      'sugestaoPlacas': sugestaoPlacas,
+      'producaoJan': producaoJan,
+      'producaoFev': producaoFev,
+      'producaoMar': producaoMar,
+      'producaoAbr': producaoAbr,
+      'producaoMai': producaoMai,
+      'producaoJun': producaoJun,
+      'producaoJul': producaoJul,
+      'producaoAgo': producaoAgo,
+      'producaoSete': producaoSete,
+      'producaoOutu': producaoOutu,
+      'producaoNov': producaoNov,
+      'producaoDez': producaoDez,
+
     };
   }
 
@@ -95,7 +146,22 @@ class DimensionamentoRealizado {
         dez: map['jan'],
         data: map['data'],
         cidade: map['cidade'],
-        mediaConsumo: map['mediaConsumo']
+        mediaConsumo: map['mediaConsumo'],
+      potenciakit: map['potenciakit'],
+      areOcupada: map['areOcupada'],
+      sugestaoPlacas: map['sugestaoPlacas'],
+      producaoJan: map['producaoJan'],
+      producaoFev: map['producaoFev'],
+      producaoMar: map['producaoMar'],
+      producaoAbr: map['producaoAbr'],
+      producaoMai: map['producaoMai'],
+      producaoJun: map['producaoJun'],
+      producaoJul: map['producaoJul'],
+      producaoAgo: map['producaoAgo'],
+      producaoSete: map['producaoSete'],
+      producaoOutu: map['producaoOutu'],
+      producaoNov: map['producaoNov'],
+      producaoDez: map['producaoDez'],
     );
   }
 
