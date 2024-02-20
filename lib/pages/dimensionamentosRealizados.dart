@@ -20,10 +20,7 @@ class DimensionamentosRealizados extends StatefulWidget {
 class _DimensionamentosRealizadosState
     extends State<DimensionamentosRealizados> {
   _cardDimensionados(double largura, double altura,
-      
       DimensionamentoRealizado dimensionamentoRealizado) {
-
-    
     return GestureDetector(
       onTap: () async {
         await Navigator.push(
@@ -47,18 +44,15 @@ class _DimensionamentosRealizadosState
             child: Card(
               shape:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-              color: Colors.white,
+              color: Colors.black,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 6, top: 6, left: 12),
+                padding: const EdgeInsets.only(bottom: 10, top: 6, left: 14),
                 child: Row(
                   children: [
                     Expanded(
                       flex: 4,
                       child: Column(
                         children: [
-                          SizedBox(
-                            width: (largura-12) * 0.65,
-                          ),
                           Row(
                             children: [
                               Expanded(
@@ -66,27 +60,51 @@ class _DimensionamentosRealizadosState
                                   "${dimensionamentoRealizado.nome}",
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(fontSize: (largura-12) * 0.11),
+                                  style: GoogleFonts.graduate(
+                                      fontSize: (largura - 12) * 0.095,
+                                      color: Color.fromARGB(255, 255, 222, 89),
+                                      fontWeight: FontWeight.w500),
+                                  // style: TextStyle(fontSize: (largura-12) * 0.095),
                                 ),
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              Text(dimensionamentoRealizado.data,
-                                  style: TextStyle(fontSize: (largura-12) * 0.063),),
+                              Text(
+                                dimensionamentoRealizado.data,
+                                style: GoogleFonts.graduate(
+                                    fontSize: (largura - 12) * 0.06,
+                                    color: Color.fromARGB(255, 255, 222, 89),
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              // style: TextStyle(fontSize: (largura-12) * 0.063),),
                             ],
                           ),
                           Row(
                             children: [
-                              Text("${dimensionamentoRealizado.cidade}",
-                                  style: TextStyle(fontSize: (largura-12) * 0.063)),
+                              Text(
+                                "${dimensionamentoRealizado.cidade}",
+                                style: GoogleFonts.graduate(
+                                    fontSize: (largura - 12) * 0.06,
+                                    color: Color.fromARGB(255, 255, 222, 89),
+                                    fontWeight: FontWeight.w500),
+                                // style:
+                                //     TextStyle(fontSize: (largura - 12) * 0.063),
+                              ),
                             ],
                           ),
                           Row(
                             children: [
-                              Text("${dimensionamentoRealizado.mediaConsumo} kWh",
-                                  style: TextStyle(fontSize: largura * 0.063)),
+                              Text(
+                                "${dimensionamentoRealizado.mediaConsumo} kWh",
+                                style: GoogleFonts.graduate(
+                                    fontSize: (largura - 12) * 0.06,
+                                    color: Color.fromARGB(255, 255, 222, 89),
+                                    fontWeight: FontWeight.w500),
+
+                                // style: TextStyle(fontSize: largura * 0.063),
+                              ),
                             ],
                           ),
                         ],
@@ -102,6 +120,7 @@ class _DimensionamentosRealizadosState
                           Icon(
                             Icons.solar_power,
                             size: largura * 0.28,
+                            color: Color.fromARGB(255, 255, 222, 89),
                           ),
                         ],
                       ),
@@ -150,14 +169,20 @@ class _DimensionamentosRealizadosState
         ),
         backgroundColor: Color.fromARGB(255, 255, 222, 89),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 14.0, right: 6.0, left: 6.0),
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return _cardDimensionados(
-                largura, altura, listaDimensionamentos[index]);
-          },
-          itemCount: listaDimensionamentos.length,
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/image/paisagem.png'),
+                fit: BoxFit.cover)),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 14.0, right: 6.0, left: 6.0),
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return _cardDimensionados(
+                  largura, altura, listaDimensionamentos[index]);
+            },
+            itemCount: listaDimensionamentos.length,
+          ),
         ),
       ),
     );
