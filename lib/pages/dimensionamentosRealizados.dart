@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sunlight/dao/dimensionamentodao.dart';
 import 'package:sunlight/dao/impl/dimensionamento_dao_db.dart';
@@ -19,7 +20,10 @@ class DimensionamentosRealizados extends StatefulWidget {
 class _DimensionamentosRealizadosState
     extends State<DimensionamentosRealizados> {
   _cardDimensionados(double largura, double altura,
+      
       DimensionamentoRealizado dimensionamentoRealizado) {
+
+    
     return GestureDetector(
       onTap: () async {
         await Navigator.push(
@@ -45,52 +49,62 @@ class _DimensionamentosRealizadosState
                   OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 6, top: 6),
+                padding: const EdgeInsets.only(bottom: 6, top: 6, left: 12),
                 child: Row(
                   children: [
-                    Column(
-                      children: [
-                        SizedBox(
-                          width: largura * 0.46,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              dimensionamentoRealizado.nome,
-                              style: TextStyle(fontSize: largura * 0.11),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(dimensionamentoRealizado.data,
-                                style: TextStyle(fontSize: largura * 0.063)),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text("${dimensionamentoRealizado.cidade}",
-                                style: TextStyle(fontSize: largura * 0.063)),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text("${dimensionamentoRealizado.mediaConsumo} kWh",
-                                style: TextStyle(fontSize: largura * 0.063)),
-                          ],
-                        ),
-                      ],
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: (largura-12) * 0.65,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "${dimensionamentoRealizado.nome}",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(fontSize: (largura-12) * 0.11),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(dimensionamentoRealizado.data,
+                                  style: TextStyle(fontSize: (largura-12) * 0.063),),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("${dimensionamentoRealizado.cidade}",
+                                  style: TextStyle(fontSize: (largura-12) * 0.063)),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("${dimensionamentoRealizado.mediaConsumo} kWh",
+                                  style: TextStyle(fontSize: largura * 0.063)),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(
-                      width: largura * 0.18,
-                    ),
-                    Column(
-                      children: [
-                        Icon(
-                          Icons.solar_power,
-                          size: largura * 0.28,
-                        ),
-                      ],
+                    // SizedBox(
+                    //   width: (largura-12) * 0.030,
+                    // ),
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.solar_power,
+                            size: largura * 0.28,
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),
