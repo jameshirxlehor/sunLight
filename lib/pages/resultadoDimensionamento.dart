@@ -10,13 +10,18 @@ import 'package:sunlight/model/producaototal.dart';
 import '../dao/dimensionamentodao.dart';
 import '../dao/impl/dimensionamento_dao_db.dart';
 import '../model/dimensionamentorealizado.dart';
+import 'novoDimensionamento.dart';
 
 class ResultadoDimensionamento extends StatefulWidget {
   DimensionamentoRealizado dimensionamentoRealizadoEnviadoDeOutraTela;
   late bool novoDimensionamentoOuNao;
+  late bool editarOuNao;
+  late var listaEstado;
+  late var infoCidade;
+
 
   ResultadoDimensionamento(
-      {super.key,required this.dimensionamentoRealizadoEnviadoDeOutraTela, required this.novoDimensionamentoOuNao});
+      {super.key,required this.dimensionamentoRealizadoEnviadoDeOutraTela, required this.novoDimensionamentoOuNao, required this.editarOuNao, required this.listaEstado, required this.infoCidade});
 
   @override
   State<ResultadoDimensionamento> createState() =>
@@ -24,6 +29,7 @@ class ResultadoDimensionamento extends StatefulWidget {
 }
 
 class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
+  late bool _editarOuNao = false;
   late DimensionamentoDao dimensionamentoDao;
   late DimensionamentoRealizado dimensionamentorealizado =
       widget.dimensionamentoRealizadoEnviadoDeOutraTela;
@@ -32,6 +38,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
   @override
   void initState() {
     dimensionamentoDao = DimensionamentoDaoDb(db: Mediator().db);
+    _editarOuNao = widget.editarOuNao;
   }
 
   _salvar() {
@@ -39,13 +46,19 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     Navigator.pop(context);
     Navigator.pop(context);
   }
+  _editar(){
+    dimensionamentoDao.atualizar(dimensionamentorealizado);
+    Navigator.pop(context);
+    Navigator.pop(context);
+
+  }
 
   _clickSalvar() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Salvar?'),
-        content: Text('Tem certeza que deseja salvar?'),
+        title: _editarOuNao ? Text('Salvar alteração?') : Text('Salvar?'),
+        content: _editarOuNao ? Text('Tem certeza que deseja salvar alteração realizada?') : Text('Tem certeza que deseja salvar?'),
         actions: [
           TextButton(
               onPressed: () {
@@ -55,7 +68,11 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
           TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _salvar();
+                if(_editarOuNao){
+                  _editar();
+                } else{
+                  _salvar();
+                }
               },
               child: Text('Salvar')),
         ],
@@ -379,9 +396,9 @@ _getBotao(bool novoDimensionamentoOuNao){
                     EasyButton(
                       type: EasyButtonType.elevated,
                       // Conteúdo dentro do botão quando o estado do botão está inativo.
-                      idleStateWidget: const Text(
+                      idleStateWidget: Text(_editarOuNao ? 'Editar' :
                         'Sair',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.w700),
@@ -416,8 +433,20 @@ _getBotao(bool novoDimensionamentoOuNao){
                       // Para [EasyButtonType.text]: Esta será a cor do texto.
                       buttonColor: Color.fromARGB(255, 255, 222, 89),
                       onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.pop(context);
+
+                        if(_editarOuNao){
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NovoDimensionamento(estados: widget.listaEstado, infocidades: widget.infoCidade,editarOuNao: true,dimensionamentoSalvo: widget.dimensionamentoRealizadoEnviadoDeOutraTela,)
+                            ),
+                          );
+                        }else{
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        }
                       },
                     ),
                     SizedBox(width: 20),

@@ -4,8 +4,10 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sunlight/dao/dimensionamentodao.dart';
 import 'package:sunlight/dao/impl/dimensionamento_dao_db.dart';
+import 'package:sunlight/pages/novoDimensionamento.dart';
 import 'package:sunlight/pages/resultadoDimensionamento.dart';
 
+import '../dao/impl/infocidade_dao_mem.dart';
 import '../domain/mediator.dart';
 import '../model/dimensionamentorealizado.dart';
 
@@ -30,6 +32,9 @@ class _DimensionamentosRealizadosState
               dimensionamentoRealizadoEnviadoDeOutraTela:
                   dimensionamentoRealizado,
               novoDimensionamentoOuNao: false,
+              editarOuNao: true,
+              listaEstado: listaEstado, infoCidade: infoCidade
+              ,
             ),
           ),
         );
@@ -37,6 +42,14 @@ class _DimensionamentosRealizadosState
           listaDimensionamentos = value;
           setState(() {});
         });
+      },
+      onLongPress: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NovoDimensionamento(estados: listaEstado, infocidades: infoCidade,editarOuNao: true,dimensionamentoSalvo: dimensionamentoRealizado,)
+          ),
+        );
       },
       child: Row(
         children: [
@@ -137,12 +150,23 @@ class _DimensionamentosRealizadosState
 
   late DimensionamentoDao dimensionamentoDao;
   List<DimensionamentoRealizado> listaDimensionamentos = [];
+  List<String> listaEstado = [];
+  var infoCidade;
 
   @override
   void initState() {
     dimensionamentoDao = DimensionamentoDaoDb(db: Mediator().db);
-    dimensionamentoDao.listar().then((value) {
+    dimensionamentoDao.listar().then((value) async{
       listaDimensionamentos = value;
+      var mediator = Mediator();
+
+      mediator.mapaCidades = await InfoCidadeDaoMem().listarCidades();
+
+      listaEstado = mediator.mapaCidades.keys.toList();
+      print(mediator.mapaCidades.keys);
+      infoCidade = mediator.mapaCidades;
+
+
       setState(() {});
     });
     super.initState();

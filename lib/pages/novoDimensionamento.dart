@@ -12,40 +12,88 @@ import '../model/dimensionamentorealizado.dart';
 class NovoDimensionamento extends StatefulWidget {
   late List<String> estados;
   late Map<String, List<InfoCidade>> infocidades;
+  late bool editarOuNao;
+  DimensionamentoRealizado? dimensionamentoSalvo;
+
 
   NovoDimensionamento(
-      {super.key, required this.estados, required this.infocidades});
+      {super.key, required this.estados, required this.infocidades,required this.editarOuNao,this.dimensionamentoSalvo});
 
   @override
   State<NovoDimensionamento> createState() => _NovoDimensionamentoState();
 }
 
 class _NovoDimensionamentoState extends State<NovoDimensionamento> {
-  String textoDropDownEstado = "Selecione";
-  String textoDropDownCidade = "Selecione";
-  String dropDownMenuOrientacao = "Selecione";
+  @override
+  void initState() {
+    textoDropDownEstado = widget.editarOuNao ? widget.dimensionamentoSalvo!.estado : "Selecione";
+    textoDropDownCidade = widget.editarOuNao ? widget.dimensionamentoSalvo!.cidade : "Selecione";
+    dropDownMenuOrientacao = widget.editarOuNao ? widget.dimensionamentoSalvo!.orientacaoPlacas : "Selecione";
 
-  TextEditingController controllerNomeCliente = TextEditingController();
-  TextEditingController controllerEstado = TextEditingController();
-  TextEditingController controllerCidade = TextEditingController();
-  TextEditingController controllerOrientacaoPlaca = TextEditingController();
-  TextEditingController controllerPotenciaPlaca = TextEditingController();
-  TextEditingController controllerConsumoMedia = TextEditingController();
-  TextEditingController controllerConsumoMesJaneiro = TextEditingController();
-  TextEditingController controllerConsumoMesFevereiro = TextEditingController();
-  TextEditingController controllerConsumoMesMarco = TextEditingController();
-  TextEditingController controllerConsumoMesAbril = TextEditingController();
-  TextEditingController controllerConsumoMesMaio = TextEditingController();
-  TextEditingController controllerConsumoMesJunho = TextEditingController();
-  TextEditingController controllerConsumoMesJulho = TextEditingController();
-  TextEditingController controllerConsumoMesAgosto = TextEditingController();
-  TextEditingController controllerConsumoMesSetembro = TextEditingController();
-  TextEditingController controllerConsumoMesOutubro = TextEditingController();
-  TextEditingController controllerConsumoMesNovembro = TextEditingController();
-  TextEditingController controllerConsumoMesDezembro = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+     controllerNomeCliente = TextEditingController();
+     controllerEstado = TextEditingController();
+     controllerCidade = TextEditingController();
+     controllerOrientacaoPlaca = TextEditingController();
+     controllerPotenciaPlaca = TextEditingController();
+     controllerConsumoMedia = TextEditingController();
+     controllerConsumoMesJaneiro = TextEditingController();
+     controllerConsumoMesFevereiro = TextEditingController();
+     controllerConsumoMesMarco = TextEditingController();
+     controllerConsumoMesAbril = TextEditingController();
+     controllerConsumoMesMaio = TextEditingController();
+     controllerConsumoMesJunho = TextEditingController();
+     controllerConsumoMesJulho = TextEditingController();
+     controllerConsumoMesAgosto = TextEditingController();
+     controllerConsumoMesSetembro = TextEditingController();
+     controllerConsumoMesOutubro = TextEditingController();
+     controllerConsumoMesNovembro = TextEditingController();
+     controllerConsumoMesDezembro = TextEditingController();
+    _formKey = GlobalKey<FormState>();
 
-  bool mostrarConsumoMesAMes = false;
+    controllerNomeCliente.text = widget.editarOuNao ? widget.dimensionamentoSalvo!.nome : '';
+    controllerConsumoMedia.text = widget.editarOuNao ?(widget.dimensionamentoSalvo!.mediaConsumo == null ? '' : '${widget.dimensionamentoSalvo!.mediaConsumo}' ): '';
+    controllerConsumoMesJaneiro.text = widget.editarOuNao ?(widget.dimensionamentoSalvo!.jan == null ? '' :  '${widget.dimensionamentoSalvo!.jan}' ): '';
+    controllerConsumoMesFevereiro.text = widget.editarOuNao ?(widget.dimensionamentoSalvo!.fev == null ? '' :   '${widget.dimensionamentoSalvo!.fev}' ): '';
+    controllerConsumoMesMarco.text = widget.editarOuNao ?(widget.dimensionamentoSalvo!.mar == null ? '' :   '${widget.dimensionamentoSalvo!.mar}' ): '';
+    controllerConsumoMesAbril.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.abr == null ? '' :   '${widget.dimensionamentoSalvo!.abr}' ): '';
+    controllerConsumoMesMaio.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.mai == null ? '' :   '${widget.dimensionamentoSalvo!.mai}' ): '';
+    controllerConsumoMesJunho.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.jun == null ? '' :   '${widget.dimensionamentoSalvo!.jun}' ): '';
+    controllerConsumoMesJulho.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.jul == null ? '' :   '${widget.dimensionamentoSalvo!.jul}' ): '';
+    controllerConsumoMesAgosto.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.ago == null ? '' :   '${widget.dimensionamentoSalvo!.ago}' ): '';
+    controllerConsumoMesSetembro.text =  widget.editarOuNao ?(widget.dimensionamentoSalvo!.sete == null ? '' :   '${widget.dimensionamentoSalvo!.sete}' ): '';
+    controllerConsumoMesOutubro.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.outu == null ? '' :   '${widget.dimensionamentoSalvo!.outu}' ): '';
+    controllerConsumoMesNovembro.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.nov == null ? '' :   '${widget.dimensionamentoSalvo!.nov}' ): '';
+    controllerConsumoMesDezembro.text = widget.editarOuNao ?(widget.dimensionamentoSalvo!.dez == null ? '' :   '${widget.dimensionamentoSalvo!.dez}' ): '';
+    controllerPotenciaPlaca.text = widget.editarOuNao ?( '${widget.dimensionamentoSalvo!.potenciaPlaca}' ): '';
+    mostrarConsumoMesAMes = widget.editarOuNao ?( widget.dimensionamentoSalvo!.mesOuMedia ): false;
+
+    super.initState();
+  }
+
+  late String textoDropDownEstado;
+  late String textoDropDownCidade;
+  late String dropDownMenuOrientacao;
+
+  late TextEditingController controllerNomeCliente;
+  late TextEditingController controllerEstado;
+  late TextEditingController controllerCidade;
+  late TextEditingController controllerOrientacaoPlaca;
+  late TextEditingController controllerPotenciaPlaca;
+  late TextEditingController controllerConsumoMedia;
+  late TextEditingController controllerConsumoMesJaneiro;
+  late TextEditingController controllerConsumoMesFevereiro;
+  late TextEditingController controllerConsumoMesMarco;
+  late TextEditingController controllerConsumoMesAbril;
+  late TextEditingController controllerConsumoMesMaio;
+  late TextEditingController controllerConsumoMesJunho;
+  late TextEditingController controllerConsumoMesJulho;
+  late TextEditingController controllerConsumoMesAgosto;
+  late TextEditingController controllerConsumoMesSetembro;
+  late TextEditingController controllerConsumoMesOutubro;
+  late TextEditingController controllerConsumoMesNovembro;
+  late TextEditingController controllerConsumoMesDezembro;
+  late GlobalKey<FormState> _formKey;
+  late bool mostrarConsumoMesAMes;
 
   _onToggled(bool isToggled) {
     setState(() {
@@ -117,7 +165,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
               borderSide: BorderSide(color: Colors.black)),
           fillColor: Colors.white,
           filled: true),
-      icon: Icon(Icons.map, color: Colors.black),
+      icon: const Icon(Icons.map, color: Colors.black),
       focusColor: Colors.transparent,
       menuMaxHeight: altura * 0.55,
       hint: Text(textoDropDownEstado,
@@ -434,6 +482,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
 
       DimensionamentoRealizado dimensionamentoRealizado =
       DimensionamentoRealizado(
+          id: widget.editarOuNao ? widget.dimensionamentoSalvo!.id : null,
           nome: controllerNomeCliente.text,
           data: _converteDateTimePString(),
           estado: textoDropDownEstado,
@@ -441,54 +490,54 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
           orientacaoPlacas: dropDownMenuOrientacao,
           potenciaPlaca: int.parse(controllerPotenciaPlaca.text),
           mesOuMedia: mostrarConsumoMesAMes,
-          mediaConsumo: controllerConsumoMedia.text == ''
+          mediaConsumo: controllerConsumoMedia.text == '' || controllerConsumoMedia.text == 'null'
               ? null
               : double.parse(controllerConsumoMedia.text.replaceAll(',', '.')),
-          jan: controllerConsumoMesJaneiro.text == ''
+          jan: controllerConsumoMesJaneiro.text == '' || controllerConsumoMesJaneiro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesJaneiro.text.replaceAll(',', '.')),
-          fev: controllerConsumoMesFevereiro.text == ''
+          fev: controllerConsumoMesFevereiro.text == '' ||  controllerConsumoMesFevereiro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesFevereiro.text.replaceAll(',', '.')),
-          mar: controllerConsumoMesMarco.text == ''
+          mar: controllerConsumoMesMarco.text == '' || controllerConsumoMesMarco.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesMarco.text.replaceAll(',', '.')),
-          abr: controllerConsumoMesAbril.text == ''
+          abr: controllerConsumoMesAbril.text == '' || controllerConsumoMesAbril.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesAbril.text.replaceAll(',', '.')),
-          mai: controllerConsumoMesMaio.text == ''
+          mai: controllerConsumoMesMaio.text == '' || controllerConsumoMesMaio.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesMaio.text.replaceAll(',', '.')),
-          jun: controllerConsumoMesJunho.text == ''
+          jun: controllerConsumoMesJunho.text == '' || controllerConsumoMesJunho.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesJunho.text.replaceAll(',', '.')),
-          jul: controllerConsumoMesJulho.text == ''
+          jul: controllerConsumoMesJulho.text == '' || controllerConsumoMesJulho.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesJulho.text.replaceAll(',', '.')),
-          ago: controllerConsumoMesAgosto.text == ''
+          ago: controllerConsumoMesAgosto.text == '' || controllerConsumoMesAgosto.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesAgosto.text.replaceAll(',', '.')),
-          sete: controllerConsumoMesSetembro.text == ''
+          sete: controllerConsumoMesSetembro.text == '' || controllerConsumoMesSetembro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesSetembro.text.replaceAll(',', '.')),
-          outu: controllerConsumoMesOutubro.text == ''
+          outu: controllerConsumoMesOutubro.text == '' || controllerConsumoMesOutubro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesOutubro.text.replaceAll(',', '.')),
-          nov: controllerConsumoMesNovembro.text == ''
+          nov: controllerConsumoMesNovembro.text == '' || controllerConsumoMesNovembro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesNovembro.text.replaceAll(',', '.')),
-          dez: controllerConsumoMesDezembro.text == ''
+          dez: controllerConsumoMesDezembro.text == '' || controllerConsumoMesDezembro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesDezembro.text.replaceAll(',', '.')),
@@ -508,14 +557,14 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
           producaoNov: calculogerado.producaoTotal.producaoMensalNov,
           producaoDez: calculogerado.producaoTotal.producaoMensalDez
       );
-
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) =>
                   ResultadoDimensionamento(
                     dimensionamentoRealizadoEnviadoDeOutraTela:
-                    dimensionamentoRealizado, novoDimensionamentoOuNao: true,
+                    dimensionamentoRealizado, novoDimensionamentoOuNao: true, editarOuNao: widget.editarOuNao,
+                    listaEstado: widget.estados,infoCidade: widget.infocidades,
                   )));
     }
   }
@@ -727,47 +776,49 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      EasyButton(
-                        type: EasyButtonType.elevated,
-                        // Conteúdo dentro do botão quando o estado do botão está inativo.
-                        idleStateWidget: const Text(
-                          'Calcular',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
-                        loadingStateWidget: const CircularProgressIndicator(
-                          strokeWidth: 3.0,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.black,
-                          ),
-                        ),
-                        // Animar ou não a largura do botão. O padrão é `true`.
-                        // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
-                        useWidthAnimation: true,
-                        // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-                        // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-                        // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
-                        useEqualLoadingStateWidgetDimension: false,
-                        // Se você quiser um tamanho de largura total, defina como double.infinity
-                        width: 150.0,
-                        height: 40.0,
-                        borderRadius: 4.0,
-                        // A elevação do botão.
-                        // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
-                        elevation: 0.0,
-                        // A lacuna entre o botão e seu conteúdo.
-                        // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
-                        contentGap: 6.0,
-                        //Cor do botão.
-                        // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-                        // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-                        // Para [EasyButtonType.text]: Esta será a cor do texto.
-                        buttonColor: Color.fromARGB(255, 255, 222, 89),
-                        onPressed: _clickCalcular,
-                      ),
+                      ElevatedButton(onPressed: _clickCalcular, child: Text('Calcular'),),
+
+                      // EasyButton(
+                      //   type: EasyButtonType.elevated,
+                      //   // Conteúdo dentro do botão quando o estado do botão está inativo.
+                      //   idleStateWidget: const Text(
+                      //     'Calcular',
+                      //     style: TextStyle(
+                      //         color: Colors.black,
+                      //         fontSize: 20,
+                      //         fontWeight: FontWeight.w700),
+                      //   ),
+                      //   // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+                      //   loadingStateWidget: const CircularProgressIndicator(
+                      //     strokeWidth: 3.0,
+                      //     valueColor: AlwaysStoppedAnimation<Color>(
+                      //       Colors.black,
+                      //     ),
+                      //   ),
+                      //   // Animar ou não a largura do botão. O padrão é `true`.
+                      //   // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
+                      //   useWidthAnimation: true,
+                      //   // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
+                      //   // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
+                      //   // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
+                      //   useEqualLoadingStateWidgetDimension: false,
+                      //   // Se você quiser um tamanho de largura total, defina como double.infinity
+                      //   width: 150.0,
+                      //   height: 40.0,
+                      //   borderRadius: 4.0,
+                      //   // A elevação do botão.
+                      //   // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
+                      //   elevation: 0.0,
+                      //   // A lacuna entre o botão e seu conteúdo.
+                      //   // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
+                      //   contentGap: 6.0,
+                      //   //Cor do botão.
+                      //   // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
+                      //   // Para [EasyButtonType.outlined]: Esta será a cor da borda.
+                      //   // Para [EasyButtonType.text]: Esta será a cor do texto.
+                      //   buttonColor: Color.fromARGB(255, 255, 222, 89),
+                      //   onPressed: _clickCalcular,
+                      // ),
                     ],
                   ),
                   _getSizedBox(_getAltura()),
