@@ -17,7 +17,7 @@ class NovoDimensionamento extends StatefulWidget {
 
 
   NovoDimensionamento(
-      {super.key, required this.estados, required this.infocidades,required this.editarOuNao,this.dimensionamentoSalvo});
+      {super.key, required this.estados, required this.infocidades, required this.editarOuNao, this.dimensionamentoSalvo});
 
   @override
   State<NovoDimensionamento> createState() => _NovoDimensionamentoState();
@@ -26,46 +26,92 @@ class NovoDimensionamento extends StatefulWidget {
 class _NovoDimensionamentoState extends State<NovoDimensionamento> {
   @override
   void initState() {
-    textoDropDownEstado = widget.editarOuNao ? widget.dimensionamentoSalvo!.estado : "Selecione";
-    textoDropDownCidade = widget.editarOuNao ? widget.dimensionamentoSalvo!.cidade : "Selecione";
-    dropDownMenuOrientacao = widget.editarOuNao ? widget.dimensionamentoSalvo!.orientacaoPlacas : "Selecione";
+    textoDropDownEstado =
+    widget.editarOuNao ? widget.dimensionamentoSalvo!.estado : "Selecione";
+    textoDropDownCidade =
+    widget.editarOuNao ? widget.dimensionamentoSalvo!.cidade : "Selecione";
+    dropDownMenuOrientacao = widget.editarOuNao
+        ? widget.dimensionamentoSalvo!.orientacaoPlacas
+        : "Selecione";
 
-     controllerNomeCliente = TextEditingController();
-     controllerEstado = TextEditingController();
-     controllerCidade = TextEditingController();
-     controllerOrientacaoPlaca = TextEditingController();
-     controllerPotenciaPlaca = TextEditingController();
-     controllerConsumoMedia = TextEditingController();
-     controllerConsumoMesJaneiro = TextEditingController();
-     controllerConsumoMesFevereiro = TextEditingController();
-     controllerConsumoMesMarco = TextEditingController();
-     controllerConsumoMesAbril = TextEditingController();
-     controllerConsumoMesMaio = TextEditingController();
-     controllerConsumoMesJunho = TextEditingController();
-     controllerConsumoMesJulho = TextEditingController();
-     controllerConsumoMesAgosto = TextEditingController();
-     controllerConsumoMesSetembro = TextEditingController();
-     controllerConsumoMesOutubro = TextEditingController();
-     controllerConsumoMesNovembro = TextEditingController();
-     controllerConsumoMesDezembro = TextEditingController();
+    controllerNomeCliente = TextEditingController();
+    controllerEstado = TextEditingController();
+    controllerCidade = TextEditingController();
+    controllerOrientacaoPlaca = TextEditingController();
+    controllerPotenciaPlaca = TextEditingController();
+    controllerConsumoMedia = TextEditingController();
+    controllerConsumoMesJaneiro = TextEditingController();
+    controllerConsumoMesFevereiro = TextEditingController();
+    controllerConsumoMesMarco = TextEditingController();
+    controllerConsumoMesAbril = TextEditingController();
+    controllerConsumoMesMaio = TextEditingController();
+    controllerConsumoMesJunho = TextEditingController();
+    controllerConsumoMesJulho = TextEditingController();
+    controllerConsumoMesAgosto = TextEditingController();
+    controllerConsumoMesSetembro = TextEditingController();
+    controllerConsumoMesOutubro = TextEditingController();
+    controllerConsumoMesNovembro = TextEditingController();
+    controllerConsumoMesDezembro = TextEditingController();
     _formKey = GlobalKey<FormState>();
 
-    controllerNomeCliente.text = widget.editarOuNao ? widget.dimensionamentoSalvo!.nome : '';
-    controllerConsumoMedia.text = widget.editarOuNao ?(widget.dimensionamentoSalvo!.mediaConsumo == null ? '' : '${widget.dimensionamentoSalvo!.mediaConsumo}' ): '';
-    controllerConsumoMesJaneiro.text = widget.editarOuNao ?(widget.dimensionamentoSalvo!.jan == null ? '' :  '${widget.dimensionamentoSalvo!.jan}' ): '';
-    controllerConsumoMesFevereiro.text = widget.editarOuNao ?(widget.dimensionamentoSalvo!.fev == null ? '' :   '${widget.dimensionamentoSalvo!.fev}' ): '';
-    controllerConsumoMesMarco.text = widget.editarOuNao ?(widget.dimensionamentoSalvo!.mar == null ? '' :   '${widget.dimensionamentoSalvo!.mar}' ): '';
-    controllerConsumoMesAbril.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.abr == null ? '' :   '${widget.dimensionamentoSalvo!.abr}' ): '';
-    controllerConsumoMesMaio.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.mai == null ? '' :   '${widget.dimensionamentoSalvo!.mai}' ): '';
-    controllerConsumoMesJunho.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.jun == null ? '' :   '${widget.dimensionamentoSalvo!.jun}' ): '';
-    controllerConsumoMesJulho.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.jul == null ? '' :   '${widget.dimensionamentoSalvo!.jul}' ): '';
-    controllerConsumoMesAgosto.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.ago == null ? '' :   '${widget.dimensionamentoSalvo!.ago}' ): '';
-    controllerConsumoMesSetembro.text =  widget.editarOuNao ?(widget.dimensionamentoSalvo!.sete == null ? '' :   '${widget.dimensionamentoSalvo!.sete}' ): '';
-    controllerConsumoMesOutubro.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.outu == null ? '' :   '${widget.dimensionamentoSalvo!.outu}' ): '';
-    controllerConsumoMesNovembro.text  = widget.editarOuNao ?(widget.dimensionamentoSalvo!.nov == null ? '' :   '${widget.dimensionamentoSalvo!.nov}' ): '';
-    controllerConsumoMesDezembro.text = widget.editarOuNao ?(widget.dimensionamentoSalvo!.dez == null ? '' :   '${widget.dimensionamentoSalvo!.dez}' ): '';
-    controllerPotenciaPlaca.text = widget.editarOuNao ?( '${widget.dimensionamentoSalvo!.potenciaPlaca}' ): '';
-    mostrarConsumoMesAMes = widget.editarOuNao ?( widget.dimensionamentoSalvo!.mesOuMedia ): false;
+    controllerNomeCliente.text =
+    widget.editarOuNao ? widget.dimensionamentoSalvo!.nome : '';
+    controllerConsumoMedia.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.mediaConsumo == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.mediaConsumo}') : '';
+    controllerConsumoMesJaneiro.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.jan == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.jan}') : '';
+    controllerConsumoMesFevereiro.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.fev == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.fev}') : '';
+    controllerConsumoMesMarco.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.mar == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.mar}') : '';
+    controllerConsumoMesAbril.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.abr == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.abr}') : '';
+    controllerConsumoMesMaio.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.mai == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.mai}') : '';
+    controllerConsumoMesJunho.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.jun == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.jun}') : '';
+    controllerConsumoMesJulho.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.jul == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.jul}') : '';
+    controllerConsumoMesAgosto.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.ago == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.ago}') : '';
+    controllerConsumoMesSetembro.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.sete == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.sete}') : '';
+    controllerConsumoMesOutubro.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.outu == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.outu}') : '';
+    controllerConsumoMesNovembro.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.nov == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.nov}') : '';
+    controllerConsumoMesDezembro.text =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.dez == null
+        ? ''
+        : '${widget.dimensionamentoSalvo!.dez}') : '';
+    controllerPotenciaPlaca.text =
+    widget.editarOuNao ? ('${widget.dimensionamentoSalvo!.potenciaPlaca}') : '';
+    mostrarConsumoMesAMes =
+    widget.editarOuNao ? (widget.dimensionamentoSalvo!.mesOuMedia) : false;
 
     super.initState();
   }
@@ -490,54 +536,67 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
           orientacaoPlacas: dropDownMenuOrientacao,
           potenciaPlaca: int.parse(controllerPotenciaPlaca.text),
           mesOuMedia: mostrarConsumoMesAMes,
-          mediaConsumo: controllerConsumoMedia.text == '' || controllerConsumoMedia.text == 'null'
+          mediaConsumo: controllerConsumoMedia.text == '' ||
+              controllerConsumoMedia.text == 'null'
               ? null
               : double.parse(controllerConsumoMedia.text.replaceAll(',', '.')),
-          jan: controllerConsumoMesJaneiro.text == '' || controllerConsumoMesJaneiro.text == 'null'
+          jan: controllerConsumoMesJaneiro.text == '' ||
+              controllerConsumoMesJaneiro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesJaneiro.text.replaceAll(',', '.')),
-          fev: controllerConsumoMesFevereiro.text == '' ||  controllerConsumoMesFevereiro.text == 'null'
+          fev: controllerConsumoMesFevereiro.text == '' ||
+              controllerConsumoMesFevereiro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesFevereiro.text.replaceAll(',', '.')),
-          mar: controllerConsumoMesMarco.text == '' || controllerConsumoMesMarco.text == 'null'
+          mar: controllerConsumoMesMarco.text == '' ||
+              controllerConsumoMesMarco.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesMarco.text.replaceAll(',', '.')),
-          abr: controllerConsumoMesAbril.text == '' || controllerConsumoMesAbril.text == 'null'
+          abr: controllerConsumoMesAbril.text == '' ||
+              controllerConsumoMesAbril.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesAbril.text.replaceAll(',', '.')),
-          mai: controllerConsumoMesMaio.text == '' || controllerConsumoMesMaio.text == 'null'
+          mai: controllerConsumoMesMaio.text == '' ||
+              controllerConsumoMesMaio.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesMaio.text.replaceAll(',', '.')),
-          jun: controllerConsumoMesJunho.text == '' || controllerConsumoMesJunho.text == 'null'
+          jun: controllerConsumoMesJunho.text == '' ||
+              controllerConsumoMesJunho.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesJunho.text.replaceAll(',', '.')),
-          jul: controllerConsumoMesJulho.text == '' || controllerConsumoMesJulho.text == 'null'
+          jul: controllerConsumoMesJulho.text == '' ||
+              controllerConsumoMesJulho.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesJulho.text.replaceAll(',', '.')),
-          ago: controllerConsumoMesAgosto.text == '' || controllerConsumoMesAgosto.text == 'null'
+          ago: controllerConsumoMesAgosto.text == '' ||
+              controllerConsumoMesAgosto.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesAgosto.text.replaceAll(',', '.')),
-          sete: controllerConsumoMesSetembro.text == '' || controllerConsumoMesSetembro.text == 'null'
+          sete: controllerConsumoMesSetembro.text == '' ||
+              controllerConsumoMesSetembro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesSetembro.text.replaceAll(',', '.')),
-          outu: controllerConsumoMesOutubro.text == '' || controllerConsumoMesOutubro.text == 'null'
+          outu: controllerConsumoMesOutubro.text == '' ||
+              controllerConsumoMesOutubro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesOutubro.text.replaceAll(',', '.')),
-          nov: controllerConsumoMesNovembro.text == '' || controllerConsumoMesNovembro.text == 'null'
+          nov: controllerConsumoMesNovembro.text == '' ||
+              controllerConsumoMesNovembro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesNovembro.text.replaceAll(',', '.')),
-          dez: controllerConsumoMesDezembro.text == '' || controllerConsumoMesDezembro.text == 'null'
+          dez: controllerConsumoMesDezembro.text == '' ||
+              controllerConsumoMesDezembro.text == 'null'
               ? null
               : double.parse(
               controllerConsumoMesDezembro.text.replaceAll(',', '.')),
@@ -558,14 +617,17 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
           producaoDez: calculogerado.producaoTotal.producaoMensalDez
       );
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  ResultadoDimensionamento(
-                    dimensionamentoRealizadoEnviadoDeOutraTela:
-                    dimensionamentoRealizado, novoDimensionamentoOuNao: true, editarOuNao: widget.editarOuNao,
-                    listaEstado: widget.estados,infoCidade: widget.infocidades,
-                  )));
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              ResultadoDimensionamento(
+                dimensionamentoRealizadoEnviadoDeOutraTela:
+                dimensionamentoRealizado,
+                novoDimensionamentoOuNao: true,
+                editarOuNao: widget.editarOuNao,
+                listaEstado: widget.estados,
+                infoCidade: widget.infocidades,
+              ),),);
     }
   }
 
@@ -776,49 +838,47 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton(onPressed: _clickCalcular, child: Text('Calcular'),),
-
-                      // EasyButton(
-                      //   type: EasyButtonType.elevated,
-                      //   // Conteúdo dentro do botão quando o estado do botão está inativo.
-                      //   idleStateWidget: const Text(
-                      //     'Calcular',
-                      //     style: TextStyle(
-                      //         color: Colors.black,
-                      //         fontSize: 20,
-                      //         fontWeight: FontWeight.w700),
-                      //   ),
-                      //   // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
-                      //   loadingStateWidget: const CircularProgressIndicator(
-                      //     strokeWidth: 3.0,
-                      //     valueColor: AlwaysStoppedAnimation<Color>(
-                      //       Colors.black,
-                      //     ),
-                      //   ),
-                      //   // Animar ou não a largura do botão. O padrão é `true`.
-                      //   // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
-                      //   useWidthAnimation: true,
-                      //   // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-                      //   // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-                      //   // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
-                      //   useEqualLoadingStateWidgetDimension: false,
-                      //   // Se você quiser um tamanho de largura total, defina como double.infinity
-                      //   width: 150.0,
-                      //   height: 40.0,
-                      //   borderRadius: 4.0,
-                      //   // A elevação do botão.
-                      //   // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
-                      //   elevation: 0.0,
-                      //   // A lacuna entre o botão e seu conteúdo.
-                      //   // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
-                      //   contentGap: 6.0,
-                      //   //Cor do botão.
-                      //   // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-                      //   // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-                      //   // Para [EasyButtonType.text]: Esta será a cor do texto.
-                      //   buttonColor: Color.fromARGB(255, 255, 222, 89),
-                      //   onPressed: _clickCalcular,
-                      // ),
+                      EasyButton(
+                        type: EasyButtonType.elevated,
+                        // Conteúdo dentro do botão quando o estado do botão está inativo.
+                        idleStateWidget: const Text(
+                          'Calcular',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+                        loadingStateWidget: const CircularProgressIndicator(
+                          strokeWidth: 3.0,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.black,
+                          ),
+                        ),
+                        // Animar ou não a largura do botão. O padrão é `true`.
+                        // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
+                        useWidthAnimation: true,
+                        // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
+                        // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
+                        // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
+                        useEqualLoadingStateWidgetDimension: false,
+                        // Se você quiser um tamanho de largura total, defina como double.infinity
+                        width: 150.0,
+                        height: 40.0,
+                        borderRadius: 4.0,
+                        // A elevação do botão.
+                        // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
+                        elevation: 0.0,
+                        // A lacuna entre o botão e seu conteúdo.
+                        // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
+                        contentGap: 6.0,
+                        //Cor do botão.
+                        // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
+                        // Para [EasyButtonType.outlined]: Esta será a cor da borda.
+                        // Para [EasyButtonType.text]: Esta será a cor do texto.
+                        buttonColor: Color.fromARGB(255, 255, 222, 89),
+                        onPressed: _clickCalcular,
+                      ),
                     ],
                   ),
                   _getSizedBox(_getAltura()),
