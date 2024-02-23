@@ -52,27 +52,42 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          'SunLight',
-          style: GoogleFonts.lobster(
-              fontSize: largura * 0.85 * 0.11,
-              color: Colors.black,
-              fontWeight: FontWeight.w500),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/image/Sunlight_logo.png', // Substitua pelo caminho da sua imagem
+              height: altura * 0.05, // Ajuste a altura conforme necessário
+            ),
+            SizedBox(width: largura * 0.02,),
+            Text(
+              'SunLight',
+              style: GoogleFonts.lobster(
+                  fontSize: largura * 0.85 * 0.11,
+                  color: Color.fromARGB(255, 255, 222, 89),
+                  fontWeight: FontWeight.w500),
+            ),
+          ],
         ),
-        backgroundColor: Color.fromARGB(255, 255, 222, 89),
+        backgroundColor: Colors.blueGrey[900],
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/image/paisagem.png'),
-                fit: BoxFit.cover)),
-        child: PageView(
-            children: [
+      body: Stack(children: [
+        Container(
+          color: Colors.blueGrey[900],
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height / 3,
+        ),
+        // Container com a cor do fundo inferior
+        Positioned(
+          bottom: 0,
+          child: Container(
+            height: MediaQuery.of(context).size.height / 1.5,
+          ),
+        ),
+        PageView(children: [
           cardOpcaoHome(
             largura: largura,
             altura: altura,
-            palavraPrimaria: "Novo",
-            palavraSecundaria: "Dimensionamento",
+            palavraPrimaria: "Dimensionar",
             image: const DecorationImage(
                 image: AssetImage("assets/image/dimensionar.jpg"),
                 fit: BoxFit.cover),
@@ -87,8 +102,8 @@ class _HomeState extends State<Home> {
           cardOpcaoHome(
             largura: largura,
             altura: altura,
-            palavraPrimaria: "Dimensionamentos",
-            palavraSecundaria: "Realizados",
+            palavraPrimaria: "Dimensionados",
+
             image: const DecorationImage(
                 image: AssetImage("assets/image/realizados.jpg"),
                 fit: BoxFit.cover),
@@ -96,17 +111,17 @@ class _HomeState extends State<Home> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => DimensionamentosRealizados(
-                      )));
+                      builder: (context) => DimensionamentosRealizados()));
             },
           ),
           cardOpcaoHome(
             largura: largura,
             altura: altura,
-            palavraPrimaria: "Sobre os",
-            palavraSecundaria: "Desenvolvedores",
+            palavraPrimaria: "Desenvolvedores",
+
             image: const DecorationImage(
-                image: AssetImage("assets/image/equipe.jpg"), fit: BoxFit.cover),
+                image: AssetImage("assets/image/equipe.jpg"),
+                fit: BoxFit.cover),
             click: () {
               Navigator.push(
                   context,
@@ -115,7 +130,7 @@ class _HomeState extends State<Home> {
             },
           ),
         ]),
-      ),
+      ]),
     );
   }
 }
