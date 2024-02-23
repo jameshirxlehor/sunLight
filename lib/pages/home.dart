@@ -9,7 +9,6 @@ import '../dao/dimensionamentodao.dart';
 import '../database/localdatabase.dart';
 import '../widgets/cardOpcaoHome.dart';
 import 'package:card_swiper/card_swiper.dart';
-
 import 'dimensionamentosRealizados.dart';
 
 class Home extends StatefulWidget {
@@ -82,7 +81,7 @@ class _HomeState extends State<Home> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => NovoDimensionamento(
-                          estados: listaEstado, infocidades: infoCidade)));
+                          estados: listaEstado, infocidades: infoCidade,editarOuNao: false,)));
             },
           ),
           cardOpcaoHome(

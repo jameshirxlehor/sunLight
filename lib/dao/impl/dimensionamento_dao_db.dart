@@ -29,4 +29,16 @@ class DimensionamentoDaoDb implements DimensionamentoDao {
     );
   }
 
+  @override
+  Future atualizar(DimensionamentoRealizado dimensionamentorealizado) async {
+      await db!.update(
+        tabelaDimensionamentos,
+        dimensionamentorealizado.toMap(),
+        where: 'id = ?',
+        whereArgs: [dimensionamentorealizado.id],
+      );
+  }
+  
+  
+
 }
