@@ -5,6 +5,7 @@ import 'package:sunlight/dao/impl/infocidade_dao_mem.dart';
 import 'package:sunlight/domain/mediator.dart';
 import 'package:sunlight/pages/novoDimensionamento.dart';
 import 'package:sunlight/pages/sobreDesenvolvedores.dart';
+import 'package:sunlight/pages/geracaopdf.dart';
 import '../dao/dimensionamentodao.dart';
 import '../database/localdatabase.dart';
 import '../widgets/cardOpcaoHome.dart';

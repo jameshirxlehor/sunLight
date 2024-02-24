@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sunlight/domain/mediator.dart';
 import 'package:sunlight/model/calculogeracao.dart';
 import 'package:sunlight/model/producaototal.dart';
+import 'package:sunlight/pages/geracaopdf.dart';
 
 import '../dao/dimensionamentodao.dart';
 import '../dao/impl/dimensionamento_dao_db.dart';
@@ -320,6 +321,46 @@ _getBotao(bool novoDimensionamentoOuNao){
 
 }
 
+
+  _getBotaoPdf(){
+    return EasyButton(
+      type: EasyButtonType.elevated,
+      // Conteúdo dentro do botão quando o estado do botão está inativo.
+      idleStateWidget: Text(
+        'Gerar PDF',
+        style: const TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w700),
+      ),
+      // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+      loadingStateWidget: const CircularProgressIndicator(
+        strokeWidth: 3.0,
+        valueColor: AlwaysStoppedAnimation<Color>(
+          Colors.black,
+        ),
+      ),
+      useWidthAnimation: true,
+      useEqualLoadingStateWidgetDimension: false,
+      width: 320,
+      height: 40.0,
+      borderRadius: 4.0,
+      elevation: 0.0,
+      contentGap: 6.0,
+      buttonColor:  Color.fromARGB(255, 255, 222, 89),
+      onPressed: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GeracaoPdf(dimensionamentoRealizadoEnviadoDeOutraTela: widget.dimensionamentoRealizadoEnviadoDeOutraTela,)));
+      },
+    );
+
+  }
+
+
+
+
   _getCaixaResultados(double sugestaoModulos, double potenciakit, double area,
       double altura, double largura) {
     return Padding(
@@ -332,9 +373,9 @@ _getBotao(bool novoDimensionamentoOuNao){
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _getDadosContainer("Quantidade de placas: ${sugestaoModulos.ceil().toStringAsFixed(0)}", Icons.solar_power_outlined, altura, largura),
-            SizedBox(height: altura * 0.01309,),
+            SizedBox(height: altura * 0.007,),
             _getDadosContainer("Potência do KIT: ${potenciakit.toStringAsFixed(2)}(kWp)", Icons.offline_bolt_outlined, altura, largura),
-            SizedBox(height: altura * 0.01309,),
+            SizedBox(height: altura * 0.007,),
             _getDadosContainer("Area ocupada: ${area.toStringAsFixed(1)} m²", Icons.straighten_outlined, altura, largura),
 
           ],
@@ -355,19 +396,20 @@ _getBotao(bool novoDimensionamentoOuNao){
     double sugestaoModulos = widget.dimensionamentoRealizadoEnviadoDeOutraTela.sugestaoPlacas;
 
     _getESpacamentoLadosDinamica() {
-      return altura * 0.025;
+      return altura * 0.005;
     }
 
     return Scaffold(
       backgroundColor: Colors.black,
-
       appBar: AppBar(
+        actions: [
+        ],
         iconTheme: const IconThemeData(
           color: Colors.black,
         ),
         title: Text(
           'Resultado do Dimensionamento',
-         style: GoogleFonts.lobster(fontSize: largura * 0.85 * 0.091,
+         style: GoogleFonts.lobster(fontSize: largura * 0.85 * 0.073,
     color: Colors.black,
     fontWeight: FontWeight.w500),
         ),
@@ -385,7 +427,7 @@ _getBotao(bool novoDimensionamentoOuNao){
                   style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700,color: Color.fromARGB(255, 255, 222, 89)),
                 ),
                 SizedBox(
-                  height: altura * 0.011,
+                  height: altura * 0.009,
                 ),
                 _cardGeracaoMesMedia(altura, largura, widget.dimensionamentoRealizadoEnviadoDeOutraTela),
                 _getCaixaResultados(
@@ -451,6 +493,13 @@ _getBotao(bool novoDimensionamentoOuNao){
                     ),
                     SizedBox(width: 20),
                     _getBotao(widget.novoDimensionamentoOuNao),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _getBotaoPdf(),
                   ],
                 ),
               ],
