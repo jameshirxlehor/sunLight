@@ -21,7 +21,7 @@ cardOpcaoHome(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30), //<-- SEE HERE
         ),
-        color: Color.fromARGB(100, 0, 0, 0),
+        color: const Color.fromARGB(100, 255, 255, 255),
         child: SizedBox(
           width: largura * 0.89,
           height: altura * 0.61,
@@ -34,7 +34,7 @@ cardOpcaoHome(
                   flex: 6,
                   child: Container(
                     decoration: BoxDecoration(
-                        image: image, borderRadius: BorderRadius.only(topRight: Radius.circular(25),topLeft: Radius.circular(25))),
+                        image: image, borderRadius: const  BorderRadius.only(topRight: Radius.circular(25),topLeft: Radius.circular(25))),
                   ),
                 ),
                 SizedBox(
@@ -50,7 +50,7 @@ cardOpcaoHome(
                         palavraPrimaria,
                         style: GoogleFonts.inter(
                             fontSize: largura * 0.85 * 0.11,
-                            color: Color.fromARGB(235, 38, 50, 56),
+                            color: const Color.fromARGB(235, 38, 50, 56),
                         fontWeight: FontWeight.w700),
                         textAlign: TextAlign.center,
                       ),

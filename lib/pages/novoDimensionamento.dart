@@ -154,9 +154,9 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
           child: Text(
             tituloText,
-            style: TextStyle(fontSize: fontSize,
-                fontWeight: FontWeight.w700,
-                color: Color.fromARGB(255, 255, 222, 89)),
+            style: GoogleFonts.inter(fontSize: fontSize,
+                fontWeight: FontWeight.w600,
+                color: Colors.white),
           ),
         ),
       ],
@@ -169,28 +169,28 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       decoration: InputDecoration(
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(altura * 0.038),
-              borderSide: BorderSide(color: Colors.black)),
+              borderSide: const BorderSide(color: Colors.black)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(altura * 0.038),
-              borderSide: BorderSide(color: Colors.black)),
+              borderSide: const BorderSide(color: Colors.black)),
           fillColor: Colors.white,
+          contentPadding: const EdgeInsets.all(13),
           filled: true),
-      icon: Icon(Icons.compare_arrows, color: Colors.black),
+      icon: const Icon(Icons.compare_arrows, color: Colors.black),
       focusColor: Colors.transparent,
       menuMaxHeight: altura * 0.55,
       hint: Text(dropDownMenuOrientacao,
-          style: const TextStyle(color: Colors.black)),
+          style:  GoogleFonts.inter(color: Colors.black)),
       dropdownColor: Colors.white,
       isExpanded: true,
-      style: TextStyle(
-          fontWeight: FontWeight.w800,
-          fontSize: altura * 0.025,
+      style: GoogleFonts.inter(
+          fontSize: altura * 0.0201,
           color: Colors.black),
       items: [
         for (var item in items)
           DropdownMenuItem(
             value: item,
-            child: Text('${item}'),
+            child: Text(item),
           )
       ],
       onChanged: (selected) {
@@ -205,28 +205,28 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       decoration: InputDecoration(
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(altura * 0.038),
-              borderSide: BorderSide(color: Colors.black)),
+              borderSide: const BorderSide(color: Colors.black)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(altura * 0.038),
-              borderSide: BorderSide(color: Colors.black)),
+              borderSide: const BorderSide(color: Colors.black)),
           fillColor: Colors.white,
+          contentPadding: const EdgeInsets.all(13),
           filled: true),
       icon: const Icon(Icons.map, color: Colors.black),
       focusColor: Colors.transparent,
       menuMaxHeight: altura * 0.55,
       hint: Text(textoDropDownEstado,
-          style: const TextStyle(color: Colors.black)),
+          style:  GoogleFonts.inter(color: Colors.black)),
       dropdownColor: Colors.white,
       isExpanded: true,
-      style: TextStyle(
-          fontWeight: FontWeight.w900,
-          fontSize: altura * 0.025,
+      style: GoogleFonts.inter(
+          fontSize: altura * 0.0201,
           color: Colors.black),
       items: [
         for (var item in items)
           DropdownMenuItem(
             value: item,
-            child: Text('${item}'),
+            child: Text(item),
           )
       ],
       onChanged: (selected) {
@@ -243,27 +243,27 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       decoration: InputDecoration(
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(altura * 0.038),
-              borderSide: BorderSide(color: Colors.black)),
+              borderSide: const BorderSide(color: Colors.black)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(altura * 0.038),
-              borderSide: BorderSide(color: Colors.black)),
+              borderSide: const BorderSide(color: Colors.black)),
           fillColor: Colors.white,
+          contentPadding: const EdgeInsets.all(13),
           filled: true),
-      icon: Icon(Icons.map, color: Colors.black),
+      icon: const Icon(Icons.map, color: Colors.black),
       focusColor: Colors.transparent,
       menuMaxHeight: altura * 0.55,
-      hint: Text(textoDropDownCidade, style: TextStyle(color: Colors.black)),
+      hint: Text(textoDropDownCidade, style:  GoogleFonts.inter(color: Colors.black)),
       dropdownColor: Colors.white,
       isExpanded: true,
-      style: TextStyle(
-          fontWeight: FontWeight.w800,
-          fontSize: altura * 0.025,
+      style: GoogleFonts.inter(
+          fontSize: altura * 0.0201,
           color: Colors.black),
       value: items[0],
       items: items.map<DropdownMenuItem>((e) {
         return DropdownMenuItem(
           value: e,
-          child: Text('${e}'),
+          child: Text(e),
         );
       }).toList(),
       onChanged: (selected) {
@@ -292,29 +292,28 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
       TextEditingController controller,
       String? Function(String?) validator,
       TextInputType textInputType,
-      String suffixText) {
+      String suffixText, double Altura) {
     return TextFormField(
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
+        hintStyle: GoogleFonts.inter(
+            color: Colors.black,),
         filled: true,
         fillColor: Colors.white,
-        labelStyle: TextStyle(
-            color: Colors.black, fontSize: 40, fontWeight: FontWeight.w900),
         suffixText: suffixText,
-        //errorText: "Campo Obrigatório",
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: const BorderSide(color: Colors.white),
           borderRadius: BorderRadius.circular(30),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
         ),
+        isDense: true,
+        contentPadding: EdgeInsets.all(15),
       ),
-      // Define o comportamento da label quando o campo está focado
-      //floatingLabelBehavior: FloatingLabelBehavior.auto,
       keyboardType: textInputType,
     );
   }
@@ -329,13 +328,13 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     return Column(
       children: [
         _getSizedBox(10),
-        _getTextTitulo("Média", altura * 0.029),
+        _getTextTitulo("Média", altura * 0.025),
         _getTextFormFieldDados(
             "Insira a média de consumo",
             controllerConsumoMedia,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh")
+            "kWh", altura)
       ],
     );
   }
@@ -344,101 +343,101 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
   _getMesAMes(double altura) {
     return Column(
       children: [
-        _getTextTitulo("Janeiro", altura * 0.029),
+        _getTextTitulo("Janeiro", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de janeiro",
             controllerConsumoMesJaneiro,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Fevereiro", altura * 0.029),
+        _getTextTitulo("Fevereiro", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de fevereiro",
             controllerConsumoMesFevereiro,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Março", altura * 0.029),
+        _getTextTitulo("Março", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de março",
             controllerConsumoMesMarco,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Abril", altura * 0.029),
+        _getTextTitulo("Abril", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de abril",
             controllerConsumoMesAbril,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Maio", altura * 0.029),
+        _getTextTitulo("Maio", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de maio",
             controllerConsumoMesMaio,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Junho", altura * 0.029),
+        _getTextTitulo("Junho", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de junho",
             controllerConsumoMesJunho,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Julho", altura * 0.029),
+        _getTextTitulo("Julho", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de julho",
             controllerConsumoMesJulho,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Agosto", altura * 0.029),
+        _getTextTitulo("Agosto", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de agosto",
             controllerConsumoMesAgosto,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Setembro", altura * 0.029),
+        _getTextTitulo("Setembro", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de setembro",
             controllerConsumoMesSetembro,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Outubro", altura * 0.029),
+        _getTextTitulo("Outubro", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de outubro",
             controllerConsumoMesOutubro,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Novembro", altura * 0.029),
+        _getTextTitulo("Novembro", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de novembro",
             controllerConsumoMesNovembro,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
         _getSizedBox(altura * 0.011),
-        _getTextTitulo("Dezembro", altura * 0.029),
+        _getTextTitulo("Dezembro", altura * 0.025),
         _getTextFormFieldDados(
             "Insira o consumo de dezembro",
             controllerConsumoMesDezembro,
                 (p0) => _validatorConsumos(p0),
             TextInputType.number,
-            "kWh"),
+            "kWh", altura),
       ],
     );
   }
@@ -489,7 +488,6 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     return dataString;
   }
 
-  _validaCampo() {}
 
   _clickCalcular() {
     if (_formKey.currentState!.validate() &&
@@ -746,7 +744,7 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
         .size
         .height; // tamanho da altura da
     _getAltura() {
-      return altura * 0.02;
+      return altura * 0.03;
     }
 
     _getLargura() {
@@ -754,136 +752,139 @@ class _NovoDimensionamentoState extends State<NovoDimensionamento> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.blueGrey[900],
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.black,
+          color: Color.fromARGB(255, 255, 222, 89),
         ),
-        centerTitle: true,
-        title: Text(
-          'Novo Dimensionamento',
-          style: GoogleFonts.lobster(
-              fontSize: largura * 0.85 * 0.091,
-              color: Colors.black,
-              fontWeight: FontWeight.w500),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/image/Sunlight_logo.png',
+              height: altura * 0.04,
+            ),
+            SizedBox(width: largura * 0.05,),
+            Text(
+              'Dimensionar',
+              style: GoogleFonts.lobster(
+                  fontSize: largura * 0.85 * 0.11,
+                  color: const Color.fromARGB(255, 255, 222, 89),
+                  fontWeight: FontWeight.w500),
+            ),
+          ],
         ),
-        backgroundColor: Color.fromARGB(255, 255, 222, 89),
+        backgroundColor: Colors.blueGrey[900],
       ),
-      body: Container(
-        decoration: const BoxDecoration(image: DecorationImage(
-            image: AssetImage('assets/image/preto.jpg'),
-            fit: BoxFit.cover),),
-        child: Padding(
-          padding: EdgeInsets.only(left: _getLargura(), right: _getLargura()),
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  _getSizedBox(_getAltura()),
-                  _getTextTitulo("Nome Cliente", altura * 0.03),
-                  _getTextFormFieldDados(
-                      "Insira o nome do cliente",
-                      controllerNomeCliente,
-                          (p0) => _validatorNome(p0),
-                      TextInputType.emailAddress,
-                      ""),
-                  _getSizedBox(_getAltura()),
-                  _getTextTitulo("Estado", altura * 0.03),
-                  _getDropDownMenuEstado(widget.estados, altura),
-                  // DropdownButton(items: listaEstados(), onChanged: _click()),
-                  // _getTextFormFieldDados("Insira o estado", controllerEstado,
-                  //     (p0) => null, TextInputType.emailAddress, ""),
-                  _getSizedBox(_getAltura()),
-                  _getTextTitulo("Cidade", altura * 0.03),
-                  _getDropDownMenuCidades(
-                      textoDropDownEstado == 'Selecione'
-                          ? ['']
-                          : _getCidadesPorEstados(
-                          textoDropDownEstado, widget.infocidades),
-                      altura),
-                  // _getTextFormFieldDados("Insira a cidade", controllerCidade,
-                  //     (p0) => null, TextInputType.emailAddress, ""),
-                  _getSizedBox(_getAltura()),
-                  _getTextTitulo("Orientação das Placas", altura * 0.03),
-                  _getDropDownMenuOrientacao(altura),
-                  _getSizedBox(_getAltura()),
-                  _getTextTitulo("Potência da Placa", altura * 0.03),
-                  _getTextFormFieldDados(
-                      "Insira a potência da Placa",
-                      controllerPotenciaPlaca,
-                          (p0) => _validatorPotenciaPlaca(p0),
-                      TextInputType.number,
-                      "W"),
-                  _getSizedBox(_getAltura()),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _getTextTitulo("Consumo De Energia", altura * 0.031),
-                    ],
-                  ),
-                  _getSizedBox(_getAltura()),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _getTextTitulo("Mês a Mês", altura * 0.029),
-                      StyledSwitch(onToggled: _onToggled),
-                      _getTextTitulo("Média", altura * 0.029),
-                    ],
-                  ),
-                  _getSizedBox(_getAltura()),
-                  mostrarConsumoMesAMes ? _getMesAMes(altura) : _getMedia(
-                      altura),
-                  _getSizedBox(_getAltura()),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      EasyButton(
-                        type: EasyButtonType.elevated,
-                        // Conteúdo dentro do botão quando o estado do botão está inativo.
-                        idleStateWidget: const Text(
-                          'Calcular',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
-                        loadingStateWidget: const CircularProgressIndicator(
-                          strokeWidth: 3.0,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.black,
-                          ),
-                        ),
-                        // Animar ou não a largura do botão. O padrão é `true`.
-                        // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
-                        useWidthAnimation: true,
-                        // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-                        // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-                        // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
-                        useEqualLoadingStateWidgetDimension: false,
-                        // Se você quiser um tamanho de largura total, defina como double.infinity
-                        width: 150.0,
-                        height: 40.0,
-                        borderRadius: 4.0,
-                        // A elevação do botão.
-                        // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
-                        elevation: 0.0,
-                        // A lacuna entre o botão e seu conteúdo.
-                        // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
-                        contentGap: 6.0,
-                        //Cor do botão.
-                        // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-                        // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-                        // Para [EasyButtonType.text]: Esta será a cor do texto.
-                        buttonColor: Color.fromARGB(255, 255, 222, 89),
-                        onPressed: _clickCalcular,
+      body: Padding(
+        padding: EdgeInsets.only(left: _getLargura(), right: _getLargura()),
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                _getSizedBox(_getAltura()),
+                _getTextTitulo("Nome Cliente", altura * 0.025),
+                _getTextFormFieldDados(
+                    "Insira o nome do cliente",
+                    controllerNomeCliente,
+                        (p0) => _validatorNome(p0),
+                    TextInputType.emailAddress,
+                    "", altura),
+                _getSizedBox(_getAltura()),
+                _getTextTitulo("Estado", altura * 0.025),
+                _getDropDownMenuEstado(widget.estados, altura),
+                // DropdownButton(items: listaEstados(), onChanged: _click()),
+                // _getTextFormFieldDados("Insira o estado", controllerEstado,
+                //     (p0) => null, TextInputType.emailAddress, ""),
+                _getSizedBox(_getAltura()),
+                _getTextTitulo("Cidade", altura * 0.025),
+                _getDropDownMenuCidades(
+                    textoDropDownEstado == 'Selecione'
+                        ? ['']
+                        : _getCidadesPorEstados(
+                        textoDropDownEstado, widget.infocidades),
+                    altura),
+                // _getTextFormFieldDados("Insira a cidade", controllerCidade,
+                //     (p0) => null, TextInputType.emailAddress, ""),
+                _getSizedBox(_getAltura()),
+                _getTextTitulo("Orientação das Placas", altura * 0.025),
+                _getDropDownMenuOrientacao(altura),
+                _getSizedBox(_getAltura()),
+                _getTextTitulo("Potência da Placa", altura * 0.025),
+                _getTextFormFieldDados(
+                    "Insira a potência da Placa",
+                    controllerPotenciaPlaca,
+                        (p0) => _validatorPotenciaPlaca(p0),
+                    TextInputType.number,
+                    "W", altura),
+                _getSizedBox(_getAltura()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _getTextTitulo("Consumo De Energia", altura * 0.025),
+                  ],
+                ),
+                _getSizedBox(_getAltura()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _getTextTitulo("Mês a Mês", altura * 0.025),
+                    StyledSwitch(onToggled: _onToggled),
+                    _getTextTitulo("Média", altura * 0.025),
+                  ],
+                ),
+                _getSizedBox(_getAltura()),
+                mostrarConsumoMesAMes ? _getMesAMes(altura) : _getMedia(
+                    altura),
+                _getSizedBox(_getAltura()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    EasyButton(
+                      type: EasyButtonType.elevated,
+                      // Conteúdo dentro do botão quando o estado do botão está inativo.
+                      idleStateWidget: const Text(
+                        'Calcular',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900),
                       ),
-                    ],
-                  ),
-                  _getSizedBox(_getAltura()),
-                ],
-              ),
+                      // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+                      loadingStateWidget: const CircularProgressIndicator(
+                        strokeWidth: 3.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Colors.black,
+                        ),
+                      ),
+                      // Animar ou não a largura do botão. O padrão é `true`.
+                      // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
+                      useWidthAnimation: true,
+                      // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
+                      // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
+                      // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
+                      useEqualLoadingStateWidgetDimension: false,
+                      // Se você quiser um tamanho de largura total, defina como double.infinity
+                      width: 360.0,
+                      height: 45.0,
+                      borderRadius: 30.0,
+                      // A elevação do botão.
+                      // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
+                      elevation: 0.0,
+                      // A lacuna entre o botão e seu conteúdo.
+                      // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
+                      contentGap: 6.0,
+                      //Cor do botão.
+                      // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
+                      // Para [EasyButtonType.outlined]: Esta será a cor da borda.
+                      // Para [EasyButtonType.text]: Esta será a cor do texto.
+                      buttonColor: const Color.fromARGB(255, 255, 222, 89),
+                      onPressed: _clickCalcular,
+                    ),
+                  ],
+                ),
+                _getSizedBox(_getAltura()),
+              ],
             ),
           ),
         ),

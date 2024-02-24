@@ -19,9 +19,13 @@ class ResultadoDimensionamento extends StatefulWidget {
   late var listaEstado;
   late var infoCidade;
 
-
   ResultadoDimensionamento(
-      {super.key,required this.dimensionamentoRealizadoEnviadoDeOutraTela, required this.novoDimensionamentoOuNao, required this.editarOuNao, required this.listaEstado, required this.infoCidade});
+      {super.key,
+      required this.dimensionamentoRealizadoEnviadoDeOutraTela,
+      required this.novoDimensionamentoOuNao,
+      required this.editarOuNao,
+      required this.listaEstado,
+      required this.infoCidade});
 
   @override
   State<ResultadoDimensionamento> createState() =>
@@ -46,11 +50,11 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     Navigator.pop(context);
     Navigator.pop(context);
   }
-  _editar(){
+
+  _editar() {
     dimensionamentoDao.atualizar(dimensionamentorealizado);
     Navigator.pop(context);
     Navigator.pop(context);
-
   }
 
   _clickSalvar() {
@@ -58,7 +62,9 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       context: context,
       builder: (context) => AlertDialog(
         title: _editarOuNao ? Text('Salvar alteração?') : Text('Salvar?'),
-        content: _editarOuNao ? Text('Tem certeza que deseja salvar alteração realizada?') : Text('Tem certeza que deseja salvar?'),
+        content: _editarOuNao
+            ? Text('Tem certeza que deseja salvar alteração realizada?')
+            : Text('Tem certeza que deseja salvar?'),
         actions: [
           TextButton(
               onPressed: () {
@@ -68,9 +74,9 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
           TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                if(_editarOuNao){
+                if (_editarOuNao) {
                   _editar();
-                } else{
+                } else {
                   _salvar();
                 }
               },
@@ -80,8 +86,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     );
   }
 
-  _clickExcluir(){
-
+  _clickExcluir() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -105,12 +110,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
         ],
       ),
     );
-
-
-
-
   }
-
 
   double calcularMedia(List<double> dados) {
     if (dados.isEmpty) return 0.0;
@@ -122,7 +122,6 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       return resultado.toStringAsFixed(2);
     }
   }
-
 
   _getRowCadaMes(
     String mes,
@@ -141,9 +140,11 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
               children: [
                 Text(
                   "$mes:",
-                  style: GoogleFonts.robotoMono(color: Colors.grey[600], fontSize: 17, fontWeight: FontWeight.w400),
+                  style: GoogleFonts.robotoMono(
+                      color: Colors.grey[600],
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400),
                 ),
-
               ],
             ),
             const SizedBox(
@@ -154,8 +155,10 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
               children: [
                 Text(
                   '${resultado(consumoMensal)} kWh',
-
-                  style: GoogleFonts.robotoMono(color: Colors.green, fontSize: 17,fontWeight: FontWeight.w400  ),
+                  style: GoogleFonts.robotoMono(
+                      color: Colors.green,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400),
                 ),
               ],
             ),
@@ -166,18 +169,19 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
   }
 
   _resultadoMedia() {
-    late double producao = widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoJan +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoFev +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoMar +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoAbr +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoMai +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoJun +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoJul +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoAgo +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoSete +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoOutu +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoNov +
-        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoDez;
+    late double producao =
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoJan +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoFev +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoMar +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoAbr +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoMai +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoJun +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoJul +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoAgo +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoSete +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoOutu +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoNov +
+            widget.dimensionamentoRealizadoEnviadoDeOutraTela.producaoDez;
 
     return (producao / 12);
   }
@@ -189,9 +193,12 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Text(
+            Text(
               'Média:',
-              style: GoogleFonts.robotoMono(fontWeight: FontWeight.bold, fontSize: 17, color: Colors.white70),
+              style: GoogleFonts.robotoMono(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                  color: Colors.grey[800]),
             ),
             const SizedBox(
               width: 12,
@@ -216,36 +223,26 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
         width: largura * 0.56,
         height: altura * 0.45,
         decoration: BoxDecoration(
-            color: Colors.black,
+            color: Colors.white,
             border: Border.all(width: 1),
             borderRadius: BorderRadius.circular(20)),
         child: Column(
           children: [
             SizedBox(height: altura * 0.005),
-            _getRowCadaMes(
-                "Jan", dimensionamento.producaoJan, altura, largura),
-            _getRowCadaMes(
-                "Fev", dimensionamento.producaoFev, altura, largura),
-            _getRowCadaMes(
-                "Mar", dimensionamento.producaoMar, altura, largura),
-            _getRowCadaMes(
-                "Abr", dimensionamento.producaoAbr, altura, largura),
-            _getRowCadaMes(
-                "Mai", dimensionamento.producaoMai, altura, largura),
-            _getRowCadaMes(
-                "Jun", dimensionamento.producaoJun, altura, largura),
-            _getRowCadaMes(
-                "Jul", dimensionamento.producaoJul, altura, largura),
-            _getRowCadaMes(
-                "Ago", dimensionamento.producaoAgo, altura, largura),
+            _getRowCadaMes("Jan", dimensionamento.producaoJan, altura, largura),
+            _getRowCadaMes("Fev", dimensionamento.producaoFev, altura, largura),
+            _getRowCadaMes("Mar", dimensionamento.producaoMar, altura, largura),
+            _getRowCadaMes("Abr", dimensionamento.producaoAbr, altura, largura),
+            _getRowCadaMes("Mai", dimensionamento.producaoMai, altura, largura),
+            _getRowCadaMes("Jun", dimensionamento.producaoJun, altura, largura),
+            _getRowCadaMes("Jul", dimensionamento.producaoJul, altura, largura),
+            _getRowCadaMes("Ago", dimensionamento.producaoAgo, altura, largura),
             _getRowCadaMes(
                 "Set", dimensionamento.producaoSete, altura, largura),
             _getRowCadaMes(
                 "Out", dimensionamento.producaoOutu, altura, largura),
-            _getRowCadaMes(
-                "Nov", dimensionamento.producaoNov, altura, largura),
-            _getRowCadaMes(
-                "Dez", dimensionamento.producaoDez, altura, largura),
+            _getRowCadaMes("Nov", dimensionamento.producaoNov, altura, largura),
+            _getRowCadaMes("Dez", dimensionamento.producaoDez, altura, largura),
             _getRowMedia(),
           ],
         ),
@@ -253,92 +250,113 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     );
   }
 
-  _getDadosContainer(String text, IconData icons, double altura, double largura){
+  _getDadosContainer(
+      String text, IconData icons, double altura, double largura) {
     return Container(
-      width: largura * 0.7,
-      height: altura * 0.07,
+      width: largura * 0.8,
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Colors.white,
         border: Border.all(width: 1),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Icon(icons, size: 30, color:  Colors.white,),
-            Text(
-              text, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700,color: Colors.white),) ,
+            Icon(
+              icons,
+              size: 30,
+              color: Colors.blueGrey[900],
+            ),
+            SizedBox(width: largura * 0.02,),
+            Expanded(
+              child: Center(
+                child: Text(
+                  text,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style:  GoogleFonts.inter(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.blueGrey[900]),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-_getBotao(bool novoDimensionamentoOuNao){
-  return EasyButton(
-    type: EasyButtonType.elevated,
-    // Conteúdo dentro do botão quando o estado do botão está inativo.
-    idleStateWidget: Text(
-      novoDimensionamentoOuNao ? 'Salvar': 'Excluir',
-      style: const TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.w700),
-    ),
-    // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
-    loadingStateWidget: const CircularProgressIndicator(
-      strokeWidth: 3.0,
-      valueColor: AlwaysStoppedAnimation<Color>(
-        Colors.black,
-      ),
-    ),
-    // Animar ou não a largura do botão. O padrão é `true`.
-    // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
-    useWidthAnimation: true,
-    // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-    // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-    // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
-    useEqualLoadingStateWidgetDimension: false,
-    // Se você quiser um tamanho de largura total, defina como double.infinity
-    width: 150.0,
-    height: 40.0,
-    borderRadius: 4.0,
-    // A elevação do botão.
-    // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
-    elevation: 0.0,
-    // A lacuna entre o botão e seu conteúdo.
-    // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
-    contentGap: 6.0,
-    //Cor do botão.
-    // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-    // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-    // Para [EasyButtonType.text]: Esta será a cor do texto.
-    buttonColor:  Color.fromARGB(255, 255, 222, 89),
-    onPressed: novoDimensionamentoOuNao ? _clickSalvar : _clickExcluir,
-  );
 
-}
+  _getBotao(bool novoDimensionamentoOuNao) {
+    return EasyButton(
+      type: EasyButtonType.elevated,
+      // Conteúdo dentro do botão quando o estado do botão está inativo.
+      idleStateWidget: Text(
+        novoDimensionamentoOuNao ? 'Salvar' : 'Excluir',
+        style: const TextStyle(
+            color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
+      ),
+      // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+      loadingStateWidget: const CircularProgressIndicator(
+        strokeWidth: 3.0,
+        valueColor: AlwaysStoppedAnimation<Color>(
+          Colors.black,
+        ),
+      ),
+      // Animar ou não a largura do botão. O padrão é `true`.
+      // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
+      useWidthAnimation: true,
+      // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
+      // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
+      // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
+      useEqualLoadingStateWidgetDimension: false,
+      // Se você quiser um tamanho de largura total, defina como double.infinity
+      width: 150.0,
+      height: 40.0,
+      borderRadius: 30.0,
+      // A elevação do botão.
+      // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
+      elevation: 0.0,
+      // A lacuna entre o botão e seu conteúdo.
+      // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
+      contentGap: 6.0,
+      //Cor do botão.
+      // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
+      // Para [EasyButtonType.outlined]: Esta será a cor da borda.
+      // Para [EasyButtonType.text]: Esta será a cor do texto.
+      buttonColor: Color.fromARGB(255, 255, 222, 89),
+      onPressed: novoDimensionamentoOuNao ? _clickSalvar : _clickExcluir,
+    );
+  }
 
   _getCaixaResultados(double sugestaoModulos, double potenciakit, double area,
       double altura, double largura) {
-    return Padding(
-      padding: const EdgeInsets.all(22.0),
-      child: SizedBox(
-        width: largura * 0.7,
-        height: altura * 0.24,
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _getDadosContainer("Quantidade de placas: ${sugestaoModulos.ceil().toStringAsFixed(0)}", Icons.solar_power_outlined, altura, largura),
-            SizedBox(height: altura * 0.01309,),
-            _getDadosContainer("Potência do KIT: ${potenciakit.toStringAsFixed(2)}(kWp)", Icons.offline_bolt_outlined, altura, largura),
-            SizedBox(height: altura * 0.01309,),
-            _getDadosContainer("Area ocupada: ${area.toStringAsFixed(1)} m²", Icons.straighten_outlined, altura, largura),
-
-          ],
-        ),
+    return SizedBox(
+      width: largura * 0.9,
+      height: altura * 0.24,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _getDadosContainer(
+              "Quantidade de placas: ${sugestaoModulos.ceil().toStringAsFixed(0)}",
+              Icons.solar_power_outlined,
+              altura,
+              largura),
+          SizedBox(
+            height: altura * 0.02,
+          ),
+          _getDadosContainer(
+              "Potência do KIT: ${potenciakit.toStringAsFixed(2)}(kWp)",
+              Icons.offline_bolt_outlined,
+              altura,
+              largura),
+          SizedBox(
+            height: altura * 0.02,
+          ),
+          _getDadosContainer("Area ocupada: ${area.toStringAsFixed(1)} m²",
+              Icons.straighten_outlined, altura, largura),
+        ],
       ),
     );
   }
@@ -350,111 +368,129 @@ _getBotao(bool novoDimensionamentoOuNao){
 
     double area = widget.dimensionamentoRealizadoEnviadoDeOutraTela.areOcupada;
 
-    double potenciakit = widget.dimensionamentoRealizadoEnviadoDeOutraTela.potenciakit;
+    double potenciakit =
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.potenciakit;
 
-    double sugestaoModulos = widget.dimensionamentoRealizadoEnviadoDeOutraTela.sugestaoPlacas;
+    double sugestaoModulos =
+        widget.dimensionamentoRealizadoEnviadoDeOutraTela.sugestaoPlacas;
 
     _getESpacamentoLadosDinamica() {
       return altura * 0.025;
     }
 
     return Scaffold(
-      backgroundColor: Colors.black,
-
+      backgroundColor: Colors.blueGrey[900],
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.black,
+          color: Color.fromARGB(255, 255, 222, 89),
         ),
-        title: Text(
-          'Resultado do Dimensionamento',
-         style: GoogleFonts.lobster(fontSize: largura * 0.85 * 0.091,
-    color: Colors.black,
-    fontWeight: FontWeight.w500),
-        ),
-        backgroundColor: Color.fromARGB(255, 255, 222, 89),
-      ),
-      body: Container(
-        decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/mao_pordool.jpg'), fit: BoxFit.cover)),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(_getESpacamentoLadosDinamica()), //22.0
-            child: Column(
-              children: [
-                const Text(
-                  'Geração de Energia Mensal',
-                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700,color: Color.fromARGB(255, 255, 222, 89)),
-                ),
-                SizedBox(
-                  height: altura * 0.011,
-                ),
-                _cardGeracaoMesMedia(altura, largura, widget.dimensionamentoRealizadoEnviadoDeOutraTela),
-                _getCaixaResultados(
-                    sugestaoModulos, potenciakit, area, altura, largura),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    EasyButton(
-                      type: EasyButtonType.elevated,
-                      // Conteúdo dentro do botão quando o estado do botão está inativo.
-                      idleStateWidget: Text(_editarOuNao ? 'Editar' :
-                        'Sair',
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
-                      loadingStateWidget: const CircularProgressIndicator(
-                        strokeWidth: 3.0,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Colors.black,
-                        ),
-                      ),
-                      // Animar ou não a largura do botão. O padrão é `true`.
-                      // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
-                      useWidthAnimation: true,
-                      // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-                      // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-                      // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
-                      useEqualLoadingStateWidgetDimension: false,
-                      // Se você quiser um tamanho de largura total, defina como double.infinity
-                      width: 150.0,
-                      height: 40.0,
-                      borderRadius: 4.0,
-                      // A elevação do botão.
-                      // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
-                      elevation: 0.0,
-                      // A lacuna entre o botão e seu conteúdo.
-                      // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
-                      contentGap: 6.0,
-                      //Cor do botão.
-                      // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-                      // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-                      // Para [EasyButtonType.text]: Esta será a cor do texto.
-                      buttonColor: Color.fromARGB(255, 255, 222, 89),
-                      onPressed: () {
-
-                        if(_editarOuNao){
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NovoDimensionamento(estados: widget.listaEstado, infocidades: widget.infoCidade,editarOuNao: true,dimensionamentoSalvo: widget.dimensionamentoRealizadoEnviadoDeOutraTela,)
-                            ),
-                          );
-                        }else{
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        }
-                      },
-                    ),
-                    SizedBox(width: 20),
-                    _getBotao(widget.novoDimensionamentoOuNao),
-                  ],
-                ),
-              ],
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/image/Sunlight_logo.png',
+              height: altura * 0.04,
             ),
+            SizedBox(
+              width: largura * 0.05,
+            ),
+            Text(
+              'Dimensionamento',
+              style: GoogleFonts.lobster(
+                  fontSize: largura * 0.85 * 0.091,
+                  color: const Color.fromARGB(255, 255, 222, 89),
+                  fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.blueGrey[900],
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(_getESpacamentoLadosDinamica()), //22.0
+          child: Column(
+            children: [
+              const Text(
+                'Geração de Energia Mensal',
+                style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
+              ),
+              SizedBox(
+                height: altura * 0.011,
+              ),
+              _cardGeracaoMesMedia(altura, largura,
+                  widget.dimensionamentoRealizadoEnviadoDeOutraTela),
+              _getCaixaResultados(
+                  sugestaoModulos, potenciakit, area, altura, largura),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  EasyButton(
+                    type: EasyButtonType.elevated,
+                    // Conteúdo dentro do botão quando o estado do botão está inativo.
+                    idleStateWidget: Text(
+                      _editarOuNao ? 'Editar' : 'Sair',
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
+                    loadingStateWidget: const CircularProgressIndicator(
+                      strokeWidth: 3.0,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Colors.black,
+                      ),
+                    ),
+                    // Animar ou não a largura do botão. O padrão é `true`.
+                    // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
+                    useWidthAnimation: true,
+                    // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
+                    // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
+                    // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
+                    useEqualLoadingStateWidgetDimension: false,
+                    // Se você quiser um tamanho de largura total, defina como double.infinity
+                    width: 150.0,
+                    height: 40.0,
+                    borderRadius: 30.0,
+                    // A elevação do botão.
+                    // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
+                    elevation: 0.0,
+                    // A lacuna entre o botão e seu conteúdo.
+                    // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
+                    contentGap: 6.0,
+                    //Cor do botão.
+                    // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
+                    // Para [EasyButtonType.outlined]: Esta será a cor da borda.
+                    // Para [EasyButtonType.text]: Esta será a cor do texto.
+                    buttonColor: Color.fromARGB(255, 255, 222, 89),
+                    onPressed: () {
+                      if (_editarOuNao) {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NovoDimensionamento(
+                                    estados: widget.listaEstado,
+                                    infocidades: widget.infoCidade,
+                                    editarOuNao: true,
+                                    dimensionamentoSalvo: widget
+                                        .dimensionamentoRealizadoEnviadoDeOutraTela,
+                                  )),
+                        );
+                      } else {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 20),
+                  _getBotao(widget.novoDimensionamentoOuNao),
+                ],
+              ),
+            ],
           ),
         ),
       ),
