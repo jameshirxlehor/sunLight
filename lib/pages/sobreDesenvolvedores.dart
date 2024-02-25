@@ -157,13 +157,21 @@ class SobreDesenvolvedores extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Color.fromARGB(255, 255, 222, 89),
         ),
-        centerTitle: true,
-        title: Text(
-          'Sobre os Desenvolvedores',
-          style: GoogleFonts.lobster(
-              fontSize: largura * 0.85 * 0.09,
-              color: Color.fromARGB(255, 255, 222, 89),
-              fontWeight: FontWeight.w500),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/image/Sunlight_logo.png',
+              height: altura * 0.04,
+            ),
+            SizedBox(width: largura * 0.05,),
+            Text(
+              'Desenvolvedores',
+              style: GoogleFonts.lobster(
+                  fontSize: largura * 0.85 * 0.11,
+                  color: const Color.fromARGB(255, 255, 222, 89),
+                  fontWeight: FontWeight.w500),
+            ),
+          ],
         ),
         backgroundColor: Colors.blueGrey[900],
       ),
