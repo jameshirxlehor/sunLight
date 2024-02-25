@@ -18,7 +18,7 @@ class SobreDesenvolvedores extends StatelessWidget {
       padding: EdgeInsets.only(left: espacamento, right: espacamento),
       child: Container(
         decoration: BoxDecoration(
-          color:  const Color.fromRGBO(0, 0, 0, 99),
+          color:  const Color.fromRGBO(255, 255, 255, 190),
           borderRadius: BorderRadius.circular(75),
         ),
         child: Padding(
@@ -29,7 +29,7 @@ class SobreDesenvolvedores extends StatelessWidget {
                 width: 90.0,
                 height: 90.0,
                 decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 222, 89),
+                    color: const Color.fromARGB(255, 38, 50, 56),
                     image: DecorationImage(image: imageUrl, fit: BoxFit.cover),
                     borderRadius: const BorderRadius.all(Radius.circular(75.0)),
                     boxShadow: const [
@@ -155,20 +155,20 @@ class SobreDesenvolvedores extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.black,
+          color: Color.fromARGB(255, 255, 222, 89),
         ),
         centerTitle: true,
         title: Text(
           'Sobre os Desenvolvedores',
           style: GoogleFonts.lobster(
               fontSize: largura * 0.85 * 0.09,
-              color: Colors.black,
+              color: Color.fromARGB(255, 255, 222, 89),
               fontWeight: FontWeight.w500),
         ),
-        backgroundColor: Color.fromARGB(255, 255, 222, 89),
+        backgroundColor: Colors.blueGrey[900],
       ),
       body: Container(
-        decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/paisagem.png'), fit: BoxFit.cover)),
+        decoration: BoxDecoration(color: Colors.blueGrey[900]),
         child: ListView(
           children: [
             SizedBox(
