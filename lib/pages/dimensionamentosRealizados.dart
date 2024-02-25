@@ -1,18 +1,17 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sunlight/dao/dimensionamentodao.dart';
 import 'package:sunlight/dao/impl/dimensionamento_dao_db.dart';
 import 'package:sunlight/pages/novoDimensionamento.dart';
 import 'package:sunlight/pages/resultadoDimensionamento.dart';
-
 import '../dao/impl/infocidade_dao_mem.dart';
 import '../domain/mediator.dart';
 import '../model/dimensionamentorealizado.dart';
+import '../model/infocidade.dart';
 
 class DimensionamentosRealizados extends StatefulWidget {
-  DimensionamentosRealizados({super.key});
+  const DimensionamentosRealizados({super.key});
 
   @override
   State<DimensionamentosRealizados> createState() =>
@@ -70,12 +69,12 @@ class _DimensionamentosRealizadosState
                             children: [
                               Expanded(
                                 child: Text(
-                                  "${dimensionamentoRealizado.nome}",
+                                  dimensionamentoRealizado.nome,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.graduate(
-                                      fontSize: (largura - 12) * 0.095,
-                                      color: Color.fromARGB(255, 255, 222, 89),
+                                      fontSize: (largura - 12) * 0.075,
+                                      color: const Color.fromARGB(255, 255, 222, 89),
                                       fontWeight: FontWeight.w500),
                                   // style: TextStyle(fontSize: (largura-12) * 0.095),
                                 ),
@@ -87,8 +86,8 @@ class _DimensionamentosRealizadosState
                               Text(
                                 dimensionamentoRealizado.data,
                                 style: GoogleFonts.graduate(
-                                    fontSize: (largura - 12) * 0.06,
-                                    color: Color.fromARGB(255, 255, 222, 89),
+                                    fontSize: (largura - 12) * 0.04,
+                                    color: const Color.fromARGB(255, 255, 222, 89),
                                     fontWeight: FontWeight.w500),
                               ),
                               // style: TextStyle(fontSize: (largura-12) * 0.063),),
@@ -97,10 +96,10 @@ class _DimensionamentosRealizadosState
                           Row(
                             children: [
                               Text(
-                                "${dimensionamentoRealizado.cidade}",
+                                dimensionamentoRealizado.cidade,
                                 style: GoogleFonts.graduate(
-                                    fontSize: (largura - 12) * 0.06,
-                                    color: Color.fromARGB(255, 255, 222, 89),
+                                    fontSize: (largura - 12) * 0.04,
+                                    color: const Color.fromARGB(255, 255, 222, 89),
                                     fontWeight: FontWeight.w500),
                                 // style:
                                 //     TextStyle(fontSize: (largura - 12) * 0.063),
@@ -112,8 +111,8 @@ class _DimensionamentosRealizadosState
                               Text(
                                 "${dimensionamentoRealizado.mediaConsumo} kWh",
                                 style: GoogleFonts.graduate(
-                                    fontSize: (largura - 12) * 0.06,
-                                    color: Color.fromARGB(255, 255, 222, 89),
+                                    fontSize: (largura - 12) * 0.04,
+                                    color: const Color.fromARGB(255, 255, 222, 89),
                                     fontWeight: FontWeight.w500),
 
                                 // style: TextStyle(fontSize: largura * 0.063),
@@ -132,7 +131,7 @@ class _DimensionamentosRealizadosState
                         children: [
                           Icon(
                             Icons.solar_power,
-                            size: largura * 0.28,
+                            size: largura * 0.24,
                             color: Color.fromARGB(255, 255, 222, 89),
                           ),
                         ],
@@ -151,7 +150,7 @@ class _DimensionamentosRealizadosState
   late DimensionamentoDao dimensionamentoDao;
   List<DimensionamentoRealizado> listaDimensionamentos = [];
   List<String> listaEstado = [];
-  var infoCidade;
+  late Map<String, List<InfoCidade>> infoCidade;
 
   @override
   void initState() {
@@ -163,7 +162,6 @@ class _DimensionamentosRealizadosState
       mediator.mapaCidades = await InfoCidadeDaoMem().listarCidades();
 
       listaEstado = mediator.mapaCidades.keys.toList();
-      print(mediator.mapaCidades.keys);
       infoCidade = mediator.mapaCidades;
 
 
@@ -182,28 +180,24 @@ class _DimensionamentosRealizadosState
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Color.fromARGB(255, 255, 222, 89)),
         centerTitle: true,
         title: Text(
           'Realizados',
           style: GoogleFonts.lobster(
               fontSize: largura * 0.85 * 0.11,
-              color: Colors.black,
+              color: const Color.fromARGB(255, 255, 222, 89),
               fontWeight: FontWeight.w500),
         ),
-        backgroundColor: Color.fromARGB(255, 255, 222, 89),
+        backgroundColor: Colors.blueGrey[900],
       ),
       body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/image/paisagem.png'),
-                fit: BoxFit.cover)),
+        decoration: BoxDecoration(color: Colors.blueGrey[900]),
         child: Padding(
           padding: const EdgeInsets.only(top: 14.0, right: 6.0, left: 6.0),
           child: ListView.builder(
             itemBuilder: (context, index) {
-              return _cardDimensionados(
-                  largura, altura, listaDimensionamentos[index]);
+              return _cardDimensionados(largura, altura, listaDimensionamentos[index]);
             },
             itemCount: listaDimensionamentos.length,
           ),
