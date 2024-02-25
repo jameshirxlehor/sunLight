@@ -10,6 +10,7 @@ import 'package:sunlight/model/producaototal.dart';
 import '../dao/dimensionamentodao.dart';
 import '../dao/impl/dimensionamento_dao_db.dart';
 import '../model/dimensionamentorealizado.dart';
+import 'geracaopdf.dart';
 import 'novoDimensionamento.dart';
 
 class ResultadoDimensionamento extends StatefulWidget {
@@ -288,6 +289,42 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     );
   }
 
+
+  _getBotaoPdf(DimensionamentoRealizado dimensionamentoRealizadoEnviadoDeOutraTela) {
+    return EasyButton(
+      type: EasyButtonType.elevated,
+      idleStateWidget: const Text('Gerar PDF',
+        style:  TextStyle(
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+      ),
+      loadingStateWidget: const CircularProgressIndicator(
+        strokeWidth: 3.0,
+        valueColor: AlwaysStoppedAnimation<Color>(
+          Colors.black,
+        ),
+      ),
+      useWidthAnimation: true,
+      useEqualLoadingStateWidgetDimension: false,
+      width: 200.0,
+      // height: 40.0,
+      borderRadius: 30.0,
+      elevation: 0.0,
+      contentGap: 6.0,
+      buttonColor: Colors.lightBlueAccent,
+      onPressed: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => GeracaoPdf(dimensionamentoRealizadoEnviadoDeOutraTela: widget.dimensionamentoRealizadoEnviadoDeOutraTela,)));
+
+
+      },
+    );
+  }
+
+
+
+
   _getBotao(bool novoDimensionamentoOuNao) {
     return EasyButton(
       type: EasyButtonType.elevated,
@@ -490,6 +527,14 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                   _getBotao(widget.novoDimensionamentoOuNao),
                 ],
               ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _getBotaoPdf(widget.dimensionamentoRealizadoEnviadoDeOutraTela),
+                ],
+              ),
+
             ],
           ),
         ),
