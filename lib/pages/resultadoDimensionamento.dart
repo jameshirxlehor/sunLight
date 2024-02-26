@@ -68,7 +68,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Cancelar')),
+              child: const Text('Cancelar',style: TextStyle(color: Colors.red),)),
           TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -88,7 +88,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Excluir?'),
+        title: const Text('Excluir?',style: TextStyle(color: Colors.red)),
         content:const Text('Tem certeza que deseja excluir?'),
         actions: [
           TextButton(
@@ -288,7 +288,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       type: EasyButtonType.elevated,
       idleStateWidget: const Text('Gerar PDF',
         style:  TextStyle(
-            color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
       ),
       loadingStateWidget: const CircularProgressIndicator(
         strokeWidth: 3.0,
@@ -303,7 +303,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       borderRadius: 30.0,
       elevation: 0.0,
       contentGap: 6.0,
-      buttonColor: const Color.fromARGB(255, 255, 222, 89),
+      buttonColor: Color.fromRGBO(0, 97, 228, 1),
       onPressed: (){
         Navigator.push(
             context,
@@ -325,37 +325,22 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       idleStateWidget: Text(
         novoDimensionamentoOuNao ? 'Salvar' : 'Excluir',
         style: const TextStyle(
-            color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
       ),
-      // Conteúdo dentro do botão quando o estado do botão está sendo carregado.
       loadingStateWidget: const CircularProgressIndicator(
         strokeWidth: 3.0,
         valueColor: AlwaysStoppedAnimation<Color>(
           Colors.black,
         ),
       ),
-      // Animar ou não a largura do botão. O padrão é `true`.
-      // Se estiver definido como `false`, você pode querer definir o parâmetro `useEqualLoadingStateWidgetDimension` como `true`.
       useWidthAnimation: true,
-      // Se deve ou não forçar o `loadingStateWidget` a ter dimensão igual. O padrão é `true`.
-      // Isso é útil quando você está usando `CircularProgressIndicator` como `loadingStateWidget`.
-      // Este parâmetro também pode ser útil quando você define o parâmetro `useWidthAnimation` como `true` combinado com `CircularProgressIndicator` como o valor para `loadingStateWidget`.
       useEqualLoadingStateWidgetDimension: false,
-      // Se você quiser um tamanho de largura total, defina como double.infinity
       width: 150.0,
       height: 40.0,
       borderRadius: 30.0,
-      // A elevação do botão.
-      // Isso só será aplicado quando o valor do parâmetro de tipo for EasyButtonType.elevated
       elevation: 0.0,
-      // A lacuna entre o botão e seu conteúdo.
-      // Isso será ignorado quando o valor do parâmetro `type` for definido como `EasyButtonType.text`
       contentGap: 6.0,
-      //Cor do botão.
-      // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
-      // Para [EasyButtonType.outlined]: Esta será a cor da borda.
-      // Para [EasyButtonType.text]: Esta será a cor do texto.
-      buttonColor: const Color.fromARGB(255, 255, 222, 89),
+      buttonColor: novoDimensionamentoOuNao ?  Color.fromRGBO(0, 158, 19, 1) : Colors.red,
       onPressed: novoDimensionamentoOuNao ? _clickSalvar : _clickExcluir,
     );
   }
@@ -462,7 +447,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                     idleStateWidget: Text(
                       _editarOuNao ? 'Editar' : 'Sair',
                       style: const TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.w700),
                     ),
@@ -494,7 +479,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                     // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
                     // Para [EasyButtonType.outlined]: Esta será a cor da borda.
                     // Para [EasyButtonType.text]: Esta será a cor do texto.
-                    buttonColor: const Color.fromARGB(255, 255, 222, 89),
+                    buttonColor: _editarOuNao ? Color.fromRGBO(0, 158, 19, 1) : Colors.red,
                     onPressed: () {
                       if (_editarOuNao) {
                         Navigator.pop(context);

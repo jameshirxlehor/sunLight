@@ -156,7 +156,7 @@ class _GeracaoPdfState extends State<GeracaoPdf> {
               _getRowCadaMes(
                   "Janeiro", dimensionamento.producaoJan, altura, largura),
               _getRowCadaMes(
-                  "Feveiro", dimensionamento.producaoFev, altura, largura),
+                  "Fevereiro", dimensionamento.producaoFev, altura, largura),
               _getRowCadaMes(
                   "Março", dimensionamento.producaoMar, altura, largura),
               _getRowCadaMes(
