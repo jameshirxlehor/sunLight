@@ -1,6 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sunlight/dao/dimensionamentodao.dart';
+import 'package:sunlight/dao/impl/dimensionamento_dao_db.dart';
+import 'package:sunlight/pages/resultadoDimensionamento.dart';
+
+import '../domain/mediator.dart';
+import '../model/dimensionamentorealizado.dart';
 
 class DimensionamentosRealizados extends StatefulWidget {
   DimensionamentosRealizados({super.key});
@@ -12,70 +19,114 @@ class DimensionamentosRealizados extends StatefulWidget {
 
 class _DimensionamentosRealizadosState
     extends State<DimensionamentosRealizados> {
+  _cardDimensionados(double largura, double altura,
+      
+      DimensionamentoRealizado dimensionamentoRealizado) {
 
-
-  _cardDimensionados(double largura, double altura) {
-    return Row(
-      children: [
-        Expanded(
-          child: Card(
-            shape: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 6, top: 6),
-              child: Row(
-                children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                        width: largura * 0.36,
-                      ),
-                      Row(
+    
+    return GestureDetector(
+      onTap: () async {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResultadoDimensionamento(
+              dimensionamentoRealizadoEnviadoDeOutraTela:
+                  dimensionamentoRealizado,
+              novoDimensionamentoOuNao: false,
+            ),
+          ),
+        );
+        dimensionamentoDao.listar().then((value) {
+          listaDimensionamentos = value;
+          setState(() {});
+        });
+      },
+      child: Row(
+        children: [
+          Expanded(
+            child: Card(
+              shape:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 6, top: 6, left: 12),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: Column(
                         children: [
-                          Text(
-                            'Titulo',
-                            style: TextStyle(fontSize: largura * 0.11),
+                          SizedBox(
+                            width: (largura-12) * 0.65,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "${dimensionamentoRealizado.nome}",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(fontSize: (largura-12) * 0.11),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(dimensionamentoRealizado.data,
+                                  style: TextStyle(fontSize: (largura-12) * 0.063),),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("${dimensionamentoRealizado.cidade}",
+                                  style: TextStyle(fontSize: (largura-12) * 0.063)),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("${dimensionamentoRealizado.mediaConsumo} kWh",
+                                  style: TextStyle(fontSize: largura * 0.063)),
+                            ],
                           ),
                         ],
                       ),
-                      Row(
+                    ),
+                    // SizedBox(
+                    //   width: (largura-12) * 0.030,
+                    // ),
+                    Expanded(
+                      flex: 2,
+                      child: Column(
                         children: [
-                          Text('Data',
-                              style: TextStyle(fontSize: largura * 0.063)),
+                          Icon(
+                            Icons.solar_power,
+                            size: largura * 0.28,
+                          ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Text('Cidade',
-                              style: TextStyle(fontSize: largura * 0.063)),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text('Consumo',
-                              style: TextStyle(fontSize: largura * 0.063)),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: largura * 0.25,
-                  ),
-                  Column(
-                    children: [
-                      Icon(
-                        Icons.solar_power,
-                        size: largura * 0.30,
-                      ),
-                    ],
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
+  }
+
+  late DimensionamentoDao dimensionamentoDao;
+  List<DimensionamentoRealizado> listaDimensionamentos = [];
+
+  @override
+  void initState() {
+    dimensionamentoDao = DimensionamentoDaoDb(db: Mediator().db);
+    dimensionamentoDao.listar().then((value) {
+      listaDimensionamentos = value;
+      setState(() {});
+    });
+    super.initState();
   }
 
   @override
@@ -99,21 +150,14 @@ class _DimensionamentosRealizadosState
         ),
         backgroundColor: Color.fromARGB(255, 255, 222, 89),
       ),
-      body: Container(
-        decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/image/pordosol_pretoamarelo.jpg'), fit: BoxFit.cover)),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _cardDimensionados(largura, altura),
-                _cardDimensionados(largura, altura),
-                _cardDimensionados(largura, altura),
-                _cardDimensionados(largura, altura),
-              ],
-            ),
-          ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 14.0, right: 6.0, left: 6.0),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            return _cardDimensionados(
+                largura, altura, listaDimensionamentos[index]);
+          },
+          itemCount: listaDimensionamentos.length,
         ),
       ),
     );

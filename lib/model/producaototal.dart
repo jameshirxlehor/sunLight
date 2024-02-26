@@ -1,32 +1,32 @@
 class Producaototal {
 
-  double? producaoMensalJan;
-  double? producaoMensalFev;
-  double? producaoMensalMar;
-  double? producaoMensalAbr;
-  double? producaoMensalMai;
-  double? producaoMensalJun;
-  double? producaoMensalJul;
-  double? producaoMensalAgo;
-  double? producaoMensalSete;
-  double? producaoMensalOutu;
-  double? producaoMensalNov;
-  double? producaoMensalDez;
+  double producaoMensalJan;
+  double producaoMensalFev;
+  double producaoMensalMar;
+  double producaoMensalAbr;
+  double producaoMensalMai;
+  double producaoMensalJun;
+  double producaoMensalJul;
+  double producaoMensalAgo;
+  double producaoMensalSete;
+  double producaoMensalOutu;
+  double producaoMensalNov;
+  double producaoMensalDez;
 
 
   Producaototal({
-    this.producaoMensalJan,
-    this.producaoMensalFev,
-    this.producaoMensalMar,
-    this.producaoMensalAbr,
-    this.producaoMensalMai,
-    this.producaoMensalJun,
-    this.producaoMensalJul,
-    this.producaoMensalAgo,
-    this.producaoMensalSete,
-    this.producaoMensalOutu,
-    this.producaoMensalNov,
-    this.producaoMensalDez,
+    required this.producaoMensalJan,
+    required this.producaoMensalFev,
+    required this.producaoMensalMar,
+    required this.producaoMensalAbr,
+    required this.producaoMensalMai,
+    required this.producaoMensalJun,
+    required this.producaoMensalJul,
+    required this.producaoMensalAgo,
+    required this.producaoMensalSete,
+    required this.producaoMensalOutu,
+    required this.producaoMensalNov,
+    required this.producaoMensalDez,
   });
 
   @override

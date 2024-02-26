@@ -20,4 +20,13 @@ class DimensionamentoDaoDb implements DimensionamentoDao {
     dimensionamentorealizado.id = await db.insert(tabelaDimensionamentos, dimensionamentorealizado.toMap());
     return dimensionamentorealizado;
   }
+  @override
+  Future excluir(DimensionamentoRealizado dimensionamentorealizado) async {
+    await db!.delete(
+      tabelaDimensionamentos,
+      where: 'id = ?',
+      whereArgs: [dimensionamentorealizado.id],
+    );
+  }
+
 }
