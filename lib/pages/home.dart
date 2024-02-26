@@ -55,15 +55,15 @@ class _HomeState extends State<Home> {
         title: Row(
           children: [
             Image.asset(
-              'assets/image/Sunlight_logo.png', // Substitua pelo caminho da sua imagem
-              height: altura * 0.05, // Ajuste a altura conforme necessário
+              'assets/image/Sunlight_logo.png',
+              height: altura * 0.05,
             ),
             SizedBox(width: largura * 0.02,),
             Text(
               'SunLight',
               style: GoogleFonts.lobster(
                   fontSize: largura * 0.85 * 0.11,
-                  color: Color.fromARGB(255, 255, 222, 89),
+                  color: const Color.fromARGB(255, 255, 222, 89),
                   fontWeight: FontWeight.w500),
             ),
           ],

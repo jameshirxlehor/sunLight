@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sunlight/domain/mediator.dart';
-import 'package:sunlight/model/calculogeracao.dart';
-import 'package:sunlight/model/producaototal.dart';
-
 import '../dao/dimensionamentodao.dart';
 import '../dao/impl/dimensionamento_dao_db.dart';
 import '../model/dimensionamentorealizado.dart';
@@ -62,16 +59,16 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: _editarOuNao ? Text('Salvar alteração?') : Text('Salvar?'),
+        title: _editarOuNao ? const Text('Salvar alteração?') : const Text('Salvar?'),
         content: _editarOuNao
-            ? Text('Tem certeza que deseja salvar alteração realizada?')
-            : Text('Tem certeza que deseja salvar?'),
+            ? const Text('Tem certeza que deseja salvar alteração realizada?')
+            : const Text('Tem certeza que deseja salvar?'),
         actions: [
           TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancelar')),
+              child: const Text('Cancelar')),
           TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -81,7 +78,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                   _salvar();
                 }
               },
-              child: Text('Salvar')),
+              child: const Text('Salvar')),
         ],
       ),
     );
@@ -91,14 +88,14 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Excluir?'),
-        content: Text('Tem certeza que deseja excluir?'),
+        title: const Text('Excluir?'),
+        content:const Text('Tem certeza que deseja excluir?'),
         actions: [
           TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancelar')),
+              child: const Text('Cancelar')),
           TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -107,7 +104,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                   dimensionamentoDao.excluir(dimensionamentorealizado);
                 });
               },
-              child: Text('Excluir')),
+              child:const Text('Excluir')),
         ],
       ),
     );
@@ -131,7 +128,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     double largura,
   ) {
     return Expanded(
-      child: Container(
+      child: SizedBox(
         height: altura * 0.033,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -295,7 +292,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       type: EasyButtonType.elevated,
       idleStateWidget: const Text('Gerar PDF',
         style:  TextStyle(
-            color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+            color: Colors.black, fontSize: 20, fontWeight: FontWeight.w700),
       ),
       loadingStateWidget: const CircularProgressIndicator(
         strokeWidth: 3.0,
@@ -305,12 +302,12 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       ),
       useWidthAnimation: true,
       useEqualLoadingStateWidgetDimension: false,
-      width: 200.0,
+      width: 150.0,
       // height: 40.0,
       borderRadius: 30.0,
       elevation: 0.0,
       contentGap: 6.0,
-      buttonColor: Colors.lightBlueAccent,
+      buttonColor: const Color.fromARGB(255, 255, 222, 89),
       onPressed: (){
         Navigator.push(
             context,
@@ -362,7 +359,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
       // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
       // Para [EasyButtonType.outlined]: Esta será a cor da borda.
       // Para [EasyButtonType.text]: Esta será a cor do texto.
-      buttonColor: Color.fromARGB(255, 255, 222, 89),
+      buttonColor: const Color.fromARGB(255, 255, 222, 89),
       onPressed: novoDimensionamentoOuNao ? _clickSalvar : _clickExcluir,
     );
   }
@@ -381,7 +378,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
               altura,
               largura),
           SizedBox(
-            height: altura * 0.02,
+            height: altura * 0.01,
           ),
           _getDadosContainer(
               "Potência do KIT: ${potenciakit.toStringAsFixed(2)}(kWp)",
@@ -389,7 +386,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
               altura,
               largura),
           SizedBox(
-            height: altura * 0.02,
+            height: altura * 0.01,
           ),
           _getDadosContainer("Area ocupada: ${area.toStringAsFixed(1)} m²",
               Icons.straighten_outlined, altura, largura),
@@ -412,7 +409,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
         widget.dimensionamentoRealizadoEnviadoDeOutraTela.sugestaoPlacas;
 
     _getESpacamentoLadosDinamica() {
-      return altura * 0.025;
+      return altura * 0.015;
     }
 
     return Scaffold(
@@ -454,7 +451,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                     color: Colors.white),
               ),
               SizedBox(
-                height: altura * 0.011,
+                height: altura * 0.01,
               ),
               _cardGeracaoMesMedia(altura, largura,
                   widget.dimensionamentoRealizadoEnviadoDeOutraTela),
@@ -501,7 +498,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                     // Para [EasyButtonType.elevated]: Esta será a cor de fundo.
                     // Para [EasyButtonType.outlined]: Esta será a cor da borda.
                     // Para [EasyButtonType.text]: Esta será a cor do texto.
-                    buttonColor: Color.fromARGB(255, 255, 222, 89),
+                    buttonColor: const Color.fromARGB(255, 255, 222, 89),
                     onPressed: () {
                       if (_editarOuNao) {
                         Navigator.pop(context);
@@ -527,7 +524,7 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
                   _getBotao(widget.novoDimensionamentoOuNao),
                 ],
               ),
-              const SizedBox(height: 10),
+               SizedBox(height: altura * 0.017),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

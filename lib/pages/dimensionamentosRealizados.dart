@@ -56,7 +56,7 @@ class _DimensionamentosRealizadosState
             child: Card(
               shape:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-              color: Colors.black,
+              color: const Color.fromARGB(195, 255, 255, 255),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 10, top: 6, left: 14),
                 child: Row(
@@ -72,10 +72,10 @@ class _DimensionamentosRealizadosState
                                   dimensionamentoRealizado.nome,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.graduate(
+                                  style: GoogleFonts.inter(
                                       fontSize: (largura - 12) * 0.075,
-                                      color: const Color.fromARGB(255, 255, 222, 89),
-                                      fontWeight: FontWeight.w500),
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700),
                                   // style: TextStyle(fontSize: (largura-12) * 0.095),
                                 ),
                               ),
@@ -85,10 +85,10 @@ class _DimensionamentosRealizadosState
                             children: [
                               Text(
                                 dimensionamentoRealizado.data,
-                                style: GoogleFonts.graduate(
+                                style: GoogleFonts.inter(
                                     fontSize: (largura - 12) * 0.04,
-                                    color: const Color.fromARGB(255, 255, 222, 89),
-                                    fontWeight: FontWeight.w500),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700),
                               ),
                               // style: TextStyle(fontSize: (largura-12) * 0.063),),
                             ],
@@ -97,10 +97,10 @@ class _DimensionamentosRealizadosState
                             children: [
                               Text(
                                 dimensionamentoRealizado.cidade,
-                                style: GoogleFonts.graduate(
+                                style: GoogleFonts.inter(
                                     fontSize: (largura - 12) * 0.04,
-                                    color: const Color.fromARGB(255, 255, 222, 89),
-                                    fontWeight: FontWeight.w500),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700),
                                 // style:
                                 //     TextStyle(fontSize: (largura - 12) * 0.063),
                               ),
@@ -110,10 +110,10 @@ class _DimensionamentosRealizadosState
                             children: [
                               Text(
                                 "${dimensionamentoRealizado.mediaConsumo} kWh",
-                                style: GoogleFonts.graduate(
+                                style: GoogleFonts.inter(
                                     fontSize: (largura - 12) * 0.04,
-                                    color: const Color.fromARGB(255, 255, 222, 89),
-                                    fontWeight: FontWeight.w500),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700),
 
                                 // style: TextStyle(fontSize: largura * 0.063),
                               ),
@@ -130,9 +130,9 @@ class _DimensionamentosRealizadosState
                       child: Column(
                         children: [
                           Icon(
-                            Icons.solar_power,
+                            Icons.solar_power_outlined,
                             size: largura * 0.24,
-                            color: Color.fromARGB(255, 255, 222, 89),
+                            color: Colors.black,
                           ),
                         ],
                       ),
