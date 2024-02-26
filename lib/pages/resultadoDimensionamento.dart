@@ -130,41 +130,39 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
     double altura,
     double largura,
   ) {
-    return Expanded(
-      child: Container(
-        height: altura * 0.033,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "$mes:",
-                  style: GoogleFonts.robotoMono(
-                      color: Colors.grey[600],
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400),
-                ),
-              ],
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '${resultado(consumoMensal)} kWh',
-                  style: GoogleFonts.robotoMono(
-                      color: Colors.green,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400),
-                ),
-              ],
-            ),
-          ],
-        ),
+    return Container(
+      height: altura * 0.033,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "$mes:",
+                style: GoogleFonts.robotoMono(
+                    color: Colors.grey[600],
+                    fontSize: 17,
+                    fontWeight: FontWeight.w400),
+              ),
+            ],
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${resultado(consumoMensal)} kWh',
+                style: GoogleFonts.robotoMono(
+                    color: Colors.green,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w400),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -190,29 +188,27 @@ class _ResultadoDimensionamentoState extends State<ResultadoDimensionamento> {
   _getRowMedia() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Expanded(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Média:',
-              style: GoogleFonts.robotoMono(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                  color: Colors.grey[800]),
-            ),
-            const SizedBox(
-              width: 12,
-            ),
-            Text(
-              '${_resultadoMedia().toStringAsFixed(2)}kWh',
-              style: GoogleFonts.robotoMono(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17),
-            ),
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Média:',
+            style: GoogleFonts.robotoMono(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+                color: Colors.grey[800]),
+          ),
+          const SizedBox(
+            width: 12,
+          ),
+          Text(
+            '${_resultadoMedia().toStringAsFixed(2)}kWh',
+            style: GoogleFonts.robotoMono(
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
+                fontSize: 17),
+          ),
+        ],
       ),
     );
   }

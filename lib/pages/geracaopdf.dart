@@ -215,7 +215,7 @@ class _GeracaoPdfState extends State<GeracaoPdf> {
     return pw.Opacity(
       opacity: 0.68,
       child: pw.Padding(
-        padding: pw.EdgeInsets.all(22.0),
+        padding: const pw.EdgeInsets.all(22.0),
         child: pw.SizedBox(
           child: pw.Column(
             mainAxisAlignment: pw.MainAxisAlignment.center,
@@ -304,15 +304,15 @@ class _GeracaoPdfState extends State<GeracaoPdf> {
     final image1 = await imageFromAssetBundle('assets/image/page1.png');
     final image2 = await imageFromAssetBundle('assets/image/potencia.png');
     final image3 = await imageFromAssetBundle('assets/image/area.png');
-    final imageBg = await imageFromAssetBundle('assets/image/pdfSunlight.png');
-    // final imageBytes = File('assets/image/pdfSunlight.png').readAsBytesSync();
     final imageJpg = (await rootBundle.load('assets/image/pdfSunlight.png'))
         .buffer.asUint8List();
     final pageTheme = pw.PageTheme(
       pageFormat: PdfPageFormat.a4,
       buildBackground: (Context){
-    return pw.FullPage(ignoreMargins: true,
-            child: pw.Image(pw.MemoryImage(imageJpg),)
+        return pw.FullPage(
+              ignoreMargins: true,
+              child: pw.Image(pw.MemoryImage(imageJpg),
+              ),
           );
     },
     );
