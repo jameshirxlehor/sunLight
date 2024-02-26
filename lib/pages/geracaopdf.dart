@@ -241,6 +241,10 @@ class _GeracaoPdfState extends State<GeracaoPdf> {
 
   @override
   Widget build(BuildContext context) {
+    double largura =
+        MediaQuery.of(context).size.width; // tamanho da largura da tela
+    double altura =
+        MediaQuery.of(context).size.height; // tamanho da altura da tela
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       color: Colors.blueGrey[900],
@@ -249,10 +253,30 @@ class _GeracaoPdfState extends State<GeracaoPdf> {
           appBarTheme: AppBarTheme(backgroundColor: Colors.blueGrey[900])),
       home: Scaffold(
         appBar: AppBar(
-            title: Text(
-              titleAppBar,
-              style: TextStyle(color: Colors.white),
-            )),
+          leading:
+            IconButton(onPressed: (){
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back,color: Color.fromARGB(255, 255, 222, 89),),
+            ),
+          automaticallyImplyLeading: true,
+            title: Row(
+              children: [
+                Image.asset(
+                  'assets/image/Sunlight_logo.png',
+                  height: altura * 0.04,
+                ),
+                SizedBox(width: largura * 0.04,),
+                Text(
+                  'Registro Dimensionamento',
+                  style: GoogleFonts.lobster(
+                      fontSize: largura * 0.85 * 0.07,
+                      color: const Color.fromARGB(255, 255, 222, 89),
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
+        ),
         body: PdfPreview(
           canChangeOrientation: false,
           canChangePageFormat: false,
