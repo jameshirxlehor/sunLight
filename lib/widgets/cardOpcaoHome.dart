@@ -55,7 +55,7 @@ cardOpcaoHome(
                         textAlign: TextAlign.center,
                       ),
                     ),
-                                        ),
+                  ),
                 ),
               ],
             ),
