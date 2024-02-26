@@ -45,6 +45,8 @@ dependencies:
   icons_plus: ^5.0.0
   intl: ^0.19.0
   google_fonts: ^6.1.0
+  pdf: ^3.10.8
+  printing: ^5.12.0
   flutter_native_splash: ^2.3.11
   flutter_launcher_icons: ^0.13.1
 
